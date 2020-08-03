@@ -1,6 +1,7 @@
-import { BranchModel } from '../../models/BranchModel';
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
+import { BranchModel } from '../../interfaces/BranchModel';
 
 @Injectable({
     providedIn:'root'

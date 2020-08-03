@@ -1,7 +1,7 @@
-import { UserModule } from './../../user/user.module';
-import { UserModel } from './../../models/UserModel';
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
+import { UserModel } from '../../interfaces/UserModel';
 
 @Injectable({
     providedIn: 'root'
