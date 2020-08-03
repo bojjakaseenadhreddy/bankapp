@@ -1,2 +1,6 @@
-export class RowStatusModel {
+
+export interface RowStatusModel {
+    id?: number;
+    name: String;
+
 }
