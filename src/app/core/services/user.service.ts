@@ -1,14 +1,15 @@
+import { LoginModel } from '../../../interfaces/LoginModel';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { UserModel } from '../../interfaces/UserModel';
+import { UserModel } from '../../../interfaces/UserModel';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class UserService {
-    
+
     baseUrl: string = 'http://localhost:8082/api/users'
     constructor(private _http: HttpClient) {
     }
@@ -20,6 +21,7 @@ export class UserService {
     public createUser(userModel: UserModel) {
         return this._http.post<UserModel>(`${this.baseUrl}`, userModel)
     }
+    
     public updateUser(userId: number, userModel: UserModel) {
         return this._http.put<UserModel>(`${this.baseUrl}/${userId}`, userModel)
     }
@@ -40,7 +42,11 @@ export class UserService {
         return this._http.get<UserModel[]>(`${this.baseUrl}/row-status/${rowStatusId}`);
     }
 
-    public changeUserRowStatusId(userId:number,rowStatusId:number,userModel:UserModel){
-        return this._http.put(`${this.baseUrl}/${userId}/${rowStatusId}`,userModel);
-    }   
+    public changeUserRowStatusId(userId: number, rowStatusId: number, userModel: UserModel) {
+        return this._http.put(`${this.baseUrl}/${userId}/${rowStatusId}`, userModel);
+    }
+
+    public login(loginModel: LoginModel) {
+        return this._http.post<UserModel>(`login`, loginModel);
+    }
 }
