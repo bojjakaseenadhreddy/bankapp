@@ -6,9 +6,9 @@ import { CustomerModel } from "./CustomerModel";
 
 export interface AddressModel {
     id ?: number;
-    city: String;
     country: String;
+    state:string;
+    city: String;
     pinCode: number;
     street: String;
-
 }

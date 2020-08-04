@@ -1,16 +1,32 @@
+import { AddressComponent } from './components/address/address.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { LoginComponent } from './components/login/login.component';
+import { AngMaterialModule } from './../ang-material/ang-material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CoreRoutingModule } from './core-routing.module';
 
-
+const components = [
+  LoginComponent,
+  UserRegisterComponent,
+  AddressComponent
+]
 @NgModule({
-  declarations: [],
+  declarations: [
+    components
+  ],
   imports: [
     CommonModule,
     CoreRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    AngMaterialModule
+  ],
+  exports:[
+    components
   ]
 })
 export class CoreModule { }

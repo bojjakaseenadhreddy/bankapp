@@ -13,10 +13,9 @@ export interface UserModel {
     email: String;
     password: String;
     gender: String;
-    createdDate: Date;
-    addressModel: AddressModel;
-    branchModel: BranchModel;
-    roleModel: RoleModel;
-    rowStatusModel: RowStatusModel;
-
+    createdDate?: Date;
+    addressModel?: AddressModel;
+    branchModel?: BranchModel;
+    roleModel?: RoleModel;
+    rowStatusModel?: RowStatusModel;
 }
