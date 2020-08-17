@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http';
-import { AddressModel } from '../../interfaces/AddressModel';
+import { AddressModel } from '../../../interfaces/AddressModel';
 
 @Injectable({
     providedIn:'root'
