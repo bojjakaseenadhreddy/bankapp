@@ -3,12 +3,12 @@ import { UserModel } from "./UserModel";
 import { CustomerModel } from "./CustomerModel";
 
 
-
 export interface AddressModel {
     id ?: number;
-    country: String;
+    country: string;
     state:string;
-    city: String;
+    city: string;
     pinCode: number;
-    street: String;
+    street: string;
 }
+

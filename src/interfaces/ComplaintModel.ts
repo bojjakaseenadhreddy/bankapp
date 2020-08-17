@@ -4,7 +4,7 @@ import { CustomerModel } from "./CustomerModel";
 
 export interface ComplaintModel {
     id?: number;
-    description: String;
+    description: string;
     statusModel: StatusModel;
     raisedDate: Date;
     updatedDate: Date;

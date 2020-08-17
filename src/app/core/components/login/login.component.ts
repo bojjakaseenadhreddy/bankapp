@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormBuilder, Validators, RequiredValidator } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 
 @Component({
     selector: 'login',

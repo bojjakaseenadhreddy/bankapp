@@ -1,7 +1,5 @@
-export class Countries {
-    countries=[
+  export const  countries=[
         "INDIA",
         "US"
     ]
-}
 

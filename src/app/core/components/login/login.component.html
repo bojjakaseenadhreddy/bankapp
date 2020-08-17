@@ -9,10 +9,10 @@
                         <div>
                             <mat-form-field appearance="outline">
                                 <mat-label>Email</mat-label>
-                                <input matInput type="text" formControlName='email' autofocus
+                                <input matInput type="text" formControlName='email' #email autofocus
                                     placeholder="user@domain.com" required>
                                 <mat-icon matSuffix>mail</mat-icon>
-                                <mat-error *ngIf="password.required">{{getEmailErrors()}}</mat-error>
+                                <mat-error *ngIf="email.required">{{getEmailErrors()}}</mat-error>
                             </mat-form-field>
                         </div>
                         <br>
@@ -21,8 +21,7 @@
                                 <mat-label>Password</mat-label>
                                 <input matInput [type]="hide ? 'password' : 'text'" formControlName='password' #password
                                     placeholder="password" required>
-                                <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility_off':'visibility'}}
-                                </mat-icon>
+                                <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility_off':'visibility'}}</mat-icon>
                                 <mat-error *ngIf="password.required">Password Required</mat-error>
                             </mat-form-field>
                         </div>

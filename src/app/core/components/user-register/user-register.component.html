@@ -1,1 +1,109 @@
+<div>
+    <form [formGroup]="userRegisterForm" (ngSubmit)="onSubmit()">
+        <mat-horizontal-stepper>
+            <mat-step label="Personal">
+                <mat-card class="mx-auto card-border justify-content-centre">
+                    <br>
+                    <mat-card-title>Personal Details</mat-card-title>
+                    <br>
+                    <mat-card-content>
+                        <div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Name</mat-label>
+                                <input matInput type="text" formControlName="name" autofocus placeholder="Employee Name"
+                                    required>
+                                <mat-icon matSuffix>name</mat-icon>
+                                <mat-error>Name required<br></mat-error>
+                            </mat-form-field>
+                            <br>
+                            <mat-label>Select Gender</mat-label><br><br>
+                            <mat-radio-group #gender color="primary" formControlName="gender" required>
+                                <mat-radio-button value="MALE">Male</mat-radio-button>
+                                <mat-radio-button value="FEMALE">Female</mat-radio-button>
+                            </mat-radio-group>
+                            <br>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Phone</mat-label>
+                                <input matInput type="number" formControlName="phone" placeholder="Phone Numuber"
+                                    required>
+                                <mat-icon matSuffix>phone</mat-icon>
+                                <mat-error>Phone Number Required<br></mat-error>
+                            </mat-form-field>
+                            <div>
+                                <br>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput type="text" formControlName='email' placeholder="user@domain.com"
+                                        required>
+                                    <mat-icon matSuffix>mail</mat-icon>
+                                    <mat-error *ngIf="password.required">{{getEmailErrors()}}</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <br>
+                            <div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Password</mat-label>
+                                    <input matInput [type]="hide ? 'password' : 'text'" formControlName='password'
+                                        #password placeholder="password" required>
+                                    <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility_off':'visibility'}}
+                                    </mat-icon>
+                                    <mat-error *ngIf="password.required">Password Required</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" matStepperNext type="button">Save & continue</button>
+                        <div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-step>
 
+            <mat-step label="Address">
+                <router-outlet>
+                    <app-address (onAddressId)="getAddressId($event)"></app-address>
+                    {{""+addressId}}
+                </router-outlet>
+            </mat-step>
+
+            <mat-step label="Employee">
+                <div class="card-border mx-auto">
+                    <mat-card>
+                        <br>
+                        <mat-card-title>Employee Details</mat-card-title>
+                        <br>
+                        <ng-container formGroupName="branchModel">
+                            <mat-form-field appearance="outline" required>
+                                <mat-select placeholder="Branch Name" name="branch" formControlName="branchCode">
+                                    <mat-option *ngFor="let branch of branches" [value]="branch.branchCode">
+                                        {{branch.name | titlecase}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </ng-container>
+                        <br>
+
+                        <ng-container formGroupName="roleModel">
+                            <mat-form-field appearance="outline" required>
+                                <mat-select placeholder="User Role" name="role" formControlName="id">
+                                    <mat-option *ngFor="let role of roles" [value]="role.id">{{role.role | titlecase}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </ng-container>
+                        <br>
+                        <ng-container formGroupName="rowStatusModel">
+                            <mat-form-field appearance="outline" required>
+                                <mat-select placeholder="User Status" name="status" formControlName="id">
+                                    <mat-option *ngFor="let status of rowStatuses" [value]="status.id">
+                                        {{status.status | titlecase}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </ng-container>
+                        <br>
+                        <button type="submit" [disabled]="userRegisterForm.invalid || addressId==undefined "
+                            class="btn-primary btn">Submit</button>
+                    </mat-card>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </form>
+</div>

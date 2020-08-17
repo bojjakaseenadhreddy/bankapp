@@ -9,9 +9,9 @@ export interface CustomerModel {
     email: String;
     password: String;
     confirmPassword: String;
+    addressModel:AddressModel;
     branchModel: BranchModel;
     statusModel: StatusModel;
-    accountCreatedDate: Date;
+    accountCreatedDate?: Date;
     accountTypeModel: AccountTypeModel;
-
 }

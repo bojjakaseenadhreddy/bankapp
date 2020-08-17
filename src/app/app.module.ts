@@ -1,3 +1,5 @@
+import { BranchModule } from './branch/branch.module';
+import { AdminModule } from './admin/admin.module';
 import { CoreModule } from './core/core.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -18,7 +20,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     AngMaterialModule,
     ReactiveFormsModule,
-    CoreModule
+    CoreModule,
+    AdminModule,
+    BranchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

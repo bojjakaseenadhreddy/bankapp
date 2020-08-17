@@ -1,7 +1,9 @@
 <div class="mx-auto card-border">
+
   <mat-card>
     <mat-card-title>Address</mat-card-title><br>
     <mat-card-content>
+
       <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
         <mat-label>Select Country</mat-label><br><br>
         <mat-radio-group #country color="primary" formControlName="country" required>
@@ -9,6 +11,7 @@
           <mat-radio-button (change)="onCountrySelectionChange($event)" value="US">US</mat-radio-button>
         </mat-radio-group>
         <br>
+
         <mat-form-field appearance="outline" required>
           <mat-label>State</mat-label>
           <mat-select formControlName="state" placeholder="Select State" name="item">
@@ -27,7 +30,7 @@
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Pincode</mat-label>
-          <input matInput type="number" formControlName="pincode" placeholder="Pincode" required>
+          <input matInput type="number" formControlName="pinCode" placeholder="Pincode" required>
           <mat-error>Pincode Required<br></mat-error>
         </mat-form-field>
         <br>
@@ -37,6 +40,10 @@
           <mat-error>City required<br></mat-error>
         </mat-form-field>
         <br>
+        <ng-container *ngIf="isSaving">
+          <mat-progress-bar mode="blur" value="60"></mat-progress-bar>
+          <br>
+        </ng-container>
         <button class="btn btn-primary" type="submit">Save</button>
       </form>
     </mat-card-content>
