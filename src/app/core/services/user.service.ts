@@ -20,7 +20,7 @@ export class UserService {
     public createUser(userModel: UserModel) {
         return this._http.post<UserModel>(`${this.baseUrl}`, userModel)
     }
-    
+
     public updateUser(userId: number, userModel: UserModel) {
         return this._http.put<UserModel>(`${this.baseUrl}/${userId}`, userModel)
     }
@@ -41,12 +41,6 @@ export class UserService {
         return this._http.get<UserModel[]>(`${this.baseUrl}/row-status/${rowStatusId}`);
     }
 
-<<<<<<< HEAD:src/app/shared/services/user.service.ts
-    public changeUserRowStatusId(userId:number,rowStatusId:number,userModel:UserModel){
-        return this._http.put(`${this.baseUrl}/${userId}/${rowStatusId}`,userModel);
-    }
-}
-=======
     public changeUserRowStatusId(userId: number, rowStatusId: number, userModel: UserModel) {
         return this._http.put(`${this.baseUrl}/${userId}/${rowStatusId}`, userModel);
     }
@@ -55,4 +49,3 @@ export class UserService {
         return this._http.post<UserModel>(`login`, loginModel);
     }
 }
->>>>>>> 3f160c312076215c55f3ef37483b61e439e8757c:src/app/core/services/user.service.ts
