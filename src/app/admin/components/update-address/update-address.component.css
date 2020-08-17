@@ -1,0 +1,12 @@
+mat-card.mat-card{
+    border: 1px solid black;
+}
+
+.card-border{
+    max-width:400px;
+    text-align: center;
+}
+
+.mat-radio-button ~ .mat-radio-button{
+    margin-left: 45px;
+}

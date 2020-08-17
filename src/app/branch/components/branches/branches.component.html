@@ -1,0 +1,38 @@
+<div>
+  <mat-table matTable [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Branch Name</th>
+      <td mat-cell *matCellDef="let branch">{{branch.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="phoneNo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone No</th>
+      <td mat-cell *matCellDef="let branch">{{branch.phoneNo}}</td>
+    </ng-container>
+    <ng-container matColumnDef="branchCode">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Branch Code</th>
+      <td mat-cell *matCellDef="let branch">{{branch.branchCode}}</td>
+    </ng-container>
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+      <td mat-cell *matCellDef="let branch">{{branch.addressModel.city}}</td>
+    </ng-container>
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
+      <td mat-cell *matCellDef="let branch">{{branch.addressModel.state}}</td>
+    </ng-container>
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
+      <td mat-cell *matCellDef="let branch">{{branch.addressModel.country}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="customers">
+      <th mat-header-cell *matHeaderCellDef >Country</th>
+      <td mat-cell *matCellDef="let branch"><button  class="btn btn-primary" (click)="customersByBranch(branch.branchCode)">Customers</button></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="branchColumns" ></tr>
+    <tr mat-row *matRowDef="let row;  columns : branchColumns"></tr>
+  </mat-table>
+</div>
+
+<mat-paginator [pageSizeOptions]=[5,10,50] showFirstLastPages></mat-paginator>

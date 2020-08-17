@@ -8,7 +8,7 @@ import { AddressModel } from '../../../interfaces/AddressModel';
 })
 export class AddressService{
 
-    baseUrl:string = "http://localhost:8082/api/addresses"
+    baseUrl:string = "http://localhost:8082/api/addresses";
 
     constructor( private http:HttpClient){
     }
@@ -25,8 +25,8 @@ export class AddressService{
        return this.http.post<AddressModel>(this.baseUrl,addressModel);
     }
 
-    public updateAddress(addressModel:AddressModel){
-        return this.http.post<AddressModel>(this.baseUrl,addressModel);
+    public updateAddress(addressId:number,addressModel:AddressModel){
+        return this.http.put<AddressModel>(`${this.baseUrl}/${addressId}`,addressModel);
     }
 
     public deleteAddress(addressId:number){

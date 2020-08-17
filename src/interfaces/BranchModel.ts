@@ -8,9 +8,8 @@ export interface BranchModel {
     name: String;
     addressModel: AddressModel;
     phoneNo: number;
-    createdDate: Date;
+    createdDate?: Date;
     rowStatusModel: RowStatusModel;
-
 }
 
 

@@ -1,0 +1,51 @@
+<mat-card class="card-border">
+  <mat-card-title>Update Branch</mat-card-title>
+  <mat-card-content>
+      <form [formGroup]="updateBranchForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" required>
+              <mat-label>Name</mat-label>
+              <input type="text" matInput #name formControlName="name" placeholder="Branch Name" />
+              <mat-error>Branch Name Required</mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="outline" required>
+              <mat-label>Phone</mat-label>
+              <input type="number" matInput formControlName="phoneNo" #phoneNo placeholder="Phone Number" />
+              <mat-error>Phone No Required</mat-error>
+          </mat-form-field>
+          <div>
+              <ng-container formGroupName="rowStatusModel">
+                  <mat-form-field appearance="outline" required>
+                      <mat-select formControlName="id" placeholder="Branch Status">
+                          <mat-option *ngFor="let rowStatus of rowStatuses" [value]="rowStatus.id">{{rowStatus.name}}
+                          </mat-option>
+                      </mat-select>
+                      <mat-error>Branch Status Required</mat-error>
+                  </mat-form-field>
+              </ng-container>
+          </div>
+          <br>
+          <!-- <mat-expansion-panel  [(expanded)]="isExpanded" [disabled]="addressId!==undefined">
+              <mat-expansion-panel-header>
+                  <mat-panel-title>Branch Address</mat-panel-title> 
+                  <mat-panel-description>{{addressId!==undefined ? 'Saved':'Not Saved, Please fill' }}</mat-panel-description>
+              </mat-expansion-panel-header>
+              <ng-container >
+                  <div formGroupName="addressModel">
+                      <router-outlet>
+                          <app-address (onAddressId)="getAddressId($event)"></app-address>
+                      </router-outlet>
+                  </div>
+                  <br>
+              </ng-container>
+          </mat-expansion-panel> -->
+          <ng-container *ngIf="isSaving">
+              <br>
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+              <br>
+          </ng-container>
+          <br>
+          <button class="btn btn-primary" [disabled]="!updateBranchForm.valid" type="submit">Update</button>
+      </form>
+  </mat-card-content>
+</mat-card>

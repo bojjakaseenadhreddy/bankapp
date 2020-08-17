@@ -13,7 +13,7 @@ export class CustomerService{
     baseUrl:string = 'http://localhost:8082/api/customers';
 
     public getAllCustomers(){
-        return this._http.get<CustomerModel>(this.baseUrl);
+        return this._http.get<CustomerModel[]>(this.baseUrl);
     }
 
     public getCustomerByAccountNumber(accountNumber:number){

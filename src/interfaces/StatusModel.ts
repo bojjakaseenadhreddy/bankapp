@@ -1,5 +1,5 @@
 
 export interface StatusModel {
-    id?: NumberConstructor;
+    id?: number;
     name: String;
 }
