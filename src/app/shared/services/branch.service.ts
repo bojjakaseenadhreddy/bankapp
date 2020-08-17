@@ -3,11 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { BranchModel } from '../../../interfaces/BranchModel';
 
-
 @Injectable({
     providedIn:'root'
 })
-
 export class BranchService{
 
     baseUrl:string = 'http://localhost:8082/api/branches';
@@ -29,6 +27,6 @@ export class BranchService{
     public updateBranch(branchId:number,branchModel:BranchModel){
         return this.http.put(`${this.baseUrl}/${branchId}`,branchModel);
     }
-    
+
 
 }

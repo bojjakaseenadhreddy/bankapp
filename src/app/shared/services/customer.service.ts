@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { CustomerModel } from '../../interfaces/CustomerModel';
+import { CustomerModel } from '../../../interfaces/CustomerModel';
 
 @Injectable({
     providedIn:'root'
 })
-
 export class CustomerService{
 
     constructor(private _http:HttpClient){
@@ -20,7 +19,7 @@ export class CustomerService{
     public getCustomerByAccountNumber(accountNumber:number){
         return this._http.get<CustomerModel>(`${this.baseUrl}/${accountNumber}`);
     }
-    
+
     public createCustomer(customermodel:CustomerModel){
         return this._http.post<CustomerModel>(this.baseUrl,customermodel);
     }
@@ -28,7 +27,7 @@ export class CustomerService{
     public updateCustomer(accountNumber:number,customerModel:CustomerModel){
         return this._http.put<CustomerModel>(`${this.baseUrl}/${accountNumber}`,customerModel);
     }
-    
+
     public getAllCustomersByBranchId(branchId:number){
         return this._http.get(`${this.baseUrl}/branch/${branchId}`);
     }
@@ -41,5 +40,5 @@ export class CustomerService{
         return this._http.get(`${this.baseUrl}/account-type/${accountTypeId}`);
     }
 
-    
+
 }

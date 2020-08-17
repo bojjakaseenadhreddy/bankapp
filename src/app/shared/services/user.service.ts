@@ -1,14 +1,13 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { UserModel } from '../../interfaces/UserModel';
+import { UserModel } from '../../../interfaces/UserModel';
 
 @Injectable({
     providedIn: 'root'
 })
-
 export class UserService {
-    
+
     baseUrl: string = 'http://localhost:8082/api/users'
     constructor(private _http: HttpClient) {
     }
@@ -42,5 +41,5 @@ export class UserService {
 
     public changeUserRowStatusId(userId:number,rowStatusId:number,userModel:UserModel){
         return this._http.put(`${this.baseUrl}/${userId}/${rowStatusId}`,userModel);
-    }   
+    }
 }
