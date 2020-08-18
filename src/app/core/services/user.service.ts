@@ -46,6 +46,6 @@ export class UserService {
     }
 
     public login(loginModel: LoginModel) {
-        return this._http.post<UserModel>(`login`, loginModel);
+        return this._http.post<UserModel>(`${this.baseUrl}/login`, loginModel);
     }
 }
