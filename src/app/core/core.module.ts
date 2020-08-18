@@ -9,7 +9,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { CoreRoutingModule } from './core-routing.module';
 import { CustomerRegisterComponent } from './components/customer-register/customer-register.component';
 
