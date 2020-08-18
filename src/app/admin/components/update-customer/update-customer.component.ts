@@ -35,7 +35,7 @@ export class UpdateCustomerComponent implements OnInit {
   ngOnInit() {
 
     //this.accountNumber = +this.router.snapshot.paramMap.get("account-number");
-    this.accountNumber = 11118;
+    this.accountNumber = 111118;
 
     this.customerService.getCustomerByAccountNumber(this.accountNumber).subscribe(
       (data)=>{ 
