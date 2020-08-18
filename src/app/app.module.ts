@@ -9,11 +9,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngMaterialModule } from './ang-material/ang-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-<<<<<<< HEAD
 import { CustomerModule } from './customer/customer.module';
-=======
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
->>>>>>> 1a426dd779cbca046e76a133a0a940c4ab0a7e1a
 
 @NgModule({
   declarations: [
