@@ -15,6 +15,7 @@ export class ComplaintService {
     public getAllComplaints() {
         return this.http.get<ComplaintModel[]>(this.baseUrl);
     }
+    
     public getComplaintById(complaintId: number) {
         return this.http.get<ComplaintModel>(`${this.baseUrl}/${complaintId}`);
     }

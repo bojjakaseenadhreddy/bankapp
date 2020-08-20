@@ -1,3 +1,5 @@
+import { ComplaintsComponent } from './components/complaints/complaints.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
 import { ComplaintComponent } from './components/complaint/complaint.component';
 import { BranchDialogComponent } from './components/branch-dialog/branch-dialog.component';
 import { AddressDialogComponent } from './components/address-dialog/address-dialog.component';
@@ -20,7 +22,9 @@ const components = [
   CustomerRegisterComponent,
   AddressDialogComponent,
   BranchDialogComponent,
-  ComplaintComponent
+  ComplaintComponent,
+  UserLoginComponent,
+  ComplaintsComponent
 ]
 @NgModule({
   declarations: [

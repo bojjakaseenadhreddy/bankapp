@@ -1,5 +1,5 @@
 export interface LoginModel{
-    mail:string;
+    email:string;
     password:string;
     customer:boolean;
 }

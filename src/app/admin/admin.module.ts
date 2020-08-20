@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { CreateBranchComponent } from './components/create-branch/create-branch.component';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
 
 export const components = [
   CreateBranchComponent,
@@ -18,7 +19,9 @@ export const components = [
   UsersComponent,
   UpdateBranchComponent,
   UpdateAddressComponent,
-  UpdateCustomerComponent
+  UpdateCustomerComponent,
+  UpdateUserComponent
+  
 ]
 
 @NgModule({

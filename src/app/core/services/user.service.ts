@@ -25,8 +25,8 @@ export class UserService {
         return this._http.put<UserModel>(`${this.baseUrl}/${userId}`, userModel)
     }
 
-    public getUserById() {
-        return this._http.get<UserModel>(`${this.baseUrl}`);
+    public getUserById(userId:number) {
+        return this._http.get<UserModel>(`${this.baseUrl}/${userId}`);
     }
 
     public getAllUsersByRoleId(roleId: number) {
@@ -46,6 +46,6 @@ export class UserService {
     }
 
     public login(loginModel: LoginModel) {
-        return this._http.post<UserModel>(`${this.baseUrl}/login`, loginModel);
+        return this._http.post<any>(`${this.baseUrl}/login`, loginModel);
     }
 }
