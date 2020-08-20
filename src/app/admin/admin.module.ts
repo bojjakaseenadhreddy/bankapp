@@ -1,3 +1,4 @@
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { UpdateCustomerComponent } from './components/update-customer/update-customer.component';
 import { UpdateAddressComponent } from './components/update-address/update-address.component';
 import { UpdateBranchComponent } from './components/update-branch/update-branch.component';
@@ -20,8 +21,9 @@ export const components = [
   UpdateBranchComponent,
   UpdateAddressComponent,
   UpdateCustomerComponent,
-  UpdateUserComponent
-  
+  UpdateUserComponent,
+  AdminDashboardComponent
+
 ]
 
 @NgModule({
@@ -35,7 +37,7 @@ export const components = [
     CoreModule,
     ReactiveFormsModule
   ],
-  exports:[
+  exports: [
     components
   ]
 })

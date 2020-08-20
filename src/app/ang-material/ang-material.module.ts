@@ -21,6 +21,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 export const materialModules = [
   MatSnackBarModule,
@@ -43,7 +44,8 @@ export const materialModules = [
   MatPaginatorModule,
   CdkTableModule,
   MatTooltipModule,
-  MatDialogModule
+  MatDialogModule,
+  MatGridListModule
 ]
 
 
@@ -53,7 +55,7 @@ export const materialModules = [
     CommonModule,
     materialModules
   ],
-  exports:[
+  exports: [
     materialModules
   ]
 })
