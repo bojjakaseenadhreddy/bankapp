@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+  <mat-card class="card">
+
+    <mat-card-title>
+      <h2>Transfer Form</h2>
+    </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="createTransferForm" (ngSubmit)="onSubmit()">
+        <ng-container formGroupName="customerModel">
+          <mat-form-field hintLabel="account number should be 5 digits" required >
+            <input matInput #input type="number" minlength="5" matInput formControlName="accountNo" placeholder="account number"
+              autofocus>
+            <mat-icon matSuffix>account_circle</mat-icon>
+            <mat-error>account number required</mat-error>
+           <!--- <mat-error *ngIf="customerModel.accountNo.required">{{errors()}}</mat-error>-->
+            <!---<mat-error ngxError="minlength" when="['dirty', 'touched']">accountNo should be minimum 5 digits</mat-error>-->
+           <!---- <mat-error ngxErrors="customerModel.accountNo">
+              <div ngxError="minlength" when="['dirty', 'touched']">accountNo should be minimum 5 digits</div>
+            </mat-error>-->
+            <!---<div ngxErrors="customerModel.accountNo.minlength">accountNo should be minimum 5 digits.</div>-->
+            <mat-hint align="end">{{input.value?.length || 0}}/5</mat-hint>
+          </mat-form-field>
+        </ng-container>
+        <br>
+        <br>
+        <mat-form-field>
+          <input matInput type="number" formControlName="amount" placeholder="transfer amount">
+          <mat-icon matSuffix >money</mat-icon>
+          <mat-error>amount required</mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-form-field>
+          <input matInput type="number" formControlName="receiverAccountNumber" placeholder="receiver account number">
+          <mat-icon matSuffix >account_circle</mat-icon>
+          <mat-error> receiver account number required</mat-error>
+        </mat-form-field>
+        <br>
+        <div *ngIf="isSaving">
+          <mat-progress-bar mode="determinate"></mat-progress-bar>
+        </div>
+        <br>
+        <button mat-raised-button class="btn-sm" color="primary" (click)="openSnackBar()" [disabled]="!createTransferForm.valid"
+          type="submit">Transfer <mat-icon>payment</mat-icon></button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

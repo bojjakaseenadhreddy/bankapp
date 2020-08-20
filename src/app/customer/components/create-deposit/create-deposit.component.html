@@ -2,24 +2,26 @@
   <mat-card class="card">
     <mat-card-title>
       <h2> Deposit Form</h2>
-
     </mat-card-title>
     <mat-card-content>
       <form [formGroup]="createDepositForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
-          <mat-label>Deposit Amount</mat-label>
-          <input matInput type="number" formControlName="depositAmount" placeholder="Deposit Amount">
+          <mat-label>deposit Amount</mat-label>
+          <input matInput type="number" formControlName="depositAmount" placeholder="deposit amount">
           <mat-error>amount required</mat-error>
+          <mat-icon matSuffix>money</mat-icon>
         </mat-form-field>
+        <br>
         <br>
         <ng-container formGroupName="customerModel">
           <mat-form-field>
-            <input matInput type="number" matInput formControlName="accountNo" placeholder="Account Number">
+            <input matInput type="number" matInput formControlName="accountNo" placeholder="account number">
             <mat-error>account number Required</mat-error>
+            <mat-icon matSuffix>account_circle</mat-icon>
           </mat-form-field>
         </ng-container>
         <div *ngIf="isSaving">
-          <mat-progress-bar mode="determinate"></mat-progress-bar>
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         </div>
         <br>
         <button mat-raised-button class="btn-sm" color="primary" (click)="openSnackBar()" [disabled]="!createDepositForm.valid"
@@ -30,3 +32,28 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<!---<div>
+    <li *ngFor="let item of videoList" >
+    <div>{{item.id}}</div>
+    <div>{{item.title}}</div>
+    <ol>
+    <li *ngFor="let subItem of item.nodes">
+    <div>{{subItem.title}}</div>
+    </li>
+    </ol>
+    </li>
+   </div>-->
+
+<!--   <div>
+      <li *ngFor="let project of projects" >
+      <div>{{project.projectName}}</div>
+      <div>{{project.dbName}}</div>
+      <ol>
+      <li *ngFor="let subItem of project.tables">
+      <div>{{subItem}}</div>
+      </li>
+      </ol>
+      </li>
+     </div>-->
+

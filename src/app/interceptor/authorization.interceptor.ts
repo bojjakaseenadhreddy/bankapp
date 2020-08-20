@@ -10,13 +10,14 @@ export class AuthorizationInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler) {
 
         console.log("inside intercept")
-        if(!req.url.match('/login/')){
+
+        if(!req.url.match('login/')){
             req = req.clone({setHeaders:{"Authorization":"Bearer " + localStorage.getItem('jwttoken')}});
+          console.log(req)
             console.log("after cloning")
         }
-    
-     req.headers.set("Access-Control-Allow-Credentials","true");
-      
+
+    // req.headers.set("Access-Control-Allow-Credentials","true");
        console.log(req);
         return next.handle(req);
     }

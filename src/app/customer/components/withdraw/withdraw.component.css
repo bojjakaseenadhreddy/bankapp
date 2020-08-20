@@ -1,0 +1,18 @@
+.card{
+  width:400px;
+  height: 300px;
+  text-align: center;
+  border:1px solid black
+ }
+ .green-icon{
+  color:green;
+ }
+
+.button{
+  width: 150px;
+}
+.progress-bar-width{
+  width:20px;
+}
+
+

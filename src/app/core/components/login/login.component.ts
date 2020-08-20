@@ -25,6 +25,7 @@ export class LoginComponent {
     })
     onSubmit() {
         this.login = this.loginForm.value;
+        console.log(this.login.customer);
        this.userService.login(this.login).subscribe((data)=>{console.log(data)},(error)=>{console.log(error)})
     }
     getEmailErrors() {

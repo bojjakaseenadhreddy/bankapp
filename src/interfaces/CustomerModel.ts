@@ -14,4 +14,5 @@ export interface CustomerModel {
     statusModel: StatusModel;
     accountCreatedDate?: Date;
     accountTypeModel: AccountTypeModel;
+    balance:number;
 }

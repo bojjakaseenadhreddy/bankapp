@@ -6,16 +6,19 @@ import { CreateDepositComponent } from './components/create-deposit/create-depos
 import { AngMaterialModule } from '../ang-material/ang-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton, MatButtonModule } from '@angular/material/button';
+import { WithdrawComponent } from './components/withdraw/withdraw.component';
+import { TransferComponent } from './components/transfer/transfer.component';
+import { BalanceDialogComponent } from './components/balance-dialog/balance-dialog.component';
 
 
 @NgModule({
-  declarations: [CreateDepositComponent],
+  declarations: [CreateDepositComponent, WithdrawComponent, TransferComponent, BalanceDialogComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,
     AngMaterialModule,
     ReactiveFormsModule
   ],
-  exports:[CreateDepositComponent]
+  exports:[CreateDepositComponent,WithdrawComponent,TransferComponent,BalanceDialogComponent]
 })
 export class CustomerModule { }

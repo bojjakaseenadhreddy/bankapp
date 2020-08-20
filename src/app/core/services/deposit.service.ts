@@ -21,7 +21,7 @@ export class DepositService {
   }
 
   public changeDepositStatus(depositId:number,rowStatusModel:RowStatusModel){
-    return this._http.put<RowStatusModel>(`${this.baseUrl}/${depositId}`,rowStatusModel);
+    return this._http.put<DepositModel>(`${this.baseUrl}/${depositId}`,rowStatusModel);
   }
 
   public getAllDepositsByStatusId(statusId:number){
