@@ -33,19 +33,15 @@ export class LoginComponent implements OnInit {
             customer: []
         })
     }
-    
+
 
 
     onSubmit() {
         this.login = this.loginForm.value;
-<<<<<<< HEAD
-        console.log(this.login.customer);
-       this.userService.login(this.login).subscribe((data)=>{console.log(data)},(error)=>{console.log(error)})
-=======
         if (localStorage.getItem("isCustomer")!=="false") {
             console.log("i am customer");
             const newEmail = this.loginForm.get('email').value + "cus";
-            this.login.email = newEmail; 
+            this.login.email = newEmail;
         }else{
             this.login.customer = false;
             console.log("i am not customer");
@@ -76,7 +72,6 @@ export class LoginComponent implements OnInit {
                 }
             },
             (error) => { console.log(error); this.snackbar.open("Login Failed","Retry",{duration:3000}) })
->>>>>>> 60295b496ae42b27504f502c9f5eb8b5f4b8d4b2
     }
 
 
@@ -87,8 +82,6 @@ export class LoginComponent implements OnInit {
         return this.loginForm.get('email').hasError('pattern') ? "Enter Valid Email" : "";
     }
 }
-<<<<<<< HEAD
-=======
 
 
 
@@ -106,4 +99,3 @@ export class LoginComponent implements OnInit {
 
 
 
->>>>>>> 60295b496ae42b27504f502c9f5eb8b5f4b8d4b2
