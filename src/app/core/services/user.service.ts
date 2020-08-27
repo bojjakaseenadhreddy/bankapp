@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { LoginModel } from '../../../interfaces/LoginModel';
 
 import { HttpClient } from '@angular/common/http';
@@ -14,19 +15,19 @@ export class UserService {
     constructor(private _http: HttpClient) {
     }
 
-    public getAllUsers() {
+    public getAllUsers(): Observable<any> {
         return this._http.get<UserModel[]>(`${this.baseUrl}`);
     }
 
     public createUser(userModel: UserModel) {
         return this._http.post<UserModel>(`${this.baseUrl}`, userModel)
     }
-    
+
     public updateUser(userId: number, userModel: UserModel) {
         return this._http.put<UserModel>(`${this.baseUrl}/${userId}`, userModel)
     }
 
-    public getUserById(userId:number) {
+    public getUserById(userId: number) {
         return this._http.get<UserModel>(`${this.baseUrl}/${userId}`);
     }
 
@@ -48,5 +49,9 @@ export class UserService {
 
     public login(loginModel: LoginModel) {
         return this._http.post<any>(`${this.baseUrl}/login`, loginModel);
+    }
+
+    public getUsersCount() {
+        return this._http.get(`${this.baseUrl}/count`);
     }
 }

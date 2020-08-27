@@ -9,7 +9,7 @@ import { CoreModule } from './../core/core.module';
 import { AngMaterialModule } from './../ang-material/ang-material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts'
 import { AdminRoutingModule } from './admin-routing.module';
 import { CreateBranchComponent } from './components/create-branch/create-branch.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
@@ -35,10 +35,12 @@ export const components = [
     AdminRoutingModule,
     AngMaterialModule,
     CoreModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxChartsModule
   ],
   exports: [
-    components
+    components,
+    NgxChartsModule
   ]
 })
 export class AdminModule { }

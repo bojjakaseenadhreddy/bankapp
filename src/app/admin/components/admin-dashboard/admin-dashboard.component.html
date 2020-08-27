@@ -1,3 +1,63 @@
-<mat-grid-list>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-3 mt-3">
+            <mat-card>
+                <mat-card-title>Customers</mat-card-title>
+                <mat-card-content>{{customers}}</mat-card-content>
+                <mat-card-actions align="end">
+                    <button mat-raised-button color="primary" (click)="viewCustomers()">View</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-lg-3 mt-3">
+            <mat-card>
+                <mat-card-title>Users</mat-card-title>
+                <mat-card-content>{{users}}</mat-card-content>
+                <mat-card-actions align="end">
+                    <button mat-raised-button color="primary" (click)="viewUsers()">View</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-lg-3 mt-3">
+            <mat-card>
+                <mat-card-title>Branches</mat-card-title>
+                <mat-card-content>{{branches}}</mat-card-content>
+                <mat-card-actions align="end">
+                    <button mat-raised-button color="primary" (click)="viewBranches()">View</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-lg-3 mt-3">
+            <mat-card>
+                <mat-card-title>Bank Amount</mat-card-title>
+                <mat-card-content>{{bankBalance}}</mat-card-content>
+                <mat-icon></mat-icon>
+            </mat-card>
+        </div>
+    </div>
 
-</mat-grid-list>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-3 mt-3">
+            <mat-card>
+                <mat-card-title>Complaints</mat-card-title>
+                <div>
+                    <ngx-charts-pie-chart [view]="ui" [results]="complaintData" [labels]="showLabels"
+                        [legend]="showLegend" [legendPosition]="legendPosition">
+                    </ngx-charts-pie-chart>
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-lg-3 mt-3">
+            <mat-card>
+                <mat-card-title>Branch/Balance</mat-card-title>
+                <div>
+                    <ngx-charts-bar-vertical [view]="branchUi" [results]="branchBalanceData" [gradient]="gradient"
+                        [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+                        [legendPosition]="legendPosition" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+                        [yAxisLabel]="yAxisLabel">
+                    </ngx-charts-bar-vertical>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
