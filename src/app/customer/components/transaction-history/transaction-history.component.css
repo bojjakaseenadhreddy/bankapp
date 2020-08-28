@@ -1,0 +1,18 @@
+table {
+  width: 100%;
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 25%;
+
+}
+.mat-divider {
+  border-top-color:grey
+  
+}
+
+::ng-deep .mat-card{
+  border-top:2px solid rebeccapurple;
+
+}
+

@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
     }
 
 
-
     onSubmit() {
         this.login = this.loginForm.value;
         if (localStorage.getItem("isCustomer")!=="false") {
@@ -48,7 +47,6 @@ export class LoginComponent implements OnInit {
         }
         this.userService.login(this.login).subscribe(
             (data) => {
-
                 this.snackbar.open("Login Success","Ok",{duration:2000});
                 console.log(data);
                 if (data.role == "CUSTOMER") {

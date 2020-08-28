@@ -9,6 +9,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AppComponent {
   title = 'bank-app';
   constructor(private snackBar:MatSnackBar){
-    snackBar.open("Hello snackbar","Ok",{duration:3000})
+    //snackBar.open("Hello snackbar","Ok",{duration:3000})
   }
 }
