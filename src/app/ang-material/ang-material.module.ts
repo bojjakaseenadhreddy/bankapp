@@ -29,6 +29,8 @@ import {MatListModule}  from '@angular/material/list';
 import { from } from 'rxjs';
 import {MatCheckboxModule} from '@angular/material/checkbox'
 import {MatChipsModule} from '@angular/material/chips';
+import { MatGridListModule } from '@angular/material/grid-list';
+
 export const materialModules = [
   MatSnackBarModule,
   MatButtonModule,
@@ -51,6 +53,7 @@ export const materialModules = [
   CdkTableModule,
   MatTooltipModule,
   MatDialogModule,
+<<<<<<< HEAD
  MatToolbarModule,
  MatSidenavModule,
  MatMenuModule,
@@ -60,6 +63,9 @@ export const materialModules = [
  MatCheckboxModule,
  MatChipsModule,
 
+=======
+  MatGridListModule
+>>>>>>> 3527af8066a029816a35b6f61fc6778b2f571b02
 ]
 
 
@@ -69,7 +75,7 @@ export const materialModules = [
     CommonModule,
     materialModules
   ],
-  exports:[
+  exports: [
     materialModules
   ]
 })

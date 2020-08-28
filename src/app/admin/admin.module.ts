@@ -1,3 +1,4 @@
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { UpdateCustomerComponent } from './components/update-customer/update-customer.component';
 import { UpdateAddressComponent } from './components/update-address/update-address.component';
 import { UpdateBranchComponent } from './components/update-branch/update-branch.component';
@@ -8,7 +9,7 @@ import { CoreModule } from './../core/core.module';
 import { AngMaterialModule } from './../ang-material/ang-material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts'
 import { AdminRoutingModule } from './admin-routing.module';
 import { CreateBranchComponent } from './components/create-branch/create-branch.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
@@ -20,8 +21,9 @@ export const components = [
   UpdateBranchComponent,
   UpdateAddressComponent,
   UpdateCustomerComponent,
-  UpdateUserComponent
-  
+  UpdateUserComponent,
+  AdminDashboardComponent
+
 ]
 
 @NgModule({
@@ -33,10 +35,12 @@ export const components = [
     AdminRoutingModule,
     AngMaterialModule,
     CoreModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxChartsModule
   ],
-  exports:[
-    components
+  exports: [
+    components,
+    NgxChartsModule
   ]
 })
 export class AdminModule { }

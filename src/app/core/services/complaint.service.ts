@@ -7,7 +7,7 @@ import { ComplaintModel } from "../../../interfaces/ComplaintModel";
     providedIn: "root"
 })
 export class ComplaintService {
-   
+
     constructor(private http: HttpClient) { }
 
     baseUrl: string = "http://localhost:8082/api/complaints";
@@ -15,19 +15,25 @@ export class ComplaintService {
     public getAllComplaints() {
         return this.http.get<ComplaintModel[]>(this.baseUrl);
     }
-    
+
     public getComplaintById(complaintId: number) {
         return this.http.get<ComplaintModel>(`${this.baseUrl}/${complaintId}`);
     }
     public createComplaint(complaint: ComplaintModel) {
-     return this.http.post<ComplaintModel>(this.baseUrl,complaint);
+        return this.http.post<ComplaintModel>(this.baseUrl, complaint);
     }
-    public updateComplaintById(complaintId,complaintModel){
-        return this.http.put(`${this.baseUrl}/${complaintId}`,complaintModel);
+    public updateComplaintById(complaintId, complaintModel) {
+        return this.http.put(`${this.baseUrl}/${complaintId}`, complaintModel);
     }
 
-    public updateComplaintStatusById(statusId:number,complaintId:number,complaintModel?:ComplaintModel){
-        return this.http.put(`${this.baseUrl}/${complaintId}/status/${statusId}`,null);
+    public updateComplaintStatusById(statusId: number, complaintId: number, complaintModel?: ComplaintModel) {
+        return this.http.put(`${this.baseUrl}/${complaintId}/status/${statusId}`, null);
+    }
+    public getComplaintsCount() {
+        return this.http.get(`${this.baseUrl}/count`);
+    }
+    public getComplaintsCountByStatusId(statusId: number) {
+        return this.http.get(`${this.baseUrl}/count/${statusId}`);
     }
 
 }

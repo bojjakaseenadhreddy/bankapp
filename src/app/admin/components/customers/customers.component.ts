@@ -24,7 +24,7 @@ export class CustomersComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sorting: MatSort;
 
-  constructor(private customerService: CustomerService, private dialog:MatDialog) { }
+  constructor(private customerService: CustomerService, private dialog: MatDialog) { }
   ngOnInit() {
 
     this.customerService.getAllCustomers().subscribe(
@@ -32,12 +32,17 @@ export class CustomersComponent implements OnInit {
         this.dataSource = new MatTableDataSource<CustomerModel>(data);
         this.dataSource.paginator = this.paginator;
 
+        this.dataSource.filterPredicate = function (data, filterValue: string): boolean {
+          return data.accountTypeModel.name.toLowerCase().includes(filterValue);
+        }
+
         this.dataSource.sortingDataAccessor = (item, property) => {
           console.log(item);
           console.log(property);
           switch (property) {
             case 'DOB': return new Date(item.dob);
-            default: return item[property];
+            case 'status': return item.statusModel.name;
+            default: return item[property]
           }
         }
         this.dataSource.sort = this.sorting;
@@ -54,10 +59,13 @@ export class CustomersComponent implements OnInit {
   }
 
   viewAddress(address) {
-    this.dialog.open(AddressDialogComponent,{data:address})
+    this.dialog.open(AddressDialogComponent, { data: address })
   }
   viewBranch(branch) {
-    this.dialog.open(BranchDialogComponent,{data:branch})
+    this.dialog.open(BranchDialogComponent, { data: branch })
   }
 
+  filterData(value) {
+    this.dataSource.filter = value;
+  }
 }

@@ -1,3 +1,72 @@
-<p>
-  complaints works!
-</p>
+<div class="container-fluid">
+
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><b> ID</b>
+        <div>
+          <mat-form-field>
+            <input (keyup)="filterById($event.target.value)" matInput placeholder="Complaint id">
+          </mat-form-field>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let complaint">{{complaint.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef><b>Description</b>
+        <div>
+          <mat-form-field>
+            <input (keyup)="filterByDescription($event.target.value)" matInput placeholder="Description">
+          </mat-form-field>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let complaint">{{complaint.description}}</td>
+    </ng-container>
+    <ng-container matColumnDef="user">
+      <th mat-header-cell *matHeaderCellDef><b>Name</b>
+        <div>
+          <mat-form-field>
+            <input (keyup)="filterByName($event.target.value)" matInput placeholder="Name">
+          </mat-form-field>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let complaint">{{complaint.customerModel.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="raised">
+      <th mat-header-cell *matHeaderCellDef><b>Rasied On</b>
+        <div>
+          <mat-form-field>
+            <mat-label>Select Date</mat-label>
+            <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+              <input matInput #start matStartDate>
+              <input matInput #end matEndDate>
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker disabled="false" startView="year"
+              (closed)="filterByRaisedDate(start.value,end.value)" #picker>
+            </mat-date-range-picker>
+          </mat-form-field>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let complaint">{{complaint.raisedDate | date :'dd-MMM-yyyy h:mm:ss a '}}</td>
+    </ng-container>
+    <ng-container matColumnDef="updated">
+      <th mat-header-cell *matHeaderCellDef><b>Update On</b></th>
+      <td mat-cell *matCellDef="let complaint">{{complaint.updatedDate}}</td>
+    </ng-container>
+    <ng-container matSort matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef><b>Status</b>
+        <div>
+          <mat-form-field>
+            <input (keyup)="filterByStatus($event)" matInput placeholder="Status">
+          </mat-form-field>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let complaint">{{complaint.statusModel.name}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row;  columns : columnsToDisplay"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[2,5,10,20]">
+  </mat-paginator>
+</div>

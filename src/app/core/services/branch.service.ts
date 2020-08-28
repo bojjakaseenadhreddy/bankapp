@@ -4,28 +4,36 @@ import { Injectable } from "@angular/core";
 import { BranchModel } from '../../../interfaces/BranchModel';
 
 @Injectable({
-    providedIn:'root'
+    providedIn: 'root'
 })
-export class BranchService{
 
-    baseUrl:string = 'http://localhost:8082/api/branches';
+export class BranchService {
 
-    constructor(private http:HttpClient){}
+    baseUrl: string = 'http://localhost:8082/api/branches';
 
-    public getAllBranches(){
+    constructor(private http: HttpClient) { }
+
+    public getAllBranches() {
         return this.http.get<BranchModel[]>(this.baseUrl);
     }
 
-    public getBranchById(branchId:number){
+    public getBranchById(branchId: number) {
         return this.http.get<BranchModel>(`${this.baseUrl}/${branchId}`);
     }
 
-    public createBranch(branchModel:BranchModel){
-        return this.http.post<BranchModel>(this.baseUrl,branchModel);
+    public createBranch(branchModel: BranchModel) {
+        return this.http.post<BranchModel>(this.baseUrl, branchModel);
     }
 
-    public updateBranch(branchId:number,branchModel:BranchModel){
-        return this.http.put(`${this.baseUrl}/${branchId}`,branchModel);
+    public updateBranch(branchId: number, branchModel: BranchModel) {
+        return this.http.put(`${this.baseUrl}/${branchId}`, branchModel);
+    }
+    public getBranchesCount() {
+        return this.http.get(`${this.baseUrl}/count`);
+    }
+
+    public getAllBranchesBalance() {
+        return this.http.get<Object[]>(`${this.baseUrl}/branch-balance`);
     }
 
 
