@@ -21,11 +21,16 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatSliderModule } from '@angular/material/slider';
-
-
+import { MatListModule } from '@angular/material/list';
+import { from } from 'rxjs';
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatChipsModule } from '@angular/material/chips';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 export const materialModules = [
   MatSnackBarModule,
   MatButtonModule,
@@ -48,9 +53,16 @@ export const materialModules = [
   CdkTableModule,
   MatTooltipModule,
   MatDialogModule,
-  MatGridListModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatMenuModule,
+  MatDatepickerModule,
   MatDividerModule,
-  MatSliderModule
+  MatListModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatGridListModule,
+  NgxChartsModule
 ]
 
 

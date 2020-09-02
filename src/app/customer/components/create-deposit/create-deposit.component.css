@@ -1,0 +1,8 @@
+
+.card{
+ width:400px;
+ height: 250px;
+ text-align: center;
+ justify-content: center;
+ border:1px solid black
+}

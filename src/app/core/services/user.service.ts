@@ -8,7 +8,6 @@ import { UserModel } from '../../../interfaces/UserModel';
 @Injectable({
     providedIn: 'root'
 })
-
 export class UserService {
 
     baseUrl: string = 'http://localhost:8082/api/users'
@@ -50,8 +49,7 @@ export class UserService {
     public login(loginModel: LoginModel) {
         return this._http.post<any>(`${this.baseUrl}/login`, loginModel);
     }
-
-    public getUsersCount() {
-        return this._http.get(`${this.baseUrl}/count`);
+    public getUsersCount(){
+      return this._http.get<number>(`${this.baseUrl}/count`);
     }
 }

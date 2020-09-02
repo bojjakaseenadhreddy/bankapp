@@ -5,12 +5,12 @@ import { AdminModule } from './admin/admin.module';
 import { CoreModule } from './core/core.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngMaterialModule } from './ang-material/ang-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CustomerModule } from './customer/customer.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
@@ -25,7 +25,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ReactiveFormsModule,
     CoreModule,
     AdminModule,
-    BranchModule
+    BranchModule,
+    CustomerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
