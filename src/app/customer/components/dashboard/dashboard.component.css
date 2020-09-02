@@ -1,11 +1,11 @@
 .example-container {
-  width: 950px;
+  width: auto;
   height:600px;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .example-sidenav-content {
-  height: 100%;
+  min-height: 100px;
   align-items: center;
   justify-content: center;
   display: flex
@@ -17,7 +17,7 @@
 }
 .toolbar{
   height: 40px;
-  width:950px;
+  width:auto;
 }
 .button-align{
   margin-left: 750px;

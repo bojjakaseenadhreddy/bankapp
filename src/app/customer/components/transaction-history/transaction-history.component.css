@@ -1,6 +1,4 @@
-table {
-  width: 100%;
-}
+
 .mat-form-field {
   font-size: 14px;
   width: 25%;
@@ -8,11 +6,28 @@ table {
 }
 .mat-divider {
   border-top-color:grey
-  
-}
 
+}
 ::ng-deep .mat-card{
-  border-top:2px solid rebeccapurple;
-
+  border-top:4px solid rgb(241, 89, 190)
 }
-
+.align{
+ float: right;
+}
+.chip-align{
+  margin-right: 100px;
+}
+.rotate{
+  transform: rotate(270deg);
+  font-size: 20px;
+  padding-top: -3px;
+}
+.info-icon-success{
+  color:green;
+}
+.info-icon-failed{
+  color:#df2727d2;
+}
+.info-icon-processing{
+  color:hsl(22, 88%, 59%)
+}

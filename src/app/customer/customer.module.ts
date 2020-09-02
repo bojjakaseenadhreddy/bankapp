@@ -10,10 +10,11 @@ import { TransferComponent } from './components/transfer/transfer.component';
 import { BalanceDialogComponent } from './components/balance-dialog/balance-dialog.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TransactionHistoryComponent } from './components/transaction-history/transaction-history.component';
+import { LoansComponent } from './components/loans/loans.component';
 
 
 @NgModule({
-  declarations: [CreateDepositComponent, WithdrawComponent, TransferComponent, BalanceDialogComponent, DashboardComponent, TransactionHistoryComponent],
+  declarations: [CreateDepositComponent, WithdrawComponent, TransferComponent, BalanceDialogComponent, DashboardComponent, TransactionHistoryComponent, LoansComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,
@@ -21,6 +22,6 @@ import { TransactionHistoryComponent } from './components/transaction-history/tr
     ReactiveFormsModule,
     FormsModule
   ],
-  exports:[CreateDepositComponent,WithdrawComponent,TransferComponent,BalanceDialogComponent,DashboardComponent,TransactionHistoryComponent]
+  exports:[CreateDepositComponent,WithdrawComponent,TransferComponent,BalanceDialogComponent,DashboardComponent,TransactionHistoryComponent,LoansComponent]
 })
 export class CustomerModule { }
