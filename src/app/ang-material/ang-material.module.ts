@@ -22,6 +22,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSliderModule } from '@angular/material/slider';
+
 
 export const materialModules = [
   MatSnackBarModule,
@@ -45,7 +48,9 @@ export const materialModules = [
   CdkTableModule,
   MatTooltipModule,
   MatDialogModule,
-  MatGridListModule
+  MatGridListModule,
+  MatDividerModule,
+  MatSliderModule
 ]
 
 

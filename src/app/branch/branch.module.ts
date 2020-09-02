@@ -1,3 +1,4 @@
+import { BranchDashboardComponent } from './components/branch-dashboard/branch-dashboard.component';
 import { CoreModule } from './../core/core.module';
 import { BranchesComponent } from './components/branches/branches.component';
 import { AngMaterialModule } from './../ang-material/ang-material.module';
@@ -6,20 +7,23 @@ import { CommonModule } from '@angular/common';
 
 import { BranchRoutingModule } from './branch-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-const components =[
-  BranchesComponent
+import { NgxChartsModule } from '@swimlane/ngx-charts'
+const components = [
+  BranchesComponent,
+  BranchDashboardComponent
 ]
 
 @NgModule({
-  declarations: [ components],
+  declarations: [components],
   imports: [
     CommonModule,
     BranchRoutingModule,
     HttpClientModule,
     AngMaterialModule,
-    CoreModule
+    CoreModule,
+    NgxChartsModule
   ],
-  exports:[
+  exports: [
     components
   ]
 })

@@ -9,7 +9,7 @@ export class LoanService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl: string = "localhost:8082/api/loans";
+  baseUrl: string = "http://localhost:8082/api/loans";
 
   public getAllLoans() {
     return this.http.get<LoanModel[]>(this.baseUrl);

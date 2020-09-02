@@ -2,8 +2,8 @@ import { EligibilityModel } from "./EligibilityModel";
 
 
 export interface AccountTypeModel {
-    id ?: number;
-    name: String;
+    id?: number;
+    name: string;
     interest: number;
     minBalance: number;
     withdrawLimit: number;

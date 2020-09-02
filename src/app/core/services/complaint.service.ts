@@ -36,4 +36,9 @@ export class ComplaintService {
         return this.http.get(`${this.baseUrl}/count/${statusId}`);
     }
 
+
+    public getComplaintsCountByStatusIdAndBranchId(statusId: number, branchId: number) {
+        return this.http.get(`${this.baseUrl}/count/statuses/${statusId}/branches/${branchId}`);
+    }
+
 }

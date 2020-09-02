@@ -1,3 +1,4 @@
+import { Routes, Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomerAuthenticationResponse } from './../../../../interfaces/CustomerAuthenticationResponse';
 import { LoginModel } from './../../../../interfaces/LoginModel';
@@ -12,9 +13,7 @@ import { UserAuthenticationResponse } from '../../../../interfaces/UserAuthentic
     templateUrl: './login.component.html'
 })
 
-
 export class LoginComponent implements OnInit {
-
     EMAIL_REG_EXP: string = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
     hide: boolean = true;
     login: LoginModel;
@@ -22,34 +21,34 @@ export class LoginComponent implements OnInit {
     customer: CustomerAuthenticationResponse;
     user: UserAuthenticationResponse;
     isCustomer: boolean = true;
-
-    constructor(private formBuilder: FormBuilder, private userService: UserService, private snackbar:MatSnackBar) {
+    constructor(private formBuilder: FormBuilder, private userService: UserService, private snackbar: MatSnackBar, private router: Router) {
     }
-    ngOnInit(): void {
 
+    ngOnInit(): void {
+        if (this.router.url.includes("user")) {
+            this.isCustomer = false;
+        }
         this.loginForm = this.formBuilder.group({
             email: ['', [Validators.required, Validators.pattern(this.EMAIL_REG_EXP)]],
             password: ['', Validators.required],
-            customer: []
+            customer: [this.isCustomer]
         })
     }
-    
-
 
     onSubmit() {
         this.login = this.loginForm.value;
-        if (localStorage.getItem("isCustomer")!=="false") {
+        if (this.isCustomer) {
             console.log("i am customer");
             const newEmail = this.loginForm.get('email').value + "cus";
-            this.login.email = newEmail; 
-        }else{
+            this.login.email = newEmail;
+        } else {
             this.login.customer = false;
             console.log("i am not customer");
         }
+
         this.userService.login(this.login).subscribe(
             (data) => {
-
-                this.snackbar.open("Login Success","Ok",{duration:2000});
+                this.snackbar.open("Login Success", "Ok", { duration: 2000 });
                 console.log(data);
                 if (data.role == "CUSTOMER") {
                     this.customer = data;
@@ -70,10 +69,11 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem("userId", "" + this.user.userId);
                     localStorage.setItem("userName", this.user.userName);
                 }
+                console.log(data.role);
+                this.redirectUser(data.role);
             },
-            (error) => { console.log(error); this.snackbar.open("Login Failed","Retry",{duration:3000}) })
+            (error) => { console.log(error); this.snackbar.open("Login Failed", "Retry", { duration: 3000 }) })
     }
-
 
     getEmailErrors() {
         if (this.loginForm.get('email').hasError('required')) {
@@ -81,21 +81,17 @@ export class LoginComponent implements OnInit {
         }
         return this.loginForm.get('email').hasError('pattern') ? "Enter Valid Email" : "";
     }
+
+    redirectUser(role: string) {
+        if (role == "ADMIN") {
+            this.router.navigateByUrl("/admin/admin-dashboard");
+        }
+        if (role == "MANAGER") {
+            this.router.navigateByUrl("/branch/branch-dashboard");
+        }
+        if (role == "CUSTOMER") {
+            this.router.navigateByUrl("/dashboard");
+        }
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

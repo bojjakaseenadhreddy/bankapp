@@ -1,3 +1,4 @@
+import { HttpErrorInterceptor } from './interceptor/http-error.interceptor';
 import { AuthorizationInterceptor } from './interceptor/authorization.interceptor';
 import { BranchModule } from './branch/branch.module';
 import { AdminModule } from './admin/admin.module';
@@ -27,7 +28,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     BranchModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS,useClass:AuthorizationInterceptor,multi:true}
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

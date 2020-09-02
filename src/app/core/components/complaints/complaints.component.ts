@@ -1,5 +1,4 @@
 import { MatSort } from '@angular/material/sort';
-import { States } from './../../constants/states';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -109,7 +108,4 @@ export class ComplaintsComponent implements OnInit {
     else
       return true;
   }
-
-
-
 }
