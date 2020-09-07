@@ -31,8 +31,8 @@ export class LoanService {
     return this.http.put<LoanModel>(`${this.baseUrl}/${loanNumber}`, loanModel);
   }
 
-  public updateLoanStatus(loanId: number, loanStatusId: number) {
-    return this.http.put(`${this.baseUrl}/${loanId}/status/${loanStatusId}`, null);
+  public updateLoanStatus(loanId: number, loanStatusId: number,loanModel:LoanModel) {
+    return this.http.put(`${this.baseUrl}/${loanId}/status/${loanStatusId}`,loanModel);
   }
 
 }

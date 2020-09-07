@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CustomerModule } from './customer/customer.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -25,10 +27,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     CoreModule,
     AdminModule,
     BranchModule,
-    CustomerModule
+    CustomerModule,
+
+
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS,useClass:AuthorizationInterceptor,multi:true}
+    {provide: HTTP_INTERCEPTORS,useClass:AuthorizationInterceptor,multi:true},
+
   ],
   bootstrap: [AppComponent]
 })

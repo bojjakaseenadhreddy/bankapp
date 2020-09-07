@@ -11,4 +11,5 @@ export class AppComponent {
   constructor(private snackBar:MatSnackBar){
     //snackBar.open("Hello snackbar","Ok",{duration:3000})
   }
+  
 }

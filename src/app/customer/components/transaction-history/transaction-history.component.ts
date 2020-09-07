@@ -43,11 +43,11 @@ export class TransactionHistoryComponent implements OnInit {
   });
   constructor(private withdrawService: WithdrawService, private depositService: DepositService, private transferService: TransferService) {
     // console.log("inside construtor");
-    this.endDate ="";
-    this.startDate ="";
-    this.selected ="";
-    this.type ="";
-    this.value ="";
+    this.endDate = "";
+    this.startDate = "";
+    this.selected = "";
+    this.type = "";
+    this.value = "";
   }
   get fromDate() {
     this.startDate = this.range.get('start').value
@@ -114,27 +114,36 @@ export class TransactionHistoryComponent implements OnInit {
 
 
         //moment().format('L');\
-        console.log(moment(this.toDate).format('L'));
 
 
-          console.log("insie ifff...");
 
-          //         return data.status.name.toLowerCase().includes(this.selected) && data.type.toLowerCase().includes(this.type) && money.includes(this.value)
-          // &&( (moment(data.date).format('L') <= moment(this.toDate).format('L')&&
-          // moment(data.date).format('L') >= moment(this.fromDate).format('L')));
-        
+
+        //         return data.status.name.toLowerCase().includes(this.selected) && data.type.toLowerCase().includes(this.type) && money.includes(this.value)
+        // &&( (moment(data.date).format('L') <= moment(this.toDate).format('L')&&
+        // moment(data.date).format('L') >= moment(this.fromDate).format('L')));
+        if (this.toDate && this.fromDate) {
+
+          console.log(moment(this.toDate).format('L'));
+          console.log("09/15/2020" >= "09/14/2020")
+          console.log(moment(data.date).format('L'));
+          //  console.log("lessthan::  data.date"+moment(data.date).format('L')+"data.toDate:: "+moment(this.toDate).format('L') +"  "+ moment(data.date).format('L') <= moment(this.toDate).format('L'));
+          //  console.log("greaterthan::  data.date"+moment(data.date).format('L')+"data.fromDate:: "+moment(this.fromDate).format('L') +"  "+ moment(data.date).format('L')>= moment(this.fromDate).format('L'));
+
+          return moment(this.fromDate).format('L') <= moment(data.date).format('L') && moment(data.date).format('L') <= moment(this.toDate).format('L');
+        }
+
         console.log((moment(data.date).format('L') <= moment(this.toDate).format('L')));
-          var money=+data.money+"";
-          money.toString();
-          console.log(this.selected);
-          console.log("category::"+data.status.name.toLowerCase().includes(this.selected));
-          console.log("type::"+data.type.toLowerCase().includes(this.type));
-          console.log("money::"+money.toString().includes(this.value));
-          console.log("month::"+ moment().month(month).format('MMM').concat("" + year).toLowerCase().includes(this.value));
-          if(this.selected === undefined){
-            console.log("this.selected");
-          }
-          return data.status.name.toLowerCase().includes(this.selected) && data.type.toLowerCase().includes(this.type) && money.trim().includes(this.value)
+        var money = +data.money + "";
+        money.toString();
+        console.log(this.selected);
+        console.log("category::" + data.status.name.toLowerCase().includes(this.selected));
+        console.log("type::" + data.type.toLowerCase().includes(this.type));
+        console.log("money::" + money.toString().includes(this.value));
+        console.log("month::" + moment().month(month).format('MMM').concat("" + year).toLowerCase().includes(this.value));
+        if (this.selected === undefined) {
+          console.log("this.selected");
+        }
+        return data.status.name.toLowerCase().includes(this.selected) && data.type.toLowerCase().includes(this.type) && money.trim().includes(this.value)
 
 
       }
@@ -144,7 +153,7 @@ export class TransactionHistoryComponent implements OnInit {
       });
   }
   applyFilter(filterValue: string) {
-   // this.range.reset();
+    // this.range.reset();
     //const filterValue = (event.target as HTMLInputElement).value;
     console.log("inside apply filter ")
     filterValue = filterValue.trim().toLowerCase(); // Remove whitespace
@@ -153,6 +162,7 @@ export class TransactionHistoryComponent implements OnInit {
     // filterValue='';
     console.log(filterValue);
   }
+  
   applyDateFilter() {
     //console.log("inside apply date filter");
     //console.log("Math.random()"+Math.random());

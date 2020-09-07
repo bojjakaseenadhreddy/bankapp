@@ -13,6 +13,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreRoutingModule } from './core-routing.module';
 import { CustomerRegisterComponent } from './components/customer-register/customer-register.component';
+import { UpdateComplaintComponent } from './components/update-complaint/update-complaint.component';
 
 
 const components = [
@@ -24,11 +25,13 @@ const components = [
   BranchDialogComponent,
   ComplaintComponent,
   UserLoginComponent,
-  ComplaintsComponent
+  ComplaintsComponent,
+  UpdateComplaintComponent
 ]
 @NgModule({
   declarations: [
-    components
+    components,
+
   ],
   imports: [
     CommonModule,

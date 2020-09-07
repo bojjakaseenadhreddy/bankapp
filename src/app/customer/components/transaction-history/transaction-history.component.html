@@ -20,8 +20,8 @@ Transactions Count::{{dataSource.filteredData.length}}
 <p>To Date::{{ endDate | date:'medium'}}</p> -->
 <br>
 <br>
-<mat-chip-list class="chip-align" [multiple]="true" [selectable]="true">
-  <mat-chip>filters
+<mat-chip-list  class="chip-align" [multiple]="true" [selectable]="true">
+  <mat-chip color="accent" >filters
     <mat-select [(value)]="selected" (selectionChange)="changeSelected(selected)">
       <mat-optgroup color="primary" label="Status">
         <mat-option value="success">Success</mat-option>
@@ -32,9 +32,8 @@ Transactions Count::{{dataSource.filteredData.length}}
   </mat-chip>
 </mat-chip-list>
 <p> selected status::{{selected}}</p>
-
 <br>
-<mat-chip-list color="primary" class="mr-3" [multiple]="true" [selectable]="true">
+<mat-chip-list color="primary"  [multiple]="true" [selectable]="true">
   <mat-chip>Categories
     <mat-select [(value)]="type" (selectionChange)="applyCategory(type)">
       <mat-optgroup label="categories">
@@ -75,7 +74,7 @@ Transactions Count::{{dataSource.filteredData.length}}
   </table>
 </div> -->
 <!---->
-
+<br>
 <div class="container">
   <mat-card *ngFor="let transactionModel of this.dataSource.filteredData">
     <mat-card-header>
