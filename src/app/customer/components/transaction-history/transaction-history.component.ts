@@ -114,14 +114,23 @@ export class TransactionHistoryComponent implements OnInit {
 
 
         //moment().format('L');\
-        console.log(moment(this.toDate).format('L'));
 
 
-        console.log("insie ifff...");
+
 
         //         return data.status.name.toLowerCase().includes(this.selected) && data.type.toLowerCase().includes(this.type) && money.includes(this.value)
         // &&( (moment(data.date).format('L') <= moment(this.toDate).format('L')&&
         // moment(data.date).format('L') >= moment(this.fromDate).format('L')));
+        if (this.toDate && this.fromDate) {
+
+          console.log(moment(this.toDate).format('L'));
+          console.log("09/15/2020" >= "09/14/2020")
+          console.log(moment(data.date).format('L'));
+          //  console.log("lessthan::  data.date"+moment(data.date).format('L')+"data.toDate:: "+moment(this.toDate).format('L') +"  "+ moment(data.date).format('L') <= moment(this.toDate).format('L'));
+          //  console.log("greaterthan::  data.date"+moment(data.date).format('L')+"data.fromDate:: "+moment(this.fromDate).format('L') +"  "+ moment(data.date).format('L')>= moment(this.fromDate).format('L'));
+
+          return moment(this.fromDate).format('L') <= moment(data.date).format('L') && moment(data.date).format('L') <= moment(this.toDate).format('L');
+        }
 
         console.log((moment(data.date).format('L') <= moment(this.toDate).format('L')));
         var money = +data.money + "";
@@ -153,6 +162,7 @@ export class TransactionHistoryComponent implements OnInit {
     // filterValue='';
     console.log(filterValue);
   }
+
   applyDateFilter() {
     //console.log("inside apply date filter");
     //console.log("Math.random()"+Math.random());

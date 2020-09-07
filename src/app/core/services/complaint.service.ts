@@ -10,6 +10,7 @@ export class ComplaintService {
 
     constructor(private http: HttpClient) { }
 
+
     baseUrl: string = "http://localhost:8082/api/complaints";
 
     public getAllComplaints() {
@@ -22,12 +23,12 @@ export class ComplaintService {
     public createComplaint(complaint: ComplaintModel) {
         return this.http.post<ComplaintModel>(this.baseUrl, complaint);
     }
-    public updateComplaintById(complaintId, complaintModel) {
+    public updateComplaintById(complaintId: number, complaintModel: ComplaintModel) {
         return this.http.put(`${this.baseUrl}/${complaintId}`, complaintModel);
     }
 
     public updateComplaintStatusById(statusId: number, complaintId: number, complaintModel?: ComplaintModel) {
-        return this.http.put(`${this.baseUrl}/${complaintId}/status/${statusId}`, null);
+        return this.http.put(`${this.baseUrl}/${complaintId}/status/${statusId}`, complaintModel);
     }
     public getComplaintsCount() {
         return this.http.get(`${this.baseUrl}/count`);
@@ -39,6 +40,11 @@ export class ComplaintService {
 
     public getComplaintsCountByStatusIdAndBranchId(statusId: number, branchId: number) {
         return this.http.get(`${this.baseUrl}/count/statuses/${statusId}/branches/${branchId}`);
+    }
+
+
+    public getComplaintsByBranchId(branchId: number) {
+        return this.http.get(`${this.baseUrl}/branch/${branchId}`);
     }
 
 }

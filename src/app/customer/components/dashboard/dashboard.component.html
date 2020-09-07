@@ -1,135 +1,269 @@
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<div class="container-fluid">
 <mat-toolbar color="primary" class="toolbar">
-  <div>Application</div>
-  <button class="button-align" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-    <mat-icon color="white">more_vert</mat-icon>
-  </button>
+  <div fxShow="true" fxHide.lt-md="true">Application</div>
+  <span class="title-center">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon color="white">more_vert</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon matTooltip="logout">power_settings_new</mat-icon>
+    </button>
+  </span>
+
   <mat-menu #menu="matMenu">
     <button mat-menu-item>
       <mat-icon>settings</mat-icon>
       <span>Settings</span>
     </button>
-    <button mat-menu-item>
-      <mat-icon>calendar_today</mat-icon>
-      <mat-form-field>
-       <!----<mat-label>Input disabled</mat-label>-->
-       <input matInput [matDatepicker]="dp3" disabled>
-        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-      </mat-form-field>
-      <!---<mat-datepicker-toggle [matDatepicker]="picker" matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>-->
-      <span>Calender</span>
-    </button>
+    <!-- <button mat-menu-item>
+          <mat-icon>calendar_today</mat-icon>
+          <mat-form-field>
 
-    <button mat-menu-item>
+            <input matInput [matDatepicker]="dp3" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+          </mat-form-field>
+          <mat-datepicker-toggle [matDatepicker]="picker" matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <span>Calender</span>
+        </button> -->
+
+    <button mat-menu-item (click)="showNotification('info', 'This library is built on top of Angular 2.' )" >
       <mat-icon>notifications</mat-icon>
       <span>alerts</span>
     </button>
   </mat-menu>
-  <mat-icon matTooltip="logout">power_settings_new</mat-icon>
+  <!-- class="justify-content-end align-items-end mx-auto" -->
+
 </mat-toolbar>
-<br>
 
-<mat-drawer-container class="example-container" >
-  <br>
-  <div class="row">
-    <br>
-    <mat-card class="card">
-      <button mat-fab class="mt-3 ml-5" color="primary" matTooltipPosition="above" matTooltip="check account balance"
-        aria-label="Example icon button with a heart icon" (click)="openDialog()">
-        <mat-icon>account_balance_wallet</mat-icon>
-      </button>
-      <br>
-      <mat-card-content>
-        <br>
-        <span class="ml-3">Account Balance</span></mat-card-content>
-    </mat-card>
-    <mat-card class="card">
-      <button mat-fab class="mt-3 ml-5" color="primary" matTooltip="deposit money" matTooltipPosition="above"
-        aria-label="Example icon button with a heart icon" (click)="openDialog()">
-        <mat-icon>south</mat-icon>
-        <mat-icon class="icon">account_balance</mat-icon>
-
-      </button>
-      <br>
-      <!----<img mat-card-image src="..\..\..\src\assets\10-512.png" alt="Photo of a Shiba Inu">-->
-      <mat-card-content>
-        <br>
-        <span class="ml-5">Deposit</span></mat-card-content>
-    </mat-card>
-    <mat-card class="card">
-      <button mat-fab class="mt-3 ml-5" matTooltip="withdraw money" matTooltipPosition="above" color="primary"
-        aria-label="Example icon button with a heart icon" (click)="openDialog()">
-        <mat-icon class="rotate">money</mat-icon>
-        <br>
-        <mat-icon class="rotate">account_balance_wallet</mat-icon>
-      </button>
-      <br>
-      <mat-card-content>
-        <br>
-        <span class="ml-5">Withdraw</span></mat-card-content>
-    </mat-card>
-    <br>
-
-  </div>
-  <br>
-  <div class="row">
-    <mat-card class="card">
-      <button mat-fab class="mt-3 ml-5" matTooltip="transfer money" matTooltipPosition="left" color="primary"
-        aria-label="Example icon button with a heart icon" (click)="openDialog()">
-        <mat-icon class=" transfer-icon">south</mat-icon>
-        <mat-icon class="icon ">account_balance</mat-icon>
-
-      </button>
-      <br>
-      <mat-card-content>
-        <br>
-        <span class="ml-5">Transfer</span></mat-card-content>
-    </mat-card>
-    <br>
-    <mat-card class="card">
-      <button mat-fab class="mt-3 ml-5" matTooltip="transaction history" matTooltipPosition="left" color="primary"
-        aria-label="Example icon button with a heart icon" (click)="openDialog()">
-        <mat-icon>swap_horiz</mat-icon>
-      </button>
-      <br>
-      <mat-card-content>
-        <br>
-        <span class="ml-5">History</span></mat-card-content>
-    </mat-card>
-    <br>
-    <mat-card class="card">
-        <button mat-fab class="mt-3 ml-5" matTooltip="apply for loan" matTooltipPosition="left" color="primary"
-          aria-label="Example icon button with a heart icon" (click)="openDialog()">
-       <mat-icon>check_circle_outline</mat-icon>
-       <mat-icon>person</mat-icon>
-        </button>
-        <br>
-        <mat-card-content>
-          <br>
-          <span class="ml-5">Loans</span></mat-card-content>
-      </mat-card>
-  </div>
-
-  <mat-drawer #drawer class="example-sidenav" mode="side" opened>
-    <button mat-icon-button (click)="onClick()" aria-label="Example icon button with a home icon">
-      <mat-icon class="icon-display">account_circle</mat-icon>
+<!---
+<mat-toolbar color="primary" class="mat-elevation-z10">
+  <mat-toolbar-row>
+    <mat-icon>favorite</mat-icon>
+    <span>
+      Derek Zoolander's Center for...
+    </span>
+    <span fxFlex></span>
+    <span class="example-spacer"></span>
+    <button class="align-items-end  "mat-icon-button [mat-menu-trigger-for]="menu">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="expand menu">more_vert</mat-icon>
     </button>
-    <div>
-      <button class="mr-3 ml-3 button-size" matTooltip="profile info" (click)="showFiller = !showFiller"
-        mat-icon-button>
-        <mat-icon color="accent" class="mb-0.5">info</mat-icon>
-      </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </button>
+        <!-- <button mat-menu-item>
+          <mat-icon>calendar_today</mat-icon>
+          <mat-form-field>
+
+            <input matInput [matDatepicker]="dp3" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+          </mat-form-field>
+         <mat-datepicker-toggle [matDatepicker]="picker" matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <span>Calender</span>
+        </button>
+
+        <button mat-menu-item>
+          <mat-icon>notifications</mat-icon>
+          <span>alerts</span>
+        </button>
+      </mat-menu>
+
+      <div fxShow="true" fxHide.lt-md>
+
+          <a href="#" mat-button>Align right</a>
+        </div>
+  </mat-toolbar-row>
+</mat-toolbar>-->
+
+<br>
+<div class="container-fluid">
+
+  <mat-drawer-container class="example-container">
+    <div class="row mx-0">
+      <div class="col-lg-4 col-md-4">
+        <mat-card class="card mx-auto mr-3 size">
+          <button mat-fab class="my-fab" color="primary" matTooltipPosition="above" matTooltip="check account balance"
+            aria-label="Example icon button with a heart icon" (click)="openDialog()">
+            <mat-icon class="mat-icon-size">account_balance_wallet</mat-icon>
+          </button>
+          <br>
+          <mat-card-content>
+            <br>
+            <span>Balance</span>
+          </mat-card-content>
+          <br>
+          <br>
+          <div class="align">
+            <button mat-icon-button color="primary">
+              <mat-icon>trending_flat</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+
+
+
+      <!-- col-lg-4 col-md-6 col-sm-12 " -->
+      <div class="col-lg-4 col-md-4 ">
+        <mat-card class="card mx-auto mr-3 size">
+          <button mat-fab class="my-fab" color="primary" matTooltip="deposit money" matTooltipPosition="above"
+            aria-label="Example icon button with a heart icon" (click)="openDialog()">
+            <mat-icon class="mat-icon-size mr-2">south</mat-icon>
+            <mat-icon class=" mat-icon-size mr-3">account_balance</mat-icon>
+          </button>
+          <br>
+          <!----<img mat-card-image src="..\..\..\src\assets\10-512.png" alt="Photo of a Shiba Inu">-->
+          <mat-card-content>
+            <br>
+            <span>Deposit</span></mat-card-content>
+          <br>
+          <br>
+          <div class="align">
+            <button mat-icon-button color="primary">
+              <mat-icon>trending_flat</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+
+      <div class="col-lg-4 col-md-4">
+        <mat-card class="card mx-auto mr-3 size">
+          <button mat-fab class="my-fab  " matTooltip="withdraw money" matTooltipPosition="above" color="primary"
+            aria-label="Example icon button with a heart icon" (click)="openDialog()">
+
+            <div class="rotate justify-content-center">
+              <mat-icon class=" mat-icon-size">account_balance_wallet</mat-icon>
+              &nbsp;&nbsp;
+              <mat-icon class=" mat-icon-money">money</mat-icon>
+            </div>
+          </button>
+          <br>
+          <br>
+          <mat-card-content>
+            <span>Withdraw</span></mat-card-content>
+          <br>
+          <br>
+          <div class="align">
+            <button mat-icon-button color="primary">
+              <mat-icon>trending_flat</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
     </div>
-    <p *ngIf="showFiller">Name:{{customerModel.name}}.</p>
-  </mat-drawer>
+    <br>
+    <!--mt-3 ml-5 -->
+    <div class="row mx-0">
+      <br>
+      <div class="col-lg-4 col-md-4  ">
+        <mat-card class="card mx-auto mr-3 size">
+          <button mat-fab class=" my-fab " matTooltip="transfer money" matTooltipPosition="left" color="primary"
+            aria-label="Example icon button with a heart icon" (click)="openDialog()">
+            <mat-icon class=" mat-icon-size mr-2">north</mat-icon>
+
+            <mat-icon class=" mat-icon-size mr-3">account_balance</mat-icon>
+          </button>
+          <mat-card-content>
+            <br>
+            <span>Transfer</span></mat-card-content>
+          <br>
+          <br>
+          <div class="align">
+            <button mat-icon-button color="primary">
+              <mat-icon>trending_flat</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+      <br>
+      <br>
+      <!-- class=" col-lg-3  col-sm-6  col-xs-12 -->
+      <div class="col-lg-4 col-md-4  ">
+        <mat-card class="card mx-auto mr-3 size">
+          <button mat-fab class="my-fab" matTooltip="transaction history" matTooltipPosition="left" color="primary"
+            (click)="openDialog()">
+            <mat-icon class="mat-icon-size">swap_horiz</mat-icon>
+          </button>
+          <br>
+          <mat-card-content>
+            <br>
+            <span>History</span>
+          </mat-card-content>
+          <br>
+          <br>
+          <div class="align">
+            <button mat-icon-button color="primary">
+              <mat-icon>trending_flat</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+      <br>
+      <br>
+      <div class="col-lg-4 col-md-4 ">
+        <mat-card class="card  mx-auto mr-3 size">
+          <button mat-fab class="my-fab " matTooltip="apply for loan" matTooltipPosition="left" color="primary"
+            aria-label="Example icon button with a heart icon" (click)="openDialog()">
+            <mat-icon class="mat-icon-size mr-1">check_circle_outline</mat-icon>
+            <mat-icon class="mat-icon-size ml-2">person</mat-icon>
+          </button>
+          <br>
+          <mat-card-content>
+            <br>
+            <span>Loans</span></mat-card-content>
+          <br>
+          <br>
+          <div class="align">
+            <button mat-icon-button color="primary">
+              <mat-icon>trending_flat</mat-icon>
+            </button>
+          </div>
+
+        </mat-card>
+      </div>
+    </div>
 
 
-  <div  class="example-sidenav-content "(click)="drawer.toggle()">
 
-  </div>
+    <mat-drawer #drawer class="example-sidenav " mode="side" opened>
+      <button mat-icon-button  aria-label="Example icon button with a home icon">
+        <mat-icon class="icon-display">account_circle</mat-icon>
+      </button>
+      <br>
+      <br>
+      <br>
+      <div class="justify-content-center pt-5 ml-3">
+        <!-- <button matTooltip="profile info" (click)="showFiller = !showFiller" mat-icon-button>
+          <mat-icon color="accent" class="mb-0.5">info</mat-icon>
+        </button> -->
+        <!-- <p *ngIf="showFiller">Name:{{customerModel.name}}.</p> -->
+        <mat-icon color="accent">account_box</mat-icon><span class="aligned-with-icon">Name:saranya</span>
+        <br>
+        <!-- <span>hello<i class="material-icons">face</i></span> -->
+        <mat-icon color="primary" >mail</mat-icon><span  class="aligned-with-icon"> saru@gmail.com</span>
+      </div>
 
-</mat-drawer-container>
+    </mat-drawer>
+
+    <div class="example-sidenav-content ">
+      <button mat-icon-button color="accent" (click)="drawer.toggle()">
+          <span > Hide Profile</span>&nbsp; <mat-icon>trending_flat</mat-icon>
+      </button>
+
+    </div>
+
+  </mat-drawer-container>
+  <notifier-container></notifier-container>
 </div>
+
+
+<!-- <a class="nav-link text-danger " routerLink="../search-course" routerLinkActive="is-active"><i class="fa fa-search"></i>
+  Course</a>
+<a class="nav-link text-danger" routerLink="../view-profile" routerLinkActive="is-active"><i class="fa fa-fw fa-user"></i>
+  Profile</a>
+
+<router-outlet></router-outlet> -->

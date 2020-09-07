@@ -3,6 +3,8 @@ import { CustomerService } from '../../../core/services/customer.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BalanceDialogComponent } from '../balance-dialog/balance-dialog.component';
 import { CustomerModel } from '../../../../interfaces/CustomerModel';
+import { PushNotificationsService} from 'ng-push';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +17,12 @@ customerModel:CustomerModel;
 accountNumber:any;
 balance:any;
 showFiller = false;
-constructor(private customerService:CustomerService,public dialog:MatDialog) { }
+private notifier: NotifierService;
+constructor(private customerService:CustomerService,public dialog:MatDialog , notifier: NotifierService) {
+  this.notifier = notifier;
+}
+
+
 
  ngOnInit(): void {
   }
@@ -43,5 +50,20 @@ constructor(private customerService:CustomerService,public dialog:MatDialog) { }
       //this.animal = result;
     });
   }
+
+  public showSpecificNotification( type: string, message: string, id: string ): void {
+		this.notifier.show( {
+			id,
+			message,
+			type
+		} );
+  }
+  public showNotification( type: string, message: string ): void {
+    console.log("inside show notification...")
+		this.notifier.notify( type, message );
+	}
+
+
+
 
 }

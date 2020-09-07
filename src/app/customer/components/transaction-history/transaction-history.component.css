@@ -16,6 +16,8 @@
 }
 .chip-align{
   margin-right: 100px;
+
+
 }
 .rotate{
   transform: rotate(270deg);
@@ -23,11 +25,14 @@
   padding-top: -3px;
 }
 .info-icon-success{
+  transform: rotate(180deg);
   color:green;
 }
 .info-icon-failed{
-  color:#df2727d2;
+  transform: rotate(180deg);
+  color:#dc3545;
 }
 .info-icon-processing{
+  transform: rotate(180deg);
   color:hsl(22, 88%, 59%)
 }

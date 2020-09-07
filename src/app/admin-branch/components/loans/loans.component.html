@@ -58,13 +58,15 @@
             <!--(selectionChange)="changeSelected(loanModel.id,selectedValue)"-->
             <mat-select #selectedValue [value]="selectedStatus(loanModel.id,selectedValue.value)"
               (selectionChange)="changeSelected(loanModel.id,selectedValue.value)">
-              <mat-option value="APPLIED">Applied</mat-option>
-              <mat-option value="PROCESSING">Processing</mat-option>
-              <mat-option value="APPROVED">Approved</mat-option>
-              <mat-option value="SANCTIONED">Sanctioned</mat-option>
-              <mat-option value="REJECTED">Rejected</mat-option>
+              <mat-optgroup label="status" color="primary">
+                <mat-option value="APPLIED">Applied</mat-option>
+                <mat-option value="PROCESSING">Processing</mat-option>
+                <mat-option value="APPROVED">Approved</mat-option>
+                <mat-option value="SANCTIONED">Sanctioned</mat-option>
+                <mat-option value="REJECTED">Rejected</mat-option>
+              </mat-optgroup>
             </mat-select>
-          </mat-form-field>
+            </mat-input-field>
         </ng-container>
       </td>
     </ng-container>
@@ -79,5 +81,3 @@
 </div>
 !show:{{!show}}
 show:{{show}}
-i:{{displayedColumns[4]}}
-{{selectedValue}}
