@@ -1,0 +1,71 @@
+<div>
+    <form formGroup="updateCustomerForm" (ngSubmit)="onSubmit()">
+        <mat-card class="mx-auto card-border justify-content-centre">
+            <br>
+            <mat-card-title>Update Customer</mat-card-title>
+            <br>
+            <mat-card-content>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput type="text" formControlName="name" placeholder="Employee Name" required>
+                        <mat-icon matSuffix>name</mat-icon>
+                        <mat-error>Name required<br></mat-error>
+                    </mat-form-field>
+
+                    <br>
+                    <mat-form-field appearance="outline">
+                        <mat-label>DOB</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dob" placeholder="DD/MM/YYYY"
+                            required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="text" formControlName='email' #email placeholder="user@domain.com"
+                                required>
+                            <mat-icon matSuffix>mail</mat-icon>
+                            <mat-error *ngIf="email.required">{{getEmailErrors()}}</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName='password' #password
+                                placeholder="password" required>
+                            <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility_off':'visibility'}}
+                            </mat-icon>
+                            <mat-error *ngIf="password.required">Password Required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Confirm Password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName='confirmPassword'
+                                #confirmPassword placeholder="Confirm Password" required>
+                            <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility_off':'visibility'}}
+                            </mat-icon>
+                            <mat-error *ngIf="confirmPassword.required">getPasswordErrors()</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div formGroupName="statusModel">
+                    <mat-form-field appearance="outline" required>
+                        <mat-label>Account Status</mat-label>
+                        <mat-select placeholder="Account Status" name="status" formControlName="id">
+                            <mat-option *ngFor="let status of statuses" [value]="status.id">
+                                {{status.name | titlecase}}</mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix></mat-icon>
+                    </mat-form-field>
+                </div>
+
+                <button type="submit" [disabled]="updateCustomerForm.invalid || addressId==undefined"
+                    class="btn-primary btn">Update</button>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

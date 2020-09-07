@@ -1,9 +1,8 @@
+import { AdminBranchRoutingModule } from './../admin-branch/admin-branch-routing.module';
+import { AdminBranchModule } from './../admin-branch/admin-branch.module';
+import { SharedModule } from './../shared/shared.module';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
-import { UpdateCustomerComponent } from './components/update-customer/update-customer.component';
-import { UpdateAddressComponent } from './components/update-address/update-address.component';
 import { UpdateBranchComponent } from './components/update-branch/update-branch.component';
-import { UsersComponent } from './components/users/users.component';
-import { CustomersComponent } from './components/customers/customers.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './../core/core.module';
 import { AngMaterialModule } from './../ang-material/ang-material.module';
@@ -12,18 +11,13 @@ import { CommonModule } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts'
 import { AdminRoutingModule } from './admin-routing.module';
 import { CreateBranchComponent } from './components/create-branch/create-branch.component';
-import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { BranchesComponent } from './components/branches/branches.component';
 
 export const components = [
   CreateBranchComponent,
-  CustomersComponent,
-  UsersComponent,
   UpdateBranchComponent,
-  UpdateAddressComponent,
-  UpdateCustomerComponent,
-  UpdateUserComponent,
-  AdminDashboardComponent
-
+  AdminDashboardComponent,
+  BranchesComponent
 ]
 
 @NgModule({
@@ -36,7 +30,9 @@ export const components = [
     AngMaterialModule,
     CoreModule,
     ReactiveFormsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    SharedModule,
+    AdminBranchModule
   ],
   exports: [
     components,

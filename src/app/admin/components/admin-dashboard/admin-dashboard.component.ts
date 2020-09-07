@@ -6,6 +6,7 @@ import { BranchService } from './../../../core/services/branch.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../core/services/user.service';
 import { forkJoin } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -49,7 +50,8 @@ export class AdminDashboardComponent implements OnInit {
     private customerService: CustomerService,
     private userService: UserService,
     private complaintService: ComplaintService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -96,15 +98,15 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   viewCustomers() {
-
+    this.router.navigateByUrl("admin/customers");
   }
   viewUsers() {
 
   }
   viewBranches() {
-
   }
   viewComplaints() {
+    this.router.navigateByUrl("admin/complaints");
 
   }
 
