@@ -149,7 +149,7 @@ export class LoansComponent implements OnInit {
     // console.log("id::" + id);
     this.selectedStatus(id, selected);
   }
-  showEditButton(id: number, status: string) {
+  editLoanButton(id: number, status: string) {
     this.isUpdated = false;
     this.idArray.push(id);
     this.statusArray.push({
