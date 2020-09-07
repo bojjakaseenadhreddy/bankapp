@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CustomerModel } from './../../../../interfaces/CustomerModel';
 import { CustomerService } from './../../../core/services/customer.service';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
@@ -24,7 +25,7 @@ export class CustomersComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sorting: MatSort;
 
-  constructor(private customerService: CustomerService, private dialog: MatDialog) { }
+  constructor(private customerService: CustomerService, private dialog: MatDialog, private router: Router) { }
   ngOnInit() {
 
     this.customerService.getAllCustomers().subscribe(
@@ -55,7 +56,8 @@ export class CustomersComponent implements OnInit {
   }
 
   customerEdit(accountNumber) {
-    console.log(accountNumber);
+    this.router.navigateByUrl(`branch/update-customer/${accountNumber}`);
+
   }
 
   viewAddress(address) {

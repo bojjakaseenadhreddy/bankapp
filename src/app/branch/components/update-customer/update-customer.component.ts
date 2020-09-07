@@ -21,7 +21,7 @@ export class UpdateCustomerComponent implements OnInit {
   addressId: number;
   branches: BranchModel[] = [];
   customer: CustomerModel;
-  accountNumber:number;
+  accountNumber: number;
   hide: boolean = true;
 
   statuses = STATUSES;
@@ -29,43 +29,40 @@ export class UpdateCustomerComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private branchService: BranchService,
     private customerService: CustomerService,
-    private router:ActivatedRoute
+    private router: ActivatedRoute
   ) { }
 
   ngOnInit() {
 
-    //this.accountNumber = +this.router.snapshot.paramMap.get("account-number");
-    this.accountNumber = 111118;
-
+    this.accountNumber = +this.router.snapshot.paramMap.get("account-number");
     this.customerService.getCustomerByAccountNumber(this.accountNumber).subscribe(
-      (data)=>{ 
-        this.customer = data; 
+      (data) => {
+        this.customer = data;
         console.log(this.customer);
         this.patchCustomer();
-        
       },
-      (error)=>{console.log(error)}
+      (error) => { console.log(error) }
     )
 
     this.updateCustomerForm = this.formBuilder.group({
-      name: ['',[Validators.required]],
+      name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      dob: ['',[Validators.required]],
-      password: ['',[Validators.required]],
-      confirmPassword: ['',[Validators.required]],
+      dob: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
       addressModel: this.formBuilder.group({
-        id: ['',[Validators.required]]
+        id: ['', [Validators.required]]
       }),
       accountTypeModel: this.formBuilder.group({
-        id: ['',[Validators.required]]
+        id: ['', [Validators.required]]
       }),
       branchModel: this.formBuilder.group({
-        branchCode: ['',[Validators.required]]
+        branchCode: ['', [Validators.required]]
       }),
       statusModel: this.formBuilder.group({
-        id: ['',[Validators.required]]
+        id: ['', [Validators.required]]
       })
-    },{Validators:passwordValidate})
+    }, { Validators: passwordValidate })
   }
   // getAddressId(value) {
   //   this.addressId = value;
@@ -74,7 +71,7 @@ export class UpdateCustomerComponent implements OnInit {
   //       id: value
   //     }
   //   });
- // }
+  // }
   getEmailErrors() {
     if (this.updateCustomerForm.get('email').hasError('required')) {
       return "Email Required"
@@ -87,15 +84,15 @@ export class UpdateCustomerComponent implements OnInit {
     if (this.updateCustomerForm.get('confirmPassword').hasError('required')) {
       return "Confirm Password Required"
     }
-    if(this.updateCustomerForm.get('confirmPassword')!=this.updateCustomerForm.get('password')){
+    if (this.updateCustomerForm.get('confirmPassword') != this.updateCustomerForm.get('password')) {
       this.updateCustomerForm.get('confirmPassword').setErrors(notEqual);
-      return  "Password Not Matched";
+      return "Password Not Matched";
     }
     else
-    return "";
+      return "";
   }
 
-  patchCustomer(){
+  patchCustomer() {
     this.addressId = this.customer.addressModel.id;
     this.updateCustomerForm.patchValue({
       name: this.customer.name,
@@ -106,35 +103,34 @@ export class UpdateCustomerComponent implements OnInit {
       addressModel: {
         id: this.customer.addressModel.id
       }
-     ,
+      ,
       accountTypeModel: {
         id: this.customer.accountTypeModel.id
       }
-     ,
+      ,
       branchModel: {
         branchCode: this.customer.branchModel.branchCode
       }
-     ,
+      ,
       statusModel: {
         id: this.customer.statusModel.id
       }
-      
     })
   }
 
-   onSubmit() {
+  onSubmit() {
     console.log(this.updateCustomerForm.value);
-    if(this.updateCustomerForm.valid){
+    if (this.updateCustomerForm.valid) {
       this.customer = this.updateCustomerForm.value;
       this.customer.accountNo = this.accountNumber;
-      this.customerService.updateCustomer(this.accountNumber,this.customer).subscribe(
+      this.customerService.updateCustomer(this.accountNumber, this.customer).subscribe(
         (data) => { this.customer = data; console.log(this.customer); },
         (error) => { console.log(error) }
       )
     }
-    else{
+    else {
 
     }
-    
+
   }
 }

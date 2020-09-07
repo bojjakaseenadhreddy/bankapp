@@ -15,7 +15,7 @@ const routes: Routes = [
     path: "", children: [
       { path: "", pathMatch: "full", component: BranchDashboardComponent },
       { path: "register-customer", component: CustomerRegisterComponent },
-      { path: "update-customer/:customer-id", component: UpdateCustomerComponent },
+      { path: "update-customer/:account-number", component: UpdateCustomerComponent },
       { path: "complaints", component: ComplaintsComponent },
       { path: "customers", component: CustomersComponent },
       { path: "loans", component: LoansComponent },
