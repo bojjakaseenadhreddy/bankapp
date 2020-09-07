@@ -1,7 +1,7 @@
 <mat-form-field class="ml-3 mr-5" appearance="outline">
   <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Amount or Status or month(ex:Aug) or year(ex:2020)"
-    #input>
+  <input matInput (keyup)="applyFilter($event.target.value)"
+    placeholder="Amount or Status or month(ex:Aug) or year(ex:2020)" #input>
 </mat-form-field>
 <mat-form-field class="mr-3 " appearance="outline">
   <mat-label>Enter a date range</mat-label>
@@ -76,7 +76,7 @@ Transactions Count::{{dataSource.filteredData.length}}
 <!---->
 <br>
 <div class="container">
-  <mat-card *ngFor="let transactionModel of this.dataSource.filteredData">
+  <mat-card *ngFor="let transactionModel of dataSource.filteredData">
     <mat-card-header>
       <mat-card-title>
 
@@ -85,51 +85,54 @@ Transactions Count::{{dataSource.filteredData.length}}
     </mat-card-header>
     <mat-card-content>
 
-        <div  *ngIf="transactionModel.type == 'transfer' ">
-          <button mat-fab matTooltip="transaction history" matTooltipPosition="left" color="primary" aria-label="Example icon button with a call made icon">
-            <mat-icon > call_made</mat-icon>
-          </button>
-          <span class="align">{{ transactionModel.money| currency:'INR':true}}</span>
-        </div>
+      <div *ngIf="transactionModel.type == 'transfer' ">
+        <button mat-fab matTooltip="transaction history" matTooltipPosition="left" color="primary"
+          aria-label="Example icon button with a call made icon">
+          <mat-icon> call_made</mat-icon>
+        </button>
+        <span class="align">{{ transactionModel.money| currency:'INR':true}}</span>
+      </div>
 
-        <div  *ngIf="transactionModel.type == 'withdraw'">
-          <button mat-fab matTooltip="transaction history" matTooltipPosition="left" color="primary" aria-label="Example icon button with a call made icon">
-            <mat-icon>arrow_downward</mat-icon>
-            <mat-icon class="rotate">account_balance_wallet</mat-icon>
-          </button>
-          <span class="align">{{ transactionModel.money| currency:'INR':true}}</span>
-        </div>
+      <div *ngIf="transactionModel.type == 'withdraw'">
+        <button mat-fab matTooltip="transaction history" matTooltipPosition="left" color="primary"
+          aria-label="Example icon button with a call made icon">
+          <mat-icon>arrow_downward</mat-icon>
+          <mat-icon class="rotate">account_balance_wallet</mat-icon>
+        </button>
+        <span class="align">{{ transactionModel.money | currency:'INR':true}}</span>
+      </div>
 
-        <div *ngIf="transactionModel.type == 'deposit'">
-          <button mat-fab matTooltip="transaction history" matTooltipPosition="left" color="primary" aria-label="Example icon button with a call made icon">
-            <mat-icon> call_received</mat-icon>
-          </button>
-          <span class="align">{{ transactionModel.money| currency:'INR':true}}</span>
-        </div>
-        <br>
-        {{transactionModel.date | date:'medium'}}
-        <div *ngIf="transactionModel.status.name == 'SUCCESS'">
-          <mat-icon class="info-icon-success align">info</mat-icon>
-          <span class="align">{{transactionModel.status.name | lowercase}}</span>
-        </div>
-        <div *ngIf="transactionModel.status.name == 'FAILED'">
-          <mat-icon class="info-icon-failed align" >info</mat-icon>
-          <span class="align" > {{transactionModel.status.name | lowercase}}</span>
-        </div>
+      <div *ngIf="transactionModel.type == 'deposit'">
+        <button mat-fab matTooltip="transaction history" matTooltipPosition="left" color="primary"
+          aria-label="Example icon button with a call made icon">
+          <mat-icon> call_received</mat-icon>
+        </button>
+        <span class="align">{{ transactionModel.money| currency:'INR':true}}</span>
+      </div>
+      <br>
+      {{transactionModel.date | date:'medium'}}
+      <div *ngIf="transactionModel.status.name == 'SUCCESS'">
+        <mat-icon class="info-icon-success align">info</mat-icon>
+        <span class="align">{{transactionModel.status.name | lowercase}}</span>
+      </div>
+      <div *ngIf="transactionModel.status.name == 'FAILED' ">
+        <mat-icon class="info-icon-failed align">info</mat-icon>
+        <span class="align"> {{transactionModel.status.name | lowercase}}</span>
+      </div>
 
-        <div *ngIf="transactionModel.status.name == 'PROCESSING'">
-          <mat-icon class="info-icon-processing align">info</mat-icon>
-          <span class="align">{{transactionModel.status.name | lowercase}}</span>
-        </div>
+      <div *ngIf="transactionModel.status.name == 'PROCESSING'">
+        <mat-icon class="info-icon-processing align">info</mat-icon>
+        <span class="align">{{transactionModel.status.name | lowercase}}</span>
+      </div>
 
 
 
-        <!-- <div class="align">{{ transactionModel.money| currency:'INR':true}}</div> -->
-        Type:: {{transactionModel.type}}
-        <br>
-        <br>
+      <!-- <div class="align">{{ transactionModel.money| currency:'INR':true}}</div> -->
+      Type:: {{transactionModel.type}}
+      <br>
+      <br>
 
-        <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
 
     </mat-card-content>
   </mat-card>

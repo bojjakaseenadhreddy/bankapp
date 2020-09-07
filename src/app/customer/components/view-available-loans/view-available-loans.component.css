@@ -1,0 +1,13 @@
+td {
+  padding: 5px;
+}
+.apply-button {
+  align-items: center;
+}
+.loan-card {
+  border-top: 4px solid rgb(38, 128, 212);
+}
+.loan-apply-card {
+  width: 300px;
+  justify-content: center;
+}

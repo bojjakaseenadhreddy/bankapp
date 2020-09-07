@@ -162,7 +162,7 @@ export class TransactionHistoryComponent implements OnInit {
     // filterValue='';
     console.log(filterValue);
   }
-  
+
   applyDateFilter() {
     //console.log("inside apply date filter");
     //console.log("Math.random()"+Math.random());

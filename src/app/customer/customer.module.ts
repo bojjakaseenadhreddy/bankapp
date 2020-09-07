@@ -1,30 +1,31 @@
+import { ViewAvailableLoansComponent } from './components/view-available-loans/view-available-loans.component';
+import { ComplaintComponent } from './components/complaint/complaint.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomerRoutingModule } from './customer-routing.module';
 import { CreateDepositComponent } from './components/create-deposit/create-deposit.component';
 import { AngMaterialModule } from '../ang-material/ang-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButton, MatButtonModule } from '@angular/material/button';
 import { WithdrawComponent } from './components/withdraw/withdraw.component';
 import { TransferComponent } from './components/transfer/transfer.component';
 import { BalanceDialogComponent } from './components/balance-dialog/balance-dialog.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TransactionHistoryComponent } from './components/transaction-history/transaction-history.component';
-import { LoansComponent } from './components/loans/loans.component';
+
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
-		horizontal: {
-			position: 'left',
-			distance: 12
-		},
-		vertical: {
-			position: 'bottom',
-			distance: 12,
-			gap: 10
-		}
-	},
+    horizontal: {
+      position: 'left',
+      distance: 12
+    },
+    vertical: {
+      position: 'bottom',
+      distance: 12,
+      gap: 10
+    }
+  },
   theme: 'material',
   behaviour: {
     autoHide: 5000,
@@ -54,19 +55,29 @@ const customNotifierOptions: NotifierOptions = {
   }
 };
 
+const components = [
+  CreateDepositComponent,
+  ComplaintComponent,
+  CreateDepositComponent,
+  ViewAvailableLoansComponent,
+  WithdrawComponent,
+  TransferComponent,
+  BalanceDialogComponent,
+  DashboardComponent,
+  TransactionHistoryComponent
+];
+
 @NgModule({
-  declarations: [CreateDepositComponent, WithdrawComponent, TransferComponent, BalanceDialogComponent, DashboardComponent, TransactionHistoryComponent, LoansComponent],
+  declarations: [components],
   imports: [
     CommonModule,
     CustomerRoutingModule,
     AngMaterialModule,
     ReactiveFormsModule,
-    FormsModule,NotifierModule.withConfig(customNotifierOptions)
+    FormsModule, NotifierModule.withConfig(customNotifierOptions)
 
 
   ],
-  exports:[CreateDepositComponent,WithdrawComponent,TransferComponent,BalanceDialogComponent,DashboardComponent,TransactionHistoryComponent,LoansComponent]
-  ,
-
+  exports: [components]
 })
 export class CustomerModule { }

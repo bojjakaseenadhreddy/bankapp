@@ -5,7 +5,7 @@ import { RowStatusModel } from "./RowStatusModel";
 
 export interface BranchModel {
     branchCode?: number;
-    name: String;
+    name: string;
     addressModel: AddressModel;
     phoneNo: number;
     createdDate?: Date;

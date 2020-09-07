@@ -23,7 +23,7 @@ export class ComplaintService {
     public createComplaint(complaint: ComplaintModel) {
         return this.http.post<ComplaintModel>(this.baseUrl, complaint);
     }
-    public updateComplaintById(complaintId:number, complaintModel:ComplaintModel) {
+    public updateComplaintById(complaintId: number, complaintModel: ComplaintModel) {
         return this.http.put(`${this.baseUrl}/${complaintId}`, complaintModel);
     }
 
@@ -37,8 +37,14 @@ export class ComplaintService {
         return this.http.get(`${this.baseUrl}/count/${statusId}`);
     }
 
-    public getComplaintsByBranchId(branchId:number){
-      return this.http.get(`${this.baseUrl}/branch/${branchId}`);
+
+    public getComplaintsCountByStatusIdAndBranchId(statusId: number, branchId: number) {
+        return this.http.get(`${this.baseUrl}/count/statuses/${statusId}/branches/${branchId}`);
+    }
+
+
+    public getComplaintsByBranchId(branchId: number) {
+        return this.http.get(`${this.baseUrl}/branch/${branchId}`);
     }
 
 }

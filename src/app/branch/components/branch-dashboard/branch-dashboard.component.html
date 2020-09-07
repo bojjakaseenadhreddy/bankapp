@@ -1,0 +1,79 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                Customers
+              </mat-card-title>
+              <mat-card-subtitle>{{customersCount}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions align="end">
+              <button mat-raised-button color="primary" (click)="viewCustomers()">View <mat-icon>arrow_right_alt
+                </mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                Users
+              </mat-card-title>
+              <mat-card-subtitle>{{usersCount}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions align="end">
+              <button mat-raised-button color="primary" (click)="viewUsers()">View <mat-icon>arrow_right_alt
+                </mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Branch Details
+          </mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <tr>
+            <td>Name</td>
+            <td>{{": "+branchModel.name}}</td>
+          </tr>
+          <tr>
+            <td>Phone No</td>
+            <td>{{": "+branchModel.phoneNo}}</td>
+          </tr>
+          <tr>
+            <td>Branch Code</td>
+            <td>{{": "+branchModel.branchCode}}</td>
+          </tr>
+          <tr>
+            <td>City</td>
+            <td>{{": "+branchModel.addressModel.city}}</td>
+          </tr>
+        </mat-card-content>
+        <br>
+      </mat-card>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <mat-card>
+        <mat-card-title>Complaints</mat-card-title>
+        <div>
+          <ngx-charts-pie-chart [view]="ui" [results]="complaintData" [labels]="showLabels" [legend]="showLegend"
+            [legendPosition]="legendPosition">
+          </ngx-charts-pie-chart>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

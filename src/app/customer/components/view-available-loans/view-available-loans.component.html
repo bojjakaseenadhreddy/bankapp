@@ -1,0 +1,80 @@
+<ng-container *ngIf="!isFormOpened">
+  <div class="container-fluid ">
+    <div class="row">
+      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-3 " *ngFor="let loanType of loanTypes">
+        <div class="my-3">
+          <mat-card class="loan-card">
+            <mat-card-header>
+              <img mat-card-avatar [src]="loadImage(loanType.name)">
+              <mat-card-title>{{loanType.name}}</mat-card-title>
+              <mat-card-subtitle>{{loanType.accountTypeModel.name +" ACCOUNT"}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              <tr>
+                <td>Maximum Loan</td>
+                <td>:{{loanType.maxAmount | currency:'INR'}}</td>
+              </tr>
+              <tr>
+                <td>Minimum Loan</td>
+                <td>:{{loanType.minAmount | currency:'INR'}}</td>
+              </tr>
+              <tr>
+                <td>Tenure</td>
+                <td>:{{loanType.months +" months"}}</td>
+              </tr>
+              <tr>
+                <td>Interest(P/M)</td>
+                <td>:{{loanType.interest +"%"}}</td>
+              </tr>
+              <tr>
+                <td>Minimum Age</td>
+                <td>:{{loanType.eligibilityModel.minAge}}</td>
+              </tr>
+              <tr>
+                <td>Maximum Age</td>
+                <td>:{{loanType.eligibilityModel.maxAge}}</td>
+              </tr>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-actions align="end">
+              <button mat-raised-button color="primary" (click)="applyLoan(loanType)">Apply
+                <mat-icon>arrow_right_alt</mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isFormOpened">
+  <br>
+  <div class="mx-auto loan-apply-card">
+    <mat-card class="loan-card">
+      <mat-card-content>
+        <tr>
+          <td>Tenure</td>
+          <td>:{{loanTypeModel.months +" months"}}</td>
+        </tr>
+        <tr>
+          <td>Interest(P/M)</td>
+          <td>:{{loanTypeModel.interest +"%"}}</td>
+        </tr>
+      </mat-card-content>
+      <form [formGroup]="loanFormGroup" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Required Money</mat-label>
+          <input required type="number" #loanAmount matInput formControlName="loanAmount"
+            [min]="loanTypeModel.minAmount" [max]="loanTypeModel.maxAmount" [value]="loanTypeModel.minAmount">
+          <mat-error *ngIf="loanAmount.required">{{""+getLoanAmountErrors()}}</mat-error>
+        </mat-form-field>
+        <mat-card-actions align="end">
+          <button mat-raised-button color="primary" type="submit">Apply Loan
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </div>
+</ng-container>

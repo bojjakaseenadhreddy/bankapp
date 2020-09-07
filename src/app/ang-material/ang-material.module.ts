@@ -65,7 +65,6 @@ export const materialModules = [
   NgxChartsModule
 ]
 
-
 @NgModule({
   declarations: [],
   imports: [

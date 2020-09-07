@@ -1,8 +1,11 @@
-mat-card.mat-card{
-    border: 1px solid black;
+mat-card.mat-card {
+  border: 1px solid black;
 }
 
-.card-border{
-    max-width:400px;
-    text-align: center;
+.card-border {
+  max-width: 400px;
+  text-align: center;
+}
+.point:hover {
+  cursor: pointer;
 }

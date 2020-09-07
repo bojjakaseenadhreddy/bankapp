@@ -1,0 +1,36 @@
+<div class="mx-auto login-card">
+    <mat-card>
+        <mat-card-title>Login</mat-card-title>
+        <br>
+        <mat-card-content>
+            <div>
+                <form [formGroup]='loginForm' (ngSubmit)="onSubmit()">
+                    <div>
+                        <div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input matInput type="text" formControlName='email' #email autofocus
+                                    placeholder="user@domain.com" required>
+                                <mat-icon matSuffix>mail</mat-icon>
+                                <mat-error *ngIf="email.required">{{getEmailErrors()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <br>
+                        <div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Password</mat-label>
+                                <input matInput [type]="hide ? 'password' : 'text'" formControlName='password' #password
+                                    placeholder="password" required>
+                                <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility_off':'visibility'}}
+                                </mat-icon>
+                                <mat-error *ngIf="password.required">Password Required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <br>
+                    </div>
+                    <button type="submit" class="btn btn-primary" type="submit">Login</button>
+                </form>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
