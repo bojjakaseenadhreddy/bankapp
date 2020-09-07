@@ -3,7 +3,7 @@ import { CustomerService } from '../../../core/services/customer.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BalanceDialogComponent } from '../balance-dialog/balance-dialog.component';
 import { CustomerModel } from '../../../../interfaces/CustomerModel';
-import { PushNotificationsService} from 'ng-push';
+
 import { NotifierService } from 'angular-notifier';
 
 @Component({
@@ -17,8 +17,8 @@ customerModel:CustomerModel;
 accountNumber:any;
 balance:any;
 showFiller = false;
-private notifier: NotifierService;
-constructor(private customerService:CustomerService,public dialog:MatDialog , notifier: NotifierService) {
+
+constructor(private customerService:CustomerService,public dialog:MatDialog ,private  notifier: NotifierService) {
   this.notifier = notifier;
 }
 
