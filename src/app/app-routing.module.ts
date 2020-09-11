@@ -1,3 +1,4 @@
+import { CanDeactivateComponentGuard } from './core/guards/can-de-activate.guard';
 import { HomeComponent } from './components/home/home.component';
 import { CanLoadCustomerGuard } from './guards/canLoadCustomer.guard';
 import { InvalidTokenComponent } from './components/invalid-token/invalid-token.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+  providers: [CanDeactivateComponentGuard],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

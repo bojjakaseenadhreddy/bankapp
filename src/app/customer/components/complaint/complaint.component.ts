@@ -24,8 +24,8 @@ export class ComplaintComponent implements OnInit, IDeactivateComponent {
 
 
   ngOnInit() {
-    this.accountNumber = +localStorage.getItem("accountNumber");
-    this.accountNumber = 11119;
+    this.accountNumber = +localStorage.getItem("accountNo");
+
     this.createComplaintForm = this.formBuilder.group({
       description: ['', [Validators.required]],
       statusModel: this.formBuilder.group({
@@ -53,7 +53,11 @@ export class ComplaintComponent implements OnInit, IDeactivateComponent {
       this.snackbar.open("Please fill the required field", "OK", { duration: 3000 });
   }
   isSaved(): boolean {
+    this.snackbar.open("save method", "OK", { duration: 3000 });
+
     console.log("checking dirty");
+    window.alert("hey i am checking");
+    window.confirm("Your changes will not be saved, please save");
     if (this.createComplaintForm.dirty) {
       if (window.confirm("Your changes will not be saved, please save")) {
         return true;

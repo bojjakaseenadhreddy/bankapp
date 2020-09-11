@@ -19,7 +19,7 @@ const routes: Routes = [
       { path: "withdraw", component: WithdrawComponent },
       { path: "loans", component: LoansComponent },
       { path: "apply-loan", component: ViewAvailableLoansComponent },
-      { path: "complaint", canDeactivate: [CanDeactivateComponentGuard], component: ComplaintComponent },
+      { path: "complaint", component: ComplaintComponent, canDeactivate: [CanDeactivateComponentGuard] },
       { path: "transaction-history", component: TransactionHistoryComponent }
     ]
   }
@@ -27,6 +27,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
+  providers: [CanDeactivateComponentGuard],
   exports: [RouterModule]
 })
 export class CustomerRoutingModule { }
