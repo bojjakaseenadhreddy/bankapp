@@ -1,50 +1,62 @@
-<mat-form-field class="ml-3 mr-5" appearance="outline">
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event.target.value)"
-    placeholder="Amount or Status or month(ex:Aug) or year(ex:2020)" #input>
-</mat-form-field>
-<mat-form-field class="mr-3 " appearance="outline">
-  <mat-label>Enter a date range</mat-label>
-  <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-    <input matStartDate formControlName="start" placeholder="Start date">
-    <input matEndDate formControlName="end" placeholder="End date">
-  </mat-date-range-input>
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-date-range-picker #picker></mat-date-range-picker>
-</mat-form-field>
-<button mat-raised-button color="primary" (click)="applyDateFilter()" [disabled]="!range.valid">Apply</button>
-Transactions Count::{{dataSource.filteredData.length}}
-<!--
+<div class="container-fluid">
+  <div class="row align-items-center text-align-center">
+    <div class="col-lg-4 ">
+      <mat-form-field appearance="outline">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Amount " #input>
+      </mat-form-field>
+    </div>
+
+
+    <!--
 <p>Selected range: {{range.value | json}}</p>
 <p>From Date::{{ startDate| date:'medium'}}</p>
 <p>To Date::{{ endDate | date:'medium'}}</p> -->
-<br>
-<br>
-<mat-chip-list  class="chip-align" [multiple]="true" [selectable]="true">
-  <mat-chip color="accent" >filters
-    <mat-select [(value)]="selected" (selectionChange)="changeSelected(selected)">
-      <mat-optgroup color="primary" label="Status">
-        <mat-option value="success">Success</mat-option>
-        <mat-option value="failed">Failed</mat-option>
-        <mat-option value="processing">Processing</mat-option>
-      </mat-optgroup>
-    </mat-select>
-  </mat-chip>
-</mat-chip-list>
-<p> selected status::{{selected}}</p>
-<br>
-<mat-chip-list color="primary"  [multiple]="true" [selectable]="true">
-  <mat-chip>Categories
-    <mat-select [(value)]="type" (selectionChange)="applyCategory(type)">
-      <mat-optgroup label="categories">
-        <mat-option value="withdraw">Money Debited (Withdraw)</mat-option>
-        <mat-option value="deposit">Money Credited (Deposit)</mat-option>
-        <mat-option value="transfer">Transfer</mat-option>
-      </mat-optgroup>
-    </mat-select>
-  </mat-chip>
-</mat-chip-list>
-<p> selected categoty::{{type}}</p>
+    <div class="col-lg-2  ">
+      <mat-chip-list [multiple]="true" [selectable]="true">
+        <mat-chip>filters
+          <mat-select [(value)]="selected" (selectionChange)="changeSelected(selected)">
+            <mat-optgroup color="primary" label="Status">
+              <mat-option value="success">Success</mat-option>
+              <mat-option value="failed">Failed</mat-option>
+              <mat-option value="processing">Processing</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    <div class="col-lg-3 ">
+      <mat-chip-list color="primary" [multiple]="true" [selectable]="true">
+        <mat-chip>Categories
+          <mat-select [(value)]="type" (selectionChange)="applyCategory(type)">
+            <mat-optgroup label="categories">
+              <mat-option value="withdraw">Money Debited (Withdraw)</mat-option>
+              <mat-option value="deposit">Money Credited (Deposit)</mat-option>
+              <mat-option value="transfer">Transfer</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    <div class="col-lg-3  ">
+      <mat-form-field class="mr-3" appearance="outline">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+          <input matStartDate formControlName="start" placeholder="Start date">
+          <input matEndDate formControlName="end" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <button mat-raised-button class="button-align" color="primary" (click)="applyDateFilter()" [disabled]="!range.valid">Apply</button>
+      <!-- <span> Count::{{dataSource.filteredData.length}}</span> -->
+    </div>
+
+
+  </div>
+</div>
+<!--
+<p> selected categoty::{{type}}</p> -->
 <!--
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
@@ -75,69 +87,64 @@ Transactions Count::{{dataSource.filteredData.length}}
 </div> -->
 <!---->
 <br>
-<div class="container">
-  <mat-card *ngFor="let transactionModel of dataSource.filteredData">
-    <mat-card-header>
-      <mat-card-title>
+<div class="container-fluid">
+  <div class="row">
+    <mat-card class="col-lg-4 col-md-6 col-xs-12 col-sm-12 " *ngFor="let transactionModel of dataSource.filteredData">
+      <!-- <mat-card-header>
+        <mat-card-title>
+        </mat-card-title>
+        <mat-card-subtitle>transfer to</mat-card-subtitle>
+      </mat-card-header>-->
+      <mat-card-content>
+        
+        <div *ngIf="transactionModel.type == 'transfer' ">
+          <button mat-fab matTooltip="transaction history" matTooltipPosition="left" color="primary" aria-label="Example icon button with a call made icon">
+            <mat-icon> call_made</mat-icon>
+          </button>
+          <span class="align">{{ transactionModel.money| currency:'INR':true}}</span>
+        </div>
 
-      </mat-card-title>
-      <!-- <mat-card-subtitle>transfer to</mat-card-subtitle> -->
-    </mat-card-header>
-    <mat-card-content>
+        <div *ngIf="transactionModel.type == 'withdraw'">
+          <button mat-fab matTooltip="transaction history" matTooltipPosition="left" color="primary" aria-label="Example icon button with a call made icon">
+            <mat-icon>arrow_downward</mat-icon>
+            <mat-icon class="rotate">account_balance_wallet</mat-icon>
+          </button>
+          <span class="align">{{ transactionModel.money | currency:'INR':true}}</span>
+        </div>
 
-      <div *ngIf="transactionModel.type == 'transfer' ">
-        <button mat-fab matTooltip="transaction history" matTooltipPosition="left" color="primary"
-          aria-label="Example icon button with a call made icon">
-          <mat-icon> call_made</mat-icon>
-        </button>
-        <span class="align">{{ transactionModel.money| currency:'INR':true}}</span>
-      </div>
+        <div *ngIf="transactionModel.type == 'deposit'">
+          <button mat-fab matTooltip="transaction history" matTooltipPosition="left" color="primary" aria-label="Example icon button with a call made icon">
+            <mat-icon> call_received</mat-icon>
+          </button>
+          <span class="align">{{ transactionModel.money| currency:'INR':true}}</span>
+        </div>
+        <br>
+        {{transactionModel.date | date:'medium'}}
+        <div *ngIf="transactionModel.status.name == 'SUCCESS'">
+          <mat-icon class="info-icon-success align">info</mat-icon>
+          <span class="align">{{transactionModel.status.name | lowercase}}</span>
+        </div>
+        <div *ngIf="transactionModel.status.name == 'FAILED' ">
+          <mat-icon class="info-icon-failed align">info</mat-icon>
+          <span class="align"> {{transactionModel.status.name | lowercase}}</span>
+        </div>
 
-      <div *ngIf="transactionModel.type == 'withdraw'">
-        <button mat-fab matTooltip="transaction history" matTooltipPosition="left" color="primary"
-          aria-label="Example icon button with a call made icon">
-          <mat-icon>arrow_downward</mat-icon>
-          <mat-icon class="rotate">account_balance_wallet</mat-icon>
-        </button>
-        <span class="align">{{ transactionModel.money | currency:'INR':true}}</span>
-      </div>
-
-      <div *ngIf="transactionModel.type == 'deposit'">
-        <button mat-fab matTooltip="transaction history" matTooltipPosition="left" color="primary"
-          aria-label="Example icon button with a call made icon">
-          <mat-icon> call_received</mat-icon>
-        </button>
-        <span class="align">{{ transactionModel.money| currency:'INR':true}}</span>
-      </div>
-      <br>
-      {{transactionModel.date | date:'medium'}}
-      <div *ngIf="transactionModel.status.name == 'SUCCESS'">
-        <mat-icon class="info-icon-success align">info</mat-icon>
-        <span class="align">{{transactionModel.status.name | lowercase}}</span>
-      </div>
-      <div *ngIf="transactionModel.status.name == 'FAILED' ">
-        <mat-icon class="info-icon-failed align">info</mat-icon>
-        <span class="align"> {{transactionModel.status.name | lowercase}}</span>
-      </div>
-
-      <div *ngIf="transactionModel.status.name == 'PROCESSING'">
-        <mat-icon class="info-icon-processing align">info</mat-icon>
-        <span class="align">{{transactionModel.status.name | lowercase}}</span>
-      </div>
-
-
-
-      <!-- <div class="align">{{ transactionModel.money| currency:'INR':true}}</div> -->
-      Type:: {{transactionModel.type}}
-      <br>
-      <br>
-
-      <mat-divider></mat-divider>
-
-    </mat-card-content>
-  </mat-card>
+        <div *ngIf="transactionModel.status.name == 'PROCESSING'">
+          <mat-icon class="info-icon-processing align">info</mat-icon>
+          <span class="align">{{transactionModel.status.name | lowercase}}</span>
+        </div>
+        <!-- <div class="align">{{ transactionModel.money| currency:'INR':true}}</div> -->
+        Type:: {{transactionModel.type}}
+        <br>
+        <br>
+        <mat-divider></mat-divider>
+      </mat-card-content>
+    </mat-card>
+  </div>
   <div *ngIf="dataSource.filteredData.length ===0">
     No data matching the filter "{{input.value}}"
   </div>
-
+  <div *ngIf="false">
+    <app-dashboard [withdrawCount]="withdrawCount" [depositCount]="depositCount" [transferCount]="transferCount"></app-dashboard>
+  </div>
 </div>

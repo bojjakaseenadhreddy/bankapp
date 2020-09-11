@@ -138,7 +138,7 @@ export class LoansComponent implements OnInit {
         if (model.id == id && model.old == model.current && this.isReset == true) {
           isTrue = true;
         }
-        else { false }
+        else { isTrue=false }
       })
     }
     // console.log("isTrue::" + isTrue);
@@ -157,8 +157,8 @@ export class LoansComponent implements OnInit {
       old: status,
       current: status
     });
-    // this.show = true;
-    // this.showDropdown(id);
+    this.show = true;
+    this.showDropdown(id);
   }
   openSnackBar(status: string, id: number) {
     this.snackBar.open(`Status Updated--- Status:+${status}+ id::${id}`, "close", {
@@ -216,15 +216,10 @@ export class LoansComponent implements OnInit {
         });
         this.show = false;
         let va = this.displayUpdate(id);
-
-        //console.log(" this.displayUpdate(id);::" + va)
-
       } (error) => {
         console.log(error);
       }
     }));
-
-
   }
   resetStatus(id: number) {
     //console.log("inside reset:...+++++");

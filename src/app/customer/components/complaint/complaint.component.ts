@@ -22,8 +22,8 @@ export class ComplaintComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.accountNumber = +localStorage.getItem("accountNumber");
-    this.accountNumber = 11119;
+    this.accountNumber = +localStorage.getItem("accountNo");
+   // this.accountNumber = 11119;
     this.createComplaintForm = this.formBuilder.group({
       description: ['', [Validators.required]],
       statusModel: this.formBuilder.group({

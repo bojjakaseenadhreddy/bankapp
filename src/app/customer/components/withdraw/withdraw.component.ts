@@ -22,15 +22,15 @@ export class WithdrawComponent implements OnInit {
   createWithdrawForm: FormGroup;
   isSaving = false;
   isSaved = false;
-  accountNumber:any;
+  accountNo:any;
   balance:any;
   constructor(private withdrawService: WithdrawService,private customerService:CustomerService,public dialog:MatDialog, private fb: FormBuilder, private snackBar: MatSnackBar) { }
-
+  accountNumber=localStorage.getItem('accountNo');
   ngOnInit(): void {
     this.createWithdrawForm = this.fb.group({
       withdrawAmount: ['', Validators.required],
       customerModel: this.fb.group({
-        accountNo: ['', Validators.required]
+        accountNo: [this.accountNumber, Validators.required]
       })
     })
 
@@ -63,12 +63,13 @@ export class WithdrawComponent implements OnInit {
 
       openDialog(): void {
         //this.withdrawModel.customerModel.accountNo
-        this.customerService.getCustomerByAccountNumber(11113).subscribe((data)=>{
+        this.customerService.getCustomerByAccountNumber(JSON.parse(localStorage.getItem('accountNo'))).subscribe((data)=>{
           this.customerModel=data;
-          this.accountNumber=this.customerModel.accountNo;
+          this.accountNo=this.customerModel.accountNo;
           this.balance=this.customerModel.balance;
           console.log(this.customerModel.accountNo);
           console.log(this.customerModel.balance);
+          console.log('The dialog was closed');
         });
 
         const dialogRef = this.dialog.open(BalanceDialogComponent, {

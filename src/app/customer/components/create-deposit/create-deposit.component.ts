@@ -18,12 +18,12 @@ export class CreateDepositComponent implements OnInit {
   isSaving = false;
   isSaved = false;
   constructor(private depositService: DepositService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
-
+  accountNumber=localStorage.getItem('accountNo')
   ngOnInit(): void {
     this.createDepositForm = this.fb.group({
       depositAmount: ['', Validators.required],
       customerModel: this.fb.group({
-        accountNo: ['', Validators.required]
+        accountNo: [this.accountNumber, Validators.required]
       })
     })
 

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { ComplaintModel } from "../../../interfaces/ComplaintModel";
@@ -23,8 +23,8 @@ export class ComplaintService {
     public createComplaint(complaint: ComplaintModel) {
         return this.http.post<ComplaintModel>(this.baseUrl, complaint);
     }
-    public updateComplaintById(complaintId: number, complaintModel: ComplaintModel) {
-        return this.http.put(`${this.baseUrl}/${complaintId}`, complaintModel);
+    public updateComplaintById(complaintId: number, complaintModel: ComplaintModel):Observable<HttpResponse<ComplaintModel>>{
+        return this.http.put<ComplaintModel>(`${this.baseUrl}/${complaintId}`, complaintModel,{ observe: 'response' });
     }
 
     public updateComplaintStatusById(statusId: number, complaintId: number, complaintModel?: ComplaintModel) {
@@ -45,6 +45,15 @@ export class ComplaintService {
 
     public getComplaintsByBranchId(branchId: number) {
         return this.http.get(`${this.baseUrl}/branch/${branchId}`);
+    }
+
+    public getComplaintsCountByAccountNumber(accountNumber:number){
+
+      return this.http.get<number>(`${this.baseUrl}/count/customer/${accountNumber}`);
+    }
+
+    public getComplaintsByAccountNumber(accountNumber:number){
+      return this.http.get<ComplaintModel[]>(`${this.baseUrl}/customers/${accountNumber}`);
     }
 
 }

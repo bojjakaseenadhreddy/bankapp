@@ -16,12 +16,12 @@ export class TransferComponent implements OnInit {
   isSaving = false;
   isSaved = false;
   constructor(private transferService: TransferService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
-
+  accountNumber=localStorage.getItem('accountNo')
 
   ngOnInit(): void {
     this.createTransferForm=this.fb.group({
       customerModel: this.fb.group({
-        accountNo: ['', [Validators.required,Validators.minLength(5)]]
+        accountNo: [this.accountNumber, [Validators.required,Validators.minLength(5)]]
       }),
       receiverAccountNumber:['',Validators.required],
       amount:['',Validators.required]

@@ -31,4 +31,8 @@ export class WithdrawService{
     return this._http.get<WithdrawModel[]>(`${this.baseUrl}/customer/${accountNumber}`);
   }
 
+  public getWithdrawCountByAccountNumber(accountNumber:number){
+    return this._http.get<number>(`${this.baseUrl}/count/${accountNumber}`);
+  }
+
 }

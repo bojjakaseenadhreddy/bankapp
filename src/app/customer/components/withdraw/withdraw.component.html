@@ -1,6 +1,5 @@
 <div class="row justify-content-center">
   <mat-card class="card">
-
     <mat-card-title>
       <h2>Withdraw Form</h2>
     </mat-card-title>
@@ -13,16 +12,16 @@
           <mat-error>amount required</mat-error>
         </mat-form-field>
         <br>
-        <ng-container formGroupName="customerModel">
+        <!-- <ng-container formGroupName="customerModel">
           <mat-form-field>
             <input matInput type="number" matInput formControlName="accountNo" placeholder="account number">
             <mat-icon matSuffix>account_circle</mat-icon>
             <mat-error>account number Required</mat-error>
           </mat-form-field>
-        </ng-container>
+        </ng-container> -->
         <div *ngIf="isSaving">
-          <mat-progress-bar class="progress-bar-width" mode="indeterminate" ></mat-progress-bar>
-        </div>
+            <mat-progress-bar mode="determinate"></mat-progress-bar>
+          </div>
         <br>
 
         <button mat-stroked-button class="btn-sm mr-2" color="primary" (click)="openSnackBar()" [disabled]="!createWithdrawForm.valid"
@@ -33,7 +32,6 @@
         <!---<button class="mr-8" mat-mini-fab color="primary" (click)="openDialog()"type="submit">
             <mat-icon>account_balance</mat-icon>
           </button>-->
-
       </form>
     </mat-card-content>
   </mat-card>

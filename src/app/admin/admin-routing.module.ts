@@ -11,6 +11,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ComplaintsComponent } from '../admin-branch/components/complaints/complaints.component';
+import { UpdateComplaintComponent } from '../core/components/update-complaint/update-complaint.component';
 
 const routes: Routes = [
   {

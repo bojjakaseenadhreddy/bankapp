@@ -75,11 +75,11 @@ export class UpdateComplaintComponent implements OnInit {
   //  this.Form.get(['user','name']).value;
    console.log(this.statusId);
    //this.complaintId
-  this.complaintService.updateComplaintStatusById(this.statusId,1,this.complaintModel).subscribe(
+  this.complaintService.updateComplaintStatusById(this.statusId,this.complaintModel.id,this.complaintModel).subscribe(
     (data)=>{
       console.log(data);
       if(data==1){
-        this.complaintService.getComplaintById(1).subscribe((data)=>{
+        this.complaintService.getComplaintById(this.complaintModel.id).subscribe((data)=>{
           this.complaintModel=data;
           this.complaintData();
         }

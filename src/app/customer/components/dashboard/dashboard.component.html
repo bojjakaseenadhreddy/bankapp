@@ -14,27 +14,14 @@
       <mat-icon>settings</mat-icon>
       <span>Settings</span>
     </button>
-    <!-- <button mat-menu-item>
-          <mat-icon>calendar_today</mat-icon>
-          <mat-form-field>
 
-            <input matInput [matDatepicker]="dp3" disabled>
-            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-          </mat-form-field>
-          <mat-datepicker-toggle [matDatepicker]="picker" matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          <span>Calender</span>
-        </button> -->
-
-    <button mat-menu-item (click)="showNotification('info', 'This library is built on top of Angular 2.' )" >
+    <button mat-menu-item (click)="showNotification('success','This library is built on top of Angular 2.' )">
       <mat-icon>notifications</mat-icon>
-      <span class="button__badge">4  </span>
+      <span class="button__badge">4 </span>
       <span>alerts</span>
     </button>
   </mat-menu>
   <!-- class="justify-content-end align-items-end mx-auto" -->
-
 </mat-toolbar>
 
 <!---
@@ -82,13 +69,13 @@
 
 <br>
 <div class="container-fluid">
-
   <mat-drawer-container class="example-container">
     <div class="row mx-0">
       <div class="col-lg-4 col-md-4">
         <mat-card class="card mx-auto mr-3 size">
+          <br>
           <button mat-fab class="my-fab" color="primary" matTooltipPosition="above" matTooltip="check account balance"
-            aria-label="Example icon button with a heart icon" (click)="openDialog()">
+            aria-label="Example icon button with a heart icon">
             <mat-icon class="mat-icon-size">account_balance_wallet</mat-icon>
           </button>
           <br>
@@ -98,8 +85,10 @@
           </mat-card-content>
           <br>
           <br>
+          <mat-divider></mat-divider>
+          <br>
           <div class="align">
-            <button mat-icon-button color="primary">
+            <button mat-icon-button color="primary" (click)="openDialog()">
               <mat-icon>trending_flat</mat-icon>
             </button>
           </div>
@@ -107,14 +96,14 @@
       </div>
 
 
-
       <!-- col-lg-4 col-md-6 col-sm-12 " -->
       <div class="col-lg-4 col-md-4 ">
         <mat-card class="card mx-auto mr-3 size">
+          <br>
           <button mat-fab class="my-fab" color="primary" matTooltip="deposit money" matTooltipPosition="above"
             aria-label="Example icon button with a heart icon" (click)="openDialog()">
-            <mat-icon class="mat-icon-size mr-2">south</mat-icon>
-            <mat-icon class=" mat-icon-size mr-3">account_balance</mat-icon>
+            <mat-icon class="mat-icon-size ">south</mat-icon>
+            <mat-icon class=" mat-icon-size ">account_balance</mat-icon>
           </button>
           <br>
           <!----<img mat-card-image src="..\..\..\src\assets\10-512.png" alt="Photo of a Shiba Inu">-->
@@ -123,23 +112,27 @@
             <span>Deposit</span></mat-card-content>
           <br>
           <br>
+          <mat-divider></mat-divider>
+          <br>
           <div class="align">
             <button mat-icon-button color="primary">
-              <mat-icon>trending_flat</mat-icon>
+              <a routerLink='deposit' routerLinkActive="router-link-active">
+                <mat-icon>trending_flat</mat-icon>
+              </a>
             </button>
           </div>
         </mat-card>
       </div>
 
       <div class="col-lg-4 col-md-4">
-        <mat-card class="card mx-auto mr-3 size">
+        <mat-card class="card mx-auto size">
+          <br>
           <button mat-fab class="my-fab  " matTooltip="withdraw money" matTooltipPosition="above" color="primary"
             aria-label="Example icon button with a heart icon" (click)="openDialog()">
 
-            <div class="rotate justify-content-center">
-              <mat-icon class=" mat-icon-size">account_balance_wallet</mat-icon>
-              &nbsp;&nbsp;
-              <mat-icon class=" mat-icon-money">money</mat-icon>
+            <div class="rotate ml-1 justify-content-center">
+              <mat-icon class="mat-icon-size">account_balance_wallet</mat-icon>
+              <mat-icon class="mat-icon-size">money</mat-icon>
             </div>
           </button>
           <br>
@@ -148,9 +141,13 @@
             <span>Withdraw</span></mat-card-content>
           <br>
           <br>
+          <mat-divider></mat-divider>
+          <br>
           <div class="align">
             <button mat-icon-button color="primary">
-              <mat-icon>trending_flat</mat-icon>
+              <a routerLink='withdraw' routerLinkActive="router-link-active">
+                <mat-icon>trending_flat</mat-icon>
+              </a>
             </button>
           </div>
         </mat-card>
@@ -162,20 +159,24 @@
       <br>
       <div class="col-lg-4 col-md-4  ">
         <mat-card class="card mx-auto mr-3 size">
+          <br>
           <button mat-fab class=" my-fab " matTooltip="transfer money" matTooltipPosition="left" color="primary"
             aria-label="Example icon button with a heart icon" (click)="openDialog()">
-            <mat-icon class=" mat-icon-size mr-2">north</mat-icon>
-
-            <mat-icon class=" mat-icon-size mr-3">account_balance</mat-icon>
+            <mat-icon class=" mat-icon-size ">north</mat-icon>
+            <mat-icon class=" mat-icon-size ">account_balance</mat-icon>
           </button>
           <mat-card-content>
             <br>
             <span>Transfer</span></mat-card-content>
           <br>
           <br>
+          <mat-divider></mat-divider>
+          <br>
           <div class="align">
             <button mat-icon-button color="primary">
-              <mat-icon>trending_flat</mat-icon>
+              <a routerLink='transfer' routerLinkActive="router-link-active">
+                <mat-icon>trending_flat</mat-icon>
+              </a>
             </button>
           </div>
         </mat-card>
@@ -185,6 +186,7 @@
       <!-- class=" col-lg-3  col-sm-6  col-xs-12 -->
       <div class="col-lg-4 col-md-4  ">
         <mat-card class="card mx-auto mr-3 size">
+          <br>
           <button mat-fab class="my-fab" matTooltip="transaction history" matTooltipPosition="left" color="primary"
             (click)="openDialog()">
             <mat-icon class="mat-icon-size">swap_horiz</mat-icon>
@@ -196,9 +198,13 @@
           </mat-card-content>
           <br>
           <br>
+          <mat-divider></mat-divider>
+          <br>
           <div class="align">
             <button mat-icon-button color="primary">
-              <mat-icon>trending_flat</mat-icon>
+              <a routerLink='transaction-history' routerLinkActive="router-link-active">
+                <mat-icon>trending_flat</mat-icon>
+              </a>
             </button>
           </div>
         </mat-card>
@@ -207,10 +213,11 @@
       <br>
       <div class="col-lg-4 col-md-4 ">
         <mat-card class="card  mx-auto mr-3 size">
+          <br>
           <button mat-fab class="my-fab " matTooltip="apply for loan" matTooltipPosition="left" color="primary"
             aria-label="Example icon button with a heart icon" (click)="openDialog()">
-            <mat-icon class="mat-icon-size mr-1">check_circle_outline</mat-icon>
-            <mat-icon class="mat-icon-size ml-2">person</mat-icon>
+            <mat-icon class="mat-icon-size ">check_circle_outline</mat-icon>
+            <mat-icon class="mat-icon-size ">person</mat-icon>
           </button>
           <br>
           <mat-card-content>
@@ -218,9 +225,13 @@
             <span>Loans</span></mat-card-content>
           <br>
           <br>
+          <mat-divider></mat-divider>
+          <br>
           <div class="align">
             <button mat-icon-button color="primary">
-              <mat-icon>trending_flat</mat-icon>
+              <a routerLink='viewloans' routerLinkActive="router-link-active">
+                <mat-icon>trending_flat</mat-icon>
+              </a>
             </button>
           </div>
 
@@ -228,43 +239,60 @@
       </div>
     </div>
 
-
-
     <mat-drawer #drawer class="example-sidenav " mode="side" opened>
-      <button mat-icon-button  aria-label="Example icon button with a home icon">
+      <button mat-icon-button aria-label="Example icon button with a home icon">
         <mat-icon class="icon-display">account_circle</mat-icon>
       </button>
       <br>
       <br>
       <br>
       <div class="justify-content-center pt-5 ml-3">
-        <!-- <button matTooltip="profile info" (click)="showFiller = !showFiller" mat-icon-button>
-          <mat-icon color="accent" class="mb-0.5">info</mat-icon>
-        </button> -->
+
         <!-- <p *ngIf="showFiller">Name:{{customerModel.name}}.</p> -->
-        <mat-icon color="accent">account_box</mat-icon><span class="aligned-with-icon">Name:saranya</span>
+        <mat-icon color="accent">account_box</mat-icon><span class="aligned-with-icon">{{name}}</span>
         <br>
         <!-- <span>hello<i class="material-icons">face</i></span> -->
-        <mat-icon color="primary" >mail</mat-icon><span  class="aligned-with-icon"> saru@gmail.com</span>
+        <mat-icon color="primary">mail</mat-icon><span class="aligned-with-icon"> {{email}}</span>
+        <br>
+      </div>
+      <div>
+        <br>
+        <br>
+
+        <mat-card class="card-border">
+          <mat-card-content>
+            Transfers:{{ transferCount}}
+            <br>
+            Withdraws:{{withdrawCount}}
+            <br>
+            Deposits:{{depositCount}}
+          </mat-card-content>
+        </mat-card>
+        <br>
+        <br>
+        <mat-card class="card-border">
+          <mat-card-content>
+            Complaints:{{complaintCount}}
+            <br>
+            <button mat-button color="primary" (click)="viewComplaints()">view</button>
+            <button mat-button color="primary">
+              <a routerLink='complaint' routerLinkActive="router-link-active">post</a></button>
+          </mat-card-content>
+        </mat-card>
       </div>
 
     </mat-drawer>
 
     <div class="example-sidenav-content ">
       <button mat-icon-button color="accent" (click)="drawer.toggle()">
-          <span > Hide Profile</span>&nbsp; <mat-icon>trending_flat</mat-icon>
+        <span> Hide Profile</span>&nbsp; <mat-icon>trending_flat</mat-icon>
       </button>
 
     </div>
-
   </mat-drawer-container>
 
 </div>
 
 <notifier-container></notifier-container>
-<!-- <a class="nav-link text-danger " routerLink="../search-course" routerLinkActive="is-active"><i class="fa fa-search"></i>
-  Course</a>
-<a class="nav-link text-danger" routerLink="../view-profile" routerLinkActive="is-active"><i class="fa fa-fw fa-user"></i>
-  Profile</a>
 
-<router-outlet></router-outlet> -->
+<router-outlet></router-outlet>

@@ -31,4 +31,8 @@ export class DepositService {
     return this._http.get<DepositModel[]>(`${this.baseUrl}/customer/${accountNumber}`);
   }
 
+  public getDepositsCountByAccountNumber(accountNumber:number){
+    return this._http.get<number>(`${this.baseUrl}/count/${accountNumber}`);
+  }
+
 }

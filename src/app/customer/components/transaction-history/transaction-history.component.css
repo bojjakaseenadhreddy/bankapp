@@ -1,22 +1,24 @@
 
 .mat-form-field {
-  font-size: 14px;
-  width: 25%;
+  font-size: 15px;
+  width: 150px;
+  height: 10px;;
 
 }
 .mat-divider {
   border-top-color:grey
 
 }
-::ng-deep .mat-card{
-  border-top:4px solid rgb(241, 89, 190)
+.mat-card{
+  border-top:4px solid rgb(241, 89, 190);
+  
 }
 .align{
  float: right;
 }
 .chip-align{
-  margin-right: 100px;
-
+  flex: 1 1 auto;
+  text-align: right;
 
 }
 .rotate{
@@ -35,4 +37,20 @@
 .info-icon-processing{
   transform: rotate(180deg);
   color:hsl(22, 88%, 59%)
+}
+.chip-button-align{
+  flex: 1 1 auto;
+  text-align: right;
+
+}
+
+.mat-raised-button{
+width:50px;
+height:40px;
+text-align: center;
+}
+
+.button-align{
+
+  top:-3px;
 }

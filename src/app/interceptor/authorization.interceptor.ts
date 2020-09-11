@@ -16,10 +16,9 @@ export class AuthorizationInterceptor implements HttpInterceptor {
         if (req.url.indexOf("login") == -1) {
             req = req.clone({ setHeaders: { "Authorization": "Bearer " + localStorage.getItem('jwttoken') } });
             console.log("after cloning")
-        } else {
-            if (req.body.customer == "true") {
-                req = req.clone({ setHeaders: { "Role": "Customer" } });
-                console.log("customer role");
+            if (localStorage.getItem('role').includes("CUSTOMER")) {
+              req = req.clone({ setHeaders: { "Role": "Customer" } });
+              console.log("customer role");
             }
         }
         console.log(req);

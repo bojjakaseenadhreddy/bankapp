@@ -13,6 +13,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TransactionHistoryComponent } from './components/transaction-history/transaction-history.component';
 
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import { ComplaintDialogComponent } from './components/complaint-dialog/complaint-dialog.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -68,7 +69,7 @@ const components = [
 ];
 
 @NgModule({
-  declarations: [components],
+  declarations: [components, ComplaintDialogComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,

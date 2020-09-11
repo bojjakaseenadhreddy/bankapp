@@ -36,21 +36,31 @@ export class TransactionHistoryComponent implements OnInit {
   startDate: any;
   endDate: any;
   value: any;
+  withdrawCount: number;
+  depositCount: number;
+  transferCount: number;
+  dateFilter: boolean;
+  moneyFilter: boolean;
+  booleanValue: boolean=true;
+
+
+
 
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
   constructor(private withdrawService: WithdrawService, private depositService: DepositService, private transferService: TransferService) {
-    // console.log("inside construtor");
-    this.endDate = "";
-    this.startDate = "";
+    console.log("inside construtor");
+    console.log("fromDate::" + this.fromDate);
     this.selected = "";
     this.type = "";
     this.value = "";
   }
   get fromDate() {
+
     this.startDate = this.range.get('start').value
+    //console.log("startDate::"+this.startDate);
     return this.range.get('start').value;
   }
   get toDate() {
@@ -66,6 +76,10 @@ export class TransactionHistoryComponent implements OnInit {
 
     forkJoin([withdraws, deposits, transfers]).subscribe(results => {
       //tap(results=>console.log(results));
+      this.withdrawCount = results[0].length;
+      this.depositCount = results[1].length;
+      this.transferCount = results[2].length;
+
       results.forEach((result: Array<any>, index) => {
         result.forEach((model) => {
           if (index === 0) {
@@ -111,28 +125,14 @@ export class TransactionHistoryComponent implements OnInit {
         console.log("inside filter predicate");
         var year = new Date(data.date).getFullYear();
         var month = new Date(data.date).getMonth();
+        // console.log("toDate"+this.toDate);
+        //console.log("fromDate::"+moment(this.fromDate).format('L'));
+        // console.log("date:"+moment(data.date).format('LL'));
+        // console.log("Date::"+new Date(data.date));
+        // console.log("Hello..."+new Date(moment(this.fromDate).format('LL')));
+        // console.log(moment(data.date).format('ddd MMM D YYYY'));
 
 
-        //moment().format('L');\
-
-
-
-
-        //         return data.status.name.toLowerCase().includes(this.selected) && data.type.toLowerCase().includes(this.type) && money.includes(this.value)
-        // &&( (moment(data.date).format('L') <= moment(this.toDate).format('L')&&
-        // moment(data.date).format('L') >= moment(this.fromDate).format('L')));
-        if (this.toDate && this.fromDate) {
-
-          console.log(moment(this.toDate).format('L'));
-          console.log("09/15/2020" >= "09/14/2020")
-          console.log(moment(data.date).format('L'));
-          //  console.log("lessthan::  data.date"+moment(data.date).format('L')+"data.toDate:: "+moment(this.toDate).format('L') +"  "+ moment(data.date).format('L') <= moment(this.toDate).format('L'));
-          //  console.log("greaterthan::  data.date"+moment(data.date).format('L')+"data.fromDate:: "+moment(this.fromDate).format('L') +"  "+ moment(data.date).format('L')>= moment(this.fromDate).format('L'));
-
-          return moment(this.fromDate).format('L') <= moment(data.date).format('L') && moment(data.date).format('L') <= moment(this.toDate).format('L');
-        }
-
-        console.log((moment(data.date).format('L') <= moment(this.toDate).format('L')));
         var money = +data.money + "";
         money.toString();
         console.log(this.selected);
@@ -143,9 +143,25 @@ export class TransactionHistoryComponent implements OnInit {
         if (this.selected === undefined) {
           console.log("this.selected");
         }
-        return data.status.name.toLowerCase().includes(this.selected) && data.type.toLowerCase().includes(this.type) && money.trim().includes(this.value)
+        // dddd, MMMM Do, YYYY h:mma
+        this.moneyFilter = (data.status.name.toLowerCase().includes(this.selected) && data.type.toLowerCase().includes(this.type) && money.includes(this.value))
+        console.log(" insde  from moneyFilter::" + this.moneyFilter);
+          this.booleanValue = this.moneyFilter;
+          console.log(" insde  from date=null  booleanValue::" + this.booleanValue);
 
 
+
+        if (this.fromDate && this.toDate) {
+
+          this.dateFilter = new Date(moment(data.date).format('L')) <= new Date(moment(this.toDate).format('L')) &&
+            new Date(moment(data.date).format('L')) >= new Date(moment(this.fromDate).format('L'));
+
+          this.booleanValue = this.moneyFilter && this.dateFilter;
+
+          console.log(" insde  from date  booleanValue::" + this.booleanValue);
+        }
+        console.log("booleanValue::" + this.booleanValue);
+        return this.booleanValue;
       }
     },
       (error) => {
@@ -164,9 +180,9 @@ export class TransactionHistoryComponent implements OnInit {
   }
 
   applyDateFilter() {
-    //console.log("inside apply date filter");
-    //console.log("Math.random()"+Math.random());
-    this.dataSource.filter = '' + 0;
+    console.log("inside apply date filter");
+    console.log("Math.random()" + Math.random());
+    this.dataSource.filter = '' + Math.random();
   }
   changeSelected(selected) {
     console.log("selected value ::" + selected);

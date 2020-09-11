@@ -31,5 +31,10 @@ export class TransferService {
     return this._http.get<TransferModel[]>(`${this.baseUrl}/customer/${accountNumber}`);
   }
 
+  public getTransafersCountByAccountNumber(accountNumber:number){
+
+    return this._http.get<number>(`${this.baseUrl}/count/${accountNumber}`);
+  }
+
 
 }
