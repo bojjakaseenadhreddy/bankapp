@@ -21,6 +21,7 @@ export class ViewAvailableLoansComponent implements OnInit {
   loanFormGroup: FormGroup;
   loanModel: LoanModel;
   isFormOpened: boolean = false;
+  accountNo: number;
 
   HOME = "https://cdn2.iconfinder.com/data/icons/app-ui-outline/64/home_house_app._technology_website_ui-512.png";
   TWO_WHEELER = "https://cdn1.iconfinder.com/data/icons/vehicle-10/210/1232-256.png";
@@ -28,6 +29,8 @@ export class ViewAvailableLoansComponent implements OnInit {
   constructor(private snackbar: MatSnackBar, private loanTypeService: LoanTypeService, private loanService: LoanService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+
+    this.accountNo = +localStorage.getItem("accountNo");
 
     this.loanTypeService.getAllLoanTypes().subscribe(
       (data) => {
@@ -79,7 +82,7 @@ export class ViewAvailableLoansComponent implements OnInit {
   applyLoan(loanType: LoanTypeModel) {
     this.loanTypeModel = loanType; this.loanFormGroup = this.formBuilder.group({
       customerModel: this.formBuilder.group({
-        accountNo: 11112
+        accountNo: this.accountNo
       }),
       statusModel: this.formBuilder.group({
         id: 1

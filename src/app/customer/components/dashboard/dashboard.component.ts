@@ -3,7 +3,11 @@ import { CustomerService } from '../../../core/services/customer.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BalanceDialogComponent } from '../balance-dialog/balance-dialog.component';
 import { CustomerModel } from '../../../../interfaces/CustomerModel';
+<<<<<<< HEAD
 
+=======
+import { PushNotificationsService } from 'ng-push';
+>>>>>>> 98d8357515d47de0a7fa2b204469d4401d924c24
 import { NotifierService } from 'angular-notifier';
 import { ComplaintService } from '../../../core/services/complaint.service';
 import { WithdrawService } from '../../../core/services/withdraw.service';
@@ -40,6 +44,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     let accountNumber = JSON.parse(localStorage.getItem('accountNo'));
+    this.accountNumber=accountNumber;
     this.customerService.getCustomerByAccountNumber(accountNumber).subscribe((data) => {
       this.customerModel = data;
       this.accountNumber = this.customerModel.accountNo;
@@ -72,6 +77,7 @@ export class DashboardComponent implements OnInit {
 
   }
 
+
   onClick() {
     this.message = "hello";
     console.log("clicked");
@@ -101,8 +107,6 @@ export class DashboardComponent implements OnInit {
     console.log("inside show notification...")
     this.notifier.notify(type, message);
   }
-
-
 
 
 }
