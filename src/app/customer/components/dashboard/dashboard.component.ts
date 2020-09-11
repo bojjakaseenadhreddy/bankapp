@@ -3,11 +3,6 @@ import { CustomerService } from '../../../core/services/customer.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BalanceDialogComponent } from '../balance-dialog/balance-dialog.component';
 import { CustomerModel } from '../../../../interfaces/CustomerModel';
-<<<<<<< HEAD
-
-=======
-import { PushNotificationsService } from 'ng-push';
->>>>>>> 98d8357515d47de0a7fa2b204469d4401d924c24
 import { NotifierService } from 'angular-notifier';
 import { ComplaintService } from '../../../core/services/complaint.service';
 import { WithdrawService } from '../../../core/services/withdraw.service';

@@ -9,7 +9,7 @@ import { TransferComponent } from './components/transfer/transfer.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoansComponent } from '../admin-branch/components/loans/loans.component';
+
 
 const routes: Routes = [
   {
@@ -18,14 +18,8 @@ const routes: Routes = [
       { path: "transfer", component: TransferComponent },
       { path: "deposit", component: CreateDepositComponent },
       { path: "withdraw", component: WithdrawComponent },
-      { path: "viewloans", component: ViewAvailableLoansComponent },
       { path: "loans", component: LoansComponent },
       { path: "complaint", component: ComplaintComponent },
-      { path: "", component: DashboardComponent },
-      { path: "transfer", component: TransferComponent },
-      { path: "deposit", component: CreateDepositComponent },
-      { path: "withdraw", component: WithdrawComponent },
-      { path: "loans", component: LoansComponent },
       { path: "apply-loan", component: ViewAvailableLoansComponent },
       { path: "complaint", component: ComplaintComponent, canDeactivate: [CanDeactivateComponentGuard] },
       { path: "transaction-history", component: TransactionHistoryComponent }
