@@ -1,3 +1,5 @@
+import { UpdateComplaintComponent } from './components/update-complaint/update-complaint.component';
+
 
 import { AngMaterialModule } from './../ang-material/ang-material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -8,7 +10,7 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-
+    UpdateComplaintComponent
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,8 @@
-table {
-  width: 100%;
+th {
+  width: 1200px;
+  vertical-align: middle;
 }
 .mat-form-field {
   font-size: 14px;
   width: 25%;
-
 }

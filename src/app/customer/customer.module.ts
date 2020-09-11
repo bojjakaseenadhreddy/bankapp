@@ -1,3 +1,4 @@
+import { CoreModule } from './../core/core.module';
 import { ViewAvailableLoansComponent } from './components/view-available-loans/view-available-loans.component';
 import { ComplaintComponent } from './components/complaint/complaint.component';
 import { NgModule } from '@angular/core';
@@ -75,9 +76,9 @@ const components = [
     CustomerRoutingModule,
     AngMaterialModule,
     ReactiveFormsModule,
-    FormsModule, NotifierModule.withConfig(customNotifierOptions)
-
-
+    CoreModule,
+    FormsModule,
+    NotifierModule.withConfig(customNotifierOptions)
   ],
   exports: [components]
 })

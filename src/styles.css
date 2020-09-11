@@ -1,17 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~angular-notifier/styles";
 
-html, body { height: 100%; }
-body { margin: 0;
-	box-sizing: border-box;
-	font-family: "Roboto", "Tahoma", "Trebuchet MS", "Arial", "Helvetica", sans-serif;
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .notif-success {
-  background-color:  #20c997 !important;
-  border-color:black!important;
-  color: black
-
+  background-color: #20c997 !important;
+  border-color: black !important;
+  color: black;
+}
+.success-snackbar {
+  color: white;
+  background-color: rgb(28, 127, 240) !important;
 }
 
 *{

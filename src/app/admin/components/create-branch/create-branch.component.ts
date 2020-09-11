@@ -1,3 +1,5 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { ROW_STATUSES } from './../../../core/constants/row-status.constant';
 import { RowStatusModel } from './../../../../interfaces/RowStatusModel';
 import { BranchModel } from './../../../../interfaces/BranchModel';
@@ -16,26 +18,27 @@ export class CreateBranchComponent implements OnInit {
 
   branchModel: BranchModel;
   createBranchForm: FormGroup;
-  rowStatuses:RowStatusModel[] = ROW_STATUSES;
-  isSaving:boolean = false;
-  addressId:number;
-  isExpanded:boolean = false;
+  rowStatuses: RowStatusModel[] = ROW_STATUSES;
+  isSaving: boolean = false;
+  addressId: number;
+  isExpanded: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private branchService: BranchService,
-    private addressService: AddressService
+    private router: Router,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit() {
 
-     this.createBranchForm = this.formBuilder.group({
+    this.createBranchForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       phoneNo: ['', [Validators.required]],
       addressModel: this.formBuilder.group({
         id: ['', [Validators.required]]
       }),
-      rowStatusModel:this.formBuilder.group({
+      rowStatusModel: this.formBuilder.group({
         id: ['', [Validators.required]]
       })
     })
@@ -49,18 +52,30 @@ export class CreateBranchComponent implements OnInit {
       this.isSaving = true;
       this.branchModel = this.createBranchForm.value;
       this.branchService.createBranch(this.branchModel).subscribe(
-        (data) => { this.branchModel = data; console.log(this.branchModel);this.isSaving = false;},
-        (error) => { console.log(error) }
+        (data) => {
+          this.branchModel = data;
+          console.log(this.branchModel);
+          this.isSaving = false;
+          this.snackbar.open("Branch added successfully", "OK", { duration: 3000 });
+          this.router.navigateByUrl("admin/branches");
+        },
+        (error) => {
+          console.log(error);
+          this.snackbar.open("Something went wrong, please try again", "OK", { duration: 4000 });
+          this.router.navigateByUrl("admin/branches");
+        }
       )
+    } else {
+      this.snackbar.open("Please fill required fields", "OK", { duration: 3000 });
     }
   }
 
-  getAddressId(value){
+  getAddressId(value) {
     this.addressId = value;
     this.isExpanded = false;
     this.createBranchForm.patchValue({
-      addressModel:{
-        id:value
+      addressModel: {
+        id: value
       }
     })
   }

@@ -1,5 +1,7 @@
-import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { BranchModel } from '../../../../interfaces/BranchModel';
 import { CustomerModel } from '../../../../interfaces/CustomerModel';
 import { STATUSES } from '../../../core/constants/status.constant';
@@ -29,17 +31,22 @@ export class UpdateCustomerComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private branchService: BranchService,
     private customerService: CustomerService,
-    private router: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackbar: MatSnackBar,
+    private location: Location
   ) { }
 
   ngOnInit() {
 
-    this.accountNumber = +this.router.snapshot.paramMap.get("account-number");
+    this.accountNumber = +this.route.snapshot.paramMap.get("account-number");
     this.customerService.getCustomerByAccountNumber(this.accountNumber).subscribe(
       (data) => {
         this.customer = data;
         console.log(this.customer);
+        console.log("before patch");
         this.patchCustomer();
+        console.log("after patch");
       },
       (error) => { console.log(error) }
     )
@@ -94,6 +101,7 @@ export class UpdateCustomerComponent implements OnInit {
 
   patchCustomer() {
     this.addressId = this.customer.addressModel.id;
+    console.log("inside patch");
     this.updateCustomerForm.patchValue({
       name: this.customer.name,
       email: this.customer.email,
@@ -116,6 +124,7 @@ export class UpdateCustomerComponent implements OnInit {
         id: this.customer.statusModel.id
       }
     })
+    console.log(this.updateCustomerForm.value)
   }
 
   onSubmit() {
@@ -124,13 +133,20 @@ export class UpdateCustomerComponent implements OnInit {
       this.customer = this.updateCustomerForm.value;
       this.customer.accountNo = this.accountNumber;
       this.customerService.updateCustomer(this.accountNumber, this.customer).subscribe(
-        (data) => { this.customer = data; console.log(this.customer); },
-        (error) => { console.log(error) }
+        (data) => {
+          this.customer = data; console.log(this.customer);
+          this.snackbar.open("Update Success", "OK", { duration: 4000, horizontalPosition: "right", verticalPosition: "top", panelClass: ['success-snackbar'] });
+          this.location.back();
+        },
+        (error) => {
+          console.log(error)
+          this.snackbar.open("Something went wrong, try after some time", "OK", { duration: 4000 });
+          this.location.back();
+        }
       )
     }
     else {
-
+      this.snackbar.open("Please fill required fields", "OK", { duration: 3000 })
     }
-
   }
 }

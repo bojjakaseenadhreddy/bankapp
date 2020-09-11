@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxChartsModule } from '@swimlane/ngx-charts'
 import { SharedModule } from '../shared/shared.module';
 import { AdminBranchModule } from '../admin-branch/admin-branch.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 const components = [
   BranchDashboardComponent,
   CustomerRegisterComponent,
@@ -26,7 +27,9 @@ const components = [
     CoreModule,
     SharedModule,
     NgxChartsModule,
-    AdminBranchModule
+    AdminBranchModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     components

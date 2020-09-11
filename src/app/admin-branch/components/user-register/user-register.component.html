@@ -1,6 +1,6 @@
 <div>
-    <form [formGroup]="userRegisterForm" (ngSubmit)="onSubmit()">
-        <mat-horizontal-stepper>
+    <form [formGroup]="userRegisterForm">
+        <mat-horizontal-stepper #stepper>
             <mat-step label="Personal">
                 <mat-card class="mx-auto card-border justify-content-centre">
                     <br>
@@ -61,7 +61,6 @@
             <mat-step label="Address">
                 <router-outlet>
                     <app-address (onAddressId)="getAddressId($event)"></app-address>
-                    {{""+addressId}}
                 </router-outlet>
             </mat-step>
 
@@ -99,7 +98,7 @@
                             </mat-form-field>
                         </ng-container>
                         <br>
-                        <button type="submit" [disabled]="userRegisterForm.invalid || addressId==undefined "
+                        <button [disabled]="userRegisterForm.invalid || addressId==undefined " (click)="onSubmit()"
                             class="btn-primary btn">Submit</button>
                     </mat-card>
                 </div>

@@ -1,13 +1,17 @@
+import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserModel } from '../../../../interfaces/UserModel';
 import { BranchModel } from '../../../../interfaces/BranchModel';
 import { AddressModel } from '../../../../interfaces/AddressModel';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { UserService } from '../../../core/services/user.service';
 import { BranchService } from '../../../core/services/branch.service';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-user-register',
@@ -20,8 +24,9 @@ import { BranchService } from '../../../core/services/branch.service';
 
 export class UserRegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private branchService: BranchService, private snackBar: MatSnackBar) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private branchService: BranchService, private snackBar: MatSnackBar, private router: Router, private location: Location) { }
 
+  @ViewChild('stepper') matStepper: MatStepper;
   addressId: number;
   branches: BranchModel[] = [];
   rowStatuses: any = [
@@ -61,12 +66,12 @@ export class UserRegisterComponent implements OnInit {
         id: ['', [Validators.required]]
       })
     })
-
     this.branchService.getAllBranches().subscribe((data) => { this.branches = data }, (error) => { console.log(error) });
   }
 
   getAddressId(value) {
     this.addressId = value;
+    this.matStepper.next();
     this.userRegisterForm.patchValue({
       addressModel: {
         id: value
@@ -84,7 +89,11 @@ export class UserRegisterComponent implements OnInit {
     if (this.userRegisterForm.valid) {
       this.user = this.userRegisterForm.value;
       this.userService.createUser(this.user).subscribe(
-        (data) => { this.user = data; console.log(this.user) },
+        (data) => {
+          this.user = data; console.log(this.user);
+          this.snackBar.open("User Registration success", "OK", { duration: 3000 });
+          this.location.back();
+        },
         (error) => { console.log(error) }
       );
     }

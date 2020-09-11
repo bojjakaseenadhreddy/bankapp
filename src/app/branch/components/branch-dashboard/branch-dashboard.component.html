@@ -1,7 +1,6 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
           <mat-card>
@@ -33,9 +32,40 @@
             </mat-card-actions>
           </mat-card>
         </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                Lonas
+              </mat-card-title>
+              <mat-card-subtitle>{{loansCount}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions align="end">
+              <button mat-raised-button color="primary" (click)="viewLoans()">View <mat-icon>arrow_right_alt
+                </mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
       </div>
     </div>
+
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <mat-card>
+        <mat-card-title>Complaints</mat-card-title>
+        <button mat-raised-button color="primary" (click)="viewComplaints()">View <mat-icon>arrow_right_alt
+          </mat-icon>
+        </button>
+        <div>
+          <ngx-charts-pie-chart [view]="ui" [results]="complaintData" [labels]="showLabels" [legend]="showLegend"
+            [legendPosition]="legendPosition">
+          </ngx-charts-pie-chart>
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
       <mat-card>
         <mat-card-header>
           <mat-card-title>
@@ -61,18 +91,6 @@
             <td>{{": "+branchModel.addressModel.city}}</td>
           </tr>
         </mat-card-content>
-        <br>
-      </mat-card>
-    </div>
-
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-      <mat-card>
-        <mat-card-title>Complaints</mat-card-title>
-        <div>
-          <ngx-charts-pie-chart [view]="ui" [results]="complaintData" [labels]="showLabels" [legend]="showLegend"
-            [legendPosition]="legendPosition">
-          </ngx-charts-pie-chart>
-        </div>
       </mat-card>
     </div>
   </div>

@@ -1,40 +1,52 @@
 <div>
-  <mat-table mat-tabel matSort [dataSource]="dataSource">
-  
-    <ng-container matColumnDef="name">
-      <th  mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef = "let user"> <mat-icon (click)="viewAddress(user.addressModel)">info</mat-icon>  {{user.name}}</td>
-    </ng-container>
-    <ng-container matColumnDef="phone">
-      <th  mat-header-cell *matHeaderCellDef mat-sort-header>Phone No</th>
-      <td mat-cell *matCellDef = "let user">{{user.phone}}</td>
-    </ng-container>
-    <ng-container matColumnDef="email">
-      <th  mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-      <td mat-cell *matCellDef = "let user">{{user.email}}</td>
-    </ng-container>
-    <ng-container matColumnDef="gender">
-      <th  mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
-      <td mat-cell *matCellDef = "let user">{{user.gender}}</td>
-    </ng-container>
+  <button class="btn btn-primary" (click)="addUser()">+ Add User</button>
+</div> <br>
+<div class="container-fluid">
+  <div>
+    <mat-table mat-tabel matSort [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let user">
+          <mat-icon class="align-middle" (click)="viewAddress(user.addressModel)">info</mat-icon> {{user.name}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone No</th>
+        <td mat-cell *matCellDef="let user">{{user.phone}}</td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+        <td mat-cell *matCellDef="let user">{{user.email}}</td>
+      </ng-container>
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
+        <td mat-cell *matCellDef="let user">{{user.gender}}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="role">
-      <th  mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
-      <td mat-cell *matCellDef = "let user">{{user.roleModel.name}}</td>
-    </ng-container>
-    <ng-container matColumnDef="branch">
-      <th  mat-header-cell *matHeaderCellDef mat-sort-header>Branch</th>
-      <td mat-cell *matCellDef = "let user"><mat-icon (click)="viewBranch(user.branchModel)">info</mat-icon>{{user.branchModel.name}}</td>
-    </ng-container>
-    <ng-container matColumnDef="status">
-      <th  mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-      <td mat-cell *matCellDef = "let user">{{user.rowStatusModel.name}}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="userColumns"></tr>
-    <tr mat-row *matRowDef="let row;  columns : userColumns"></tr>
-
-  </mat-table>
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+        <td mat-cell *matCellDef="let user">{{user.roleModel.name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="branch">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Branch</th>
+        <td mat-cell *matCellDef="let user">
+          <mat-icon class="align-middle" (click)="viewBranch(user.branchModel)">info</mat-icon>{{user.branchModel.name}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let user">{{user.rowStatusModel.name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let user">
+          <button (click)="editUser(user.id)" class="btn btn-primary">Edit</button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="userColumns"></tr>
+      <tr mat-row *matRowDef="let row;  columns : userColumns"></tr>
+    </mat-table>
+  </div>
 </div>
-<mat-paginator [pageSizeOptions]="[5,10,20,100]"></mat-paginator>
 
+<mat-paginator [pageSizeOptions]="[5,10,20,100]"></mat-paginator>

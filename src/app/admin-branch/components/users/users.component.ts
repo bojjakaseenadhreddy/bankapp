@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddressDialogComponent } from 'src/app/shared/components/address-dialog/address-dialog.component';
 import { BranchDialogComponent } from 'src/app/shared/components/branch-dialog/branch-dialog.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -19,19 +20,30 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   dataSource = new MatTableDataSource();
   users: UserModel[];
-  userColumns: string[] = ['name', 'phone', 'email', 'gender', 'branch', 'role', 'status'];
-  constructor(private userService: UserService, private dialog: MatDialog) { }
+  isAdmin: boolean = false;
+  userColumns: string[] = ['name', 'phone', 'email', 'gender', 'branch', 'role', 'status', 'action'];
+  constructor(private userService: UserService, private dialog: MatDialog, private route: Router) { }
 
   ngOnInit() {
-    this.userService.getAllUsers().subscribe(
-      (data) => {
-        this.users = data;
-        this.dataSource = new MatTableDataSource(this.users);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-      (error) => { console.log(error) }
-    )
+    if (localStorage.getItem('role').toLowerCase() === "admin") {
+      this.isAdmin = true;
+    }
+    if (this.isAdmin) {
+      this.userService.getAllUsers().subscribe(
+        (data) => {
+          this.assignRemoteData(data);
+        },
+        (error) => { console.log(error) }
+      )
+    } else {
+      const branchId = +localStorage.getItem('branchId');
+      this.userService.getAllUsersByBranchId(branchId).subscribe(
+        (data) => {
+          this.assignRemoteData(data);
+        },
+        (error) => { console.log(error) }
+      )
+    }
 
   }
   viewAddress(address) {
@@ -39,5 +51,25 @@ export class UsersComponent implements OnInit {
   }
   viewBranch(branch) {
     this.dialog.open(BranchDialogComponent, { data: branch });
+  }
+
+  addUser() {
+    if (this.isAdmin)
+      this.route.navigateByUrl(`admin/register-user`);
+    else
+      this.route.navigateByUrl(`branch/register-user`);
+  }
+  assignRemoteData(data) {
+    this.users = data;
+    this.dataSource = new MatTableDataSource(this.users);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  editUser(userId: number) {
+    if (this.isAdmin)
+      this.route.navigateByUrl(`admin/update-user/${userId}`);
+    else
+      this.route.navigateByUrl(`branch/update-user/${userId}`);
   }
 }

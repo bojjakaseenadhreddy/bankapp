@@ -1,5 +1,5 @@
 <div>
-    <form formGroup="updateCustomerForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="updateCustomerForm" (ngSubmit)="onSubmit()">
         <mat-card class="mx-auto card-border justify-content-centre">
             <br>
             <mat-card-title>Update Customer</mat-card-title>
@@ -69,3 +69,10 @@
         </mat-card>
     </form>
 </div>
+
+<a href="/one">with "/-"</a> <br>
+<a href="/one/two">with "/-/-"</a> <br>
+<a href="one">with "-"</a> <br>
+<a href="one/two">with "-/-"</a> <br>
+<a href="./one">with "./-"</a> <br>
+<a href="../one">with "../-"</a> <br>
