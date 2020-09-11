@@ -1,3 +1,5 @@
+import { UpdateComplaintComponent } from './../core/components/update-complaint/update-complaint.component';
+import { AdminRoleCanActivateChildGuard } from './../core/guards/admin.guard';
 import { UsersComponent } from './../admin-branch/components/users/users.component';
 import { UserRegisterComponent } from './../admin-branch/components/user-register/user-register.component';
 import { UpdateUserComponent } from './../admin-branch/components/update-user/update-user.component';
@@ -14,16 +16,17 @@ import { ComplaintsComponent } from '../admin-branch/components/complaints/compl
 
 const routes: Routes = [
   {
-    path: "", children: [
+    path: "", canActivateChild: [AdminRoleCanActivateChildGuard], children: [
       { path: "", pathMatch: "full", component: AdminDashboardComponent },
       { path: "branches", component: BranchesComponent },
       { path: "create-branch", component: CreateBranchComponent },
-      { path: "update-branch/:branch-id", component: UpdateBranchComponent },
+      { path: "update-branch/:branch-code", component: UpdateBranchComponent },
       { path: "complaints", component: ComplaintsComponent },
       { path: "customers", component: CustomersComponent },
       { path: "loans", component: LoansComponent },
       { path: "update-user/:user-id", component: UpdateUserComponent },
       { path: "register-user", component: UserRegisterComponent },
+      { path: "update-complaint/:complaint-id", component: UpdateComplaintComponent },
       { path: "users", component: UsersComponent }
     ]
   }

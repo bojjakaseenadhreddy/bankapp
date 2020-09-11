@@ -19,6 +19,19 @@ export class LoanService {
     return this.http.get<LoanModel>(`${this.baseUrl}/${loanId}`);
   }
 
+  public getLoanByBranchId(branchId: number) {
+    return this.http.get<LoanModel[]>(`${this.baseUrl}/branch/${branchId}`);
+  }
+
+  public getAllLoansCount() {
+    return this.http.get<any>(`${this.baseUrl}/count`)
+  }
+
+
+  public getAllLoansCountByBranchId(branchId: number) {
+    return this.http.get<any>(`${this.baseUrl}/count/branch/${branchId}`)
+  }
+
   public getLoansByAccountNumber(accountNumber: number) {
     return this.http.get<LoanModel[]>(`${this.baseUrl}/customer/${accountNumber}`);
   }
@@ -31,8 +44,8 @@ export class LoanService {
     return this.http.put<LoanModel>(`${this.baseUrl}/${loanNumber}`, loanModel);
   }
 
-  public updateLoanStatus(loanId: number, loanStatusId: number,loanModel:LoanModel) {
-    return this.http.put(`${this.baseUrl}/${loanId}/status/${loanStatusId}`,loanModel);
+  public updateLoanStatus(loanId: number, loanStatusId: number, loanModel: LoanModel) {
+    return this.http.put(`${this.baseUrl}/${loanId}/status/${loanStatusId}`, loanModel);
   }
 
 }

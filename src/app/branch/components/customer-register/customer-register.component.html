@@ -1,6 +1,6 @@
 <div>
-    <form formGroup="customerRegisterForm" (ngSubmit)="onSubmit()">
-        <mat-horizontal-stepper>
+    <form [formGroup]="customerRegisterForm" (ngSubmit)="onSubmit()">
+        <mat-horizontal-stepper #stepper>
             <mat-step label="Personal">
                 <mat-card class="mx-auto card-border justify-content-centre">
                     <br>
@@ -68,7 +68,7 @@
             <mat-step label="Address">
                 <router-outlet>
                     <app-address (onAddressId)="getAddressId($event)"></app-address>
-                    {{""+addressId}}
+
                 </router-outlet>
             </mat-step>
 

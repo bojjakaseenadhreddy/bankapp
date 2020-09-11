@@ -9,6 +9,7 @@ import { CustomerModel } from '../../../interfaces/CustomerModel';
 
 export class CustomerService {
 
+
     constructor(private _http: HttpClient) {
     }
 
@@ -48,6 +49,10 @@ export class CustomerService {
 
     public getBankBalance() {
         return this._http.get<number>(`${this.baseUrl}/balance`);
+    }
+
+    public getCustomersCountByBranchId(branchId: number) {
+        return this._http.get<number>(`${this.baseUrl}/count/branch/${branchId}`);
     }
 
 

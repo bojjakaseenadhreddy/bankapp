@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ComplaintService } from './../../../core/services/complaint.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,18 +13,19 @@ import { ComplaintModel } from '../../../../interfaces/ComplaintModel';
 })
 export class ComplaintsComponent implements OnInit {
 
-  constructor(private complaintService: ComplaintService) { }
+  constructor(private complaintService: ComplaintService, private router: Router) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sorter: MatSort;
   complaints: ComplaintModel[];
   dataSource: MatTableDataSource<ComplaintModel>;
-  columnsToDisplay: string[] = ["id", "user", "description", "raised", "updated", "status"];
+  columnsToDisplay: string[] = ["id", "user", "description", "raised", "updated", "status", "action"];
+  isAdmin: boolean = false;
 
   filterId: string = "";
   filterName: string = "";
   filterStatus: string = "";
-  filterDescription = "";
+  filterDescription: string = "";
   filterRaisedDate = "";
 
   maxDate: Date = new Date();
@@ -38,25 +40,55 @@ export class ComplaintsComponent implements OnInit {
 
   ngOnInit() {
     console.log("calling complaints");
-    this.complaintService.getAllComplaints().subscribe(
-      (data) => {
-        this.complaints = data;
-        this.dataSource = new MatTableDataSource(this.complaints);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sorter;
-        this.dataSource.filterPredicate = (data, filterValue: string): boolean => {
-          return data.id.toString().includes(this.filterId) &&
-            data.statusModel.name.toLowerCase().includes(this.filterStatus) &&
-            data.description.toLowerCase().includes(this.filterDescription) &&
-            data.customerModel.name.toLowerCase().includes(this.filterName) &&
-            this.raisedDateFilter(data);
+    if (localStorage.getItem("role").toLowerCase() === "admin") {
+      this.isAdmin = true;
+    }
+
+    if (this.isAdmin) {
+      this.complaintService.getAllComplaints().subscribe(
+        (data) => {
+          this.assignRemoteData(data);
+        },
+        (error) => {
+          console.log(error)
         }
-        console.log(this.complaints);
-      },
-      (error) => {
-        console.log(error)
+      )
+    } else {
+      const branchId = +localStorage.getItem("branchId");
+      this.complaintService.getComplaintsByBranchId(branchId).subscribe(
+        (data) => {
+          this.assignRemoteData(data);
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    }
+  }
+  assignRemoteData(data) {
+    this.complaints = data;
+    this.dataSource = new MatTableDataSource(this.complaints);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sorter;
+
+    this.dataSource.sortingDataAccessor = (data, header) => {
+      switch (header) {
+        case 'status': return data.statusModel.name;
+        case 'user': return data.customerModel.name;
+        case 'raised': return new Date(data.raisedDate);
+        case 'updated': return new Date(data.updatedDate);
+        default: return data[header];
       }
-    )
+    }
+
+    this.dataSource.filterPredicate = (data, filterValue: string): boolean => {
+      return data.id.toString().includes(this.filterId) &&
+        data.statusModel.name.toLowerCase().includes(this.filterStatus) &&
+        data.description.toLowerCase().includes(this.filterDescription) &&
+        data.customerModel.name.toLowerCase().includes(this.filterName) &&
+        this.raisedDateFilter(data);
+    }
+    console.log(this.complaints);
   }
 
   filterByRaisedDate(startDate, endDate) {
@@ -107,5 +139,14 @@ export class ComplaintsComponent implements OnInit {
     }
     else
       return true;
+  }
+
+  updateComplaint(id: number) {
+    if (this.isAdmin) {
+      this.router.navigateByUrl('admin/update-complaint/' + id);
+    }
+    else {
+      this.router.navigate(['branch', 'update-complaint', id]);
+    }
   }
 }

@@ -7,6 +7,7 @@ import { AddressComponent } from './components/address/address.component';
 import { CoreModule } from './../core/core.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const components = [
   AddressComponent,
   AddressDialogComponent,
@@ -17,7 +18,9 @@ const components = [
   imports: [
     CommonModule,
     CoreModule,
-    AngMaterialModule
+    AngMaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     components

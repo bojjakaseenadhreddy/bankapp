@@ -1,11 +1,13 @@
-th{
-  width:1200px;
+th {
+  width: 1200px;
+  vertical-align: middle;
+}
+.search-input {
+  width: max-content;
 }
 
-.custome-mat-tooltip{
-  background-color:grey;
+.custom-mat-tooltip {
+  background-color: grey;
   border: 1px solid grey;
   font-size: medium;
-  
 }
-  

@@ -49,7 +49,10 @@ export class UserService {
     public login(loginModel: LoginModel) {
         return this._http.post<any>(`${this.baseUrl}/login`, loginModel);
     }
-    public getUsersCount(){
-      return this._http.get<number>(`${this.baseUrl}/count`);
+    public getUsersCount() {
+        return this._http.get<number>(`${this.baseUrl}/count`);
+    }
+    public getUsersCountByBranchId(branchId: number) {
+        return this._http.get<number>(`${this.baseUrl}/count/branch/${branchId}`);
     }
 }

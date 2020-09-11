@@ -72,13 +72,22 @@ export class AdminDashboardComponent implements OnInit {
       (data) => { this.bankBalance = +data }
     );
     this.complaintService.getComplaintsCountByStatusId(10).subscribe(
-      (data) => { this.complaintData[0].value = +data; }
+      (data) => {
+        this.complaintData[0].value = +data;
+        this.complaintData = [].concat(this.complaintData);
+      }
     );
     this.complaintService.getComplaintsCountByStatusId(2).subscribe(
-      (data) => { this.complaintData[1].value = +data; }
+      (data) => {
+        this.complaintData[1].value = +data;
+        this.complaintData = [].concat(this.complaintData);
+      }
     );
     this.complaintService.getComplaintsCountByStatusId(5).subscribe(
-      (data) => { this.complaintData[2].value = +data; this.complaintData = [].concat(this.complaintData); }
+      (data) => {
+        this.complaintData[2].value = +data;
+        this.complaintData = [].concat(this.complaintData);
+      }
     );
     this.branchService.getAllBranchesBalance().subscribe(
       (data) => {
@@ -88,22 +97,19 @@ export class AdminDashboardComponent implements OnInit {
       }
     );
 
-    forkJoin([this.http.get("http://localhost:8082/api/customers"), this.http.get("http://localhost:8082/api/users")]).subscribe(
-      data => {
-        data.forEach((da: Array<any>, index) => {
-          da.forEach((d) => { console.log(d) })
-        })
-      }
-    )
   }
 
   viewCustomers() {
     this.router.navigateByUrl("admin/customers");
   }
   viewUsers() {
-
+    this.router.navigateByUrl("admin/users");
   }
   viewBranches() {
+    this.router.navigateByUrl("admin/branches");
+  }
+  viewLoans() {
+    this.router.navigateByUrl("admin/loans");
   }
   viewComplaints() {
     this.router.navigateByUrl("admin/complaints");

@@ -1,3 +1,7 @@
-th{
-    width: 120px;
+th {
+  width: 1200px;
+  vertical-align: middle;
+}
+td {
+  vertical-align: middle;
 }

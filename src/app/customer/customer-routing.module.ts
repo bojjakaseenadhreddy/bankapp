@@ -1,3 +1,5 @@
+import { CanDeactivateComponentGuard } from './../core/guards/can-de-activate.guard';
+import { LoansComponent } from './../admin-branch/components/loans/loans.component';
 import { TransactionHistoryComponent } from './components/transaction-history/transaction-history.component';
 import { ComplaintComponent } from './components/complaint/complaint.component';
 import { ViewAvailableLoansComponent } from './components/view-available-loans/view-available-loans.component';
@@ -10,12 +12,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: "", component: DashboardComponent, children: [
+    path: "", children: [
+      { path: "", component: DashboardComponent },
       { path: "transfer", component: TransferComponent },
       { path: "deposit", component: CreateDepositComponent },
       { path: "withdraw", component: WithdrawComponent },
-      { path: "loans", component: ViewAvailableLoansComponent },
-      { path: "complaint", component: ComplaintComponent },
+      { path: "loans", component: LoansComponent },
+      { path: "apply-loan", component: ViewAvailableLoansComponent },
+      { path: "complaint", canDeactivate: [CanDeactivateComponentGuard], component: ComplaintComponent },
       { path: "transaction-history", component: TransactionHistoryComponent }
     ]
   }

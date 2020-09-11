@@ -1,7 +1,10 @@
-
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatStepper } from '@angular/material/stepper';
+import { Location } from '@angular/common';
 import { CustomerModel } from './../../../../interfaces/CustomerModel';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BranchModel } from '../../../../interfaces/BranchModel';
 import { STATUSES } from 'src/app/core/constants/status.constant';
 import { ACCOUNT_TYPES } from 'src/app/core/constants/account-type.constant';
@@ -17,17 +20,22 @@ import { passwordValidate } from 'src/app/core/validators/password.validators';
 
 export class CustomerRegisterComponent implements OnInit {
 
-  customerRegisterForm: any;
+  customerRegisterForm: FormGroup;
   addressId: number;
   branches: BranchModel[] = [];
   customer: CustomerModel;
   hide: boolean = true;
 
+  @ViewChild('stepper') matStepper: MatStepper;
+
   statuses = STATUSES;
   accountTypes = ACCOUNT_TYPES;
   constructor(private formBuilder: FormBuilder,
     private branchService: BranchService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private snackbar: MatSnackBar,
+    private location: Location
+
   ) { }
 
   ngOnInit() {
@@ -37,6 +45,7 @@ export class CustomerRegisterComponent implements OnInit {
       dob: ['', [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
+      balance: ['', [Validators.required]],
       addressModel: this.formBuilder.group({
         id: ['', [Validators.required]]
       }),
@@ -57,10 +66,12 @@ export class CustomerRegisterComponent implements OnInit {
   }
   getAddressId(value) {
     this.addressId = value;
+    this.matStepper.next();
     this.customerRegisterForm.patchValue({
       addressModel: {
         id: value
-      }
+      },
+      balance: 0
     });
   }
   getEmailErrors() {
@@ -80,10 +91,25 @@ export class CustomerRegisterComponent implements OnInit {
 
   onSubmit() {
     console.log(this.customerRegisterForm.value);
-    this.customer = this.customerRegisterForm.value;
-    this.customerService.createCustomer(this.customer).subscribe(
-      (data) => { this.customer = data; console.log(this.customer) },
-      (error) => { console.log(error) }
-    )
+
+    if (this.customerRegisterForm.valid) {
+      this.customer = this.customerRegisterForm.value;
+      this.customerService.createCustomer(this.customer).subscribe(
+        (data) => {
+          this.customer = data;
+          console.log(this.customer);
+          this.snackbar.open("Registred successfully ", "OK", { duration: 3000 });
+          this.location.back();
+        },
+        (error) => {
+          console.log(error);
+          this.snackbar.open("Something went wrong try after some time", "OK", { duration: 4000 });
+          this.location.back();
+        }
+      )
+    } else {
+      this.snackbar.open("Please fill all required fields", "OK", { duration: 3000 });
+    }
+
   }
 }

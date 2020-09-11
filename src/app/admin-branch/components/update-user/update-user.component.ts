@@ -6,10 +6,10 @@ import { BranchModel } from './../../../../interfaces/BranchModel';
 import { AddressModel } from './../../../../interfaces/AddressModel';
 import { Validators, FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-update-user',
@@ -22,7 +22,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 export class UpdateUserComponent implements OnInit {
 
-  constructor( private formBuilder: FormBuilder, private userService: UserService,private branchService:BranchService, private snackBar:MatSnackBar) { }
+  constructor(private location: Location, private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService, private branchService: BranchService, private snackBar: MatSnackBar) { }
 
 
   branches: BranchModel[] = [];
@@ -39,16 +39,16 @@ export class UpdateUserComponent implements OnInit {
   ]
   address: AddressModel;
   hide: boolean = true;
-  userUpdateForm:FormGroup;
+  userUpdateForm: FormGroup;
   user: UserModel;
-  isValid=true;
-  userId:number;
+  isValid = true;
+  userId: number;
 
   ngOnInit() {
 
 
-     //this.userId = +this.router.snapshot.paramMap.get("user-id");
-     this.userId = 1;
+    this.userId = +this.route.snapshot.paramMap.get("user-id");
+
 
     this.userUpdateForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -70,10 +70,10 @@ export class UpdateUserComponent implements OnInit {
       })
     })
 
-    this.branchService.getAllBranches().subscribe((data)=>{ this.branches=data},(error)=>{console.log(error)});
+    this.branchService.getAllBranches().subscribe((data) => { this.branches = data }, (error) => { console.log(error) });
     this.userService.getUserById(this.userId).subscribe(
-      (data)=>{ this.user = data; console.log(this.user); this.patchUser()},
-      (error)=>{ console.log(error);}
+      (data) => { this.user = data; console.log(this.user); this.patchUser() },
+      (error) => { console.log(error); }
     )
   }
 
@@ -87,26 +87,26 @@ export class UpdateUserComponent implements OnInit {
   // }
 
 
-  patchUser(){
+  patchUser() {
     this.userUpdateForm.patchValue({
-      id:this.userId,
-      name:this.user.name,
-      email:this.user.email,
-      password:this.user.password,
-      confirmPassword:this.user.password,
-      gender:this.user.gender,
-      phone:this.user.phone,
-      addressModel:{
-        id:this.user.addressModel.id
+      id: this.userId,
+      name: this.user.name,
+      email: this.user.email,
+      password: this.user.password,
+      confirmPassword: this.user.password,
+      gender: this.user.gender,
+      phone: this.user.phone,
+      addressModel: {
+        id: this.user.addressModel.id
       },
-      roleModel:{
-        id:this.user.roleModel.id
+      roleModel: {
+        id: this.user.roleModel.id
       },
-      rowStatusModel:{
-        id:this.user.rowStatusModel.id
+      rowStatusModel: {
+        id: this.user.rowStatusModel.id
       },
-      branchModel:{
-        branchCode:this.user.branchModel.branchCode
+      branchModel: {
+        branchCode: this.user.branchModel.branchCode
       }
     })
   }
@@ -120,14 +120,18 @@ export class UpdateUserComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.userUpdateForm.value);
-    if(this.userUpdateForm.valid){
+    if (this.userUpdateForm.valid) {
       this.user = this.userUpdateForm.value;
-      this.userService.updateUser(this.userId,this.user).subscribe(
-        (data) => {this.user = data;console.log(this.user);  this.snackBar.open("Update Success","OK",{duration:3000})},
-        (error) => { console.log(error)}
-        );
+      this.userService.updateUser(this.userId, this.user).subscribe(
+        (data) => {
+          this.user = data; console.log(this.user);
+          this.snackBar.open("Update Success", "OK", { duration: 3000 });
+          this.location.back();
+        },
+        (error) => { console.log(error) }
+      );
     }
     else
-      this.snackBar.open("Please Fill All Mandatory Fields","OK",{duration:2000})
+      this.snackBar.open("Please Fill All Mandatory Fields", "OK", { duration: 2000 })
   }
 }

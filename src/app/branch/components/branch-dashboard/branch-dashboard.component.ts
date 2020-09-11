@@ -1,3 +1,5 @@
+import { LoanService } from './../../../core/services/loan.service';
+import { Router } from '@angular/router';
 import { BranchModel } from './../../../../interfaces/BranchModel';
 import { ComplaintService } from './../../../core/services/complaint.service';
 import { UserService } from './../../../core/services/user.service';
@@ -16,8 +18,9 @@ export class BranchDashboardComponent implements OnInit {
   customersCount = 0;
   usersCount = 0;
   branchBalance = 0;
+  loansCount = 0;
   branchModel: BranchModel;
-  branchId = 1;
+
 
   complaintData: ChartDataModel[] = [
     { name: "Raised", value: 0 },
@@ -30,38 +33,67 @@ export class BranchDashboardComponent implements OnInit {
   showLabels: boolean = true;
   legendPosition: string = 'below';
   gradient = false;
+  branchId: number;
 
-  constructor(private branchService: BranchService, private customerService: CustomerService, private userService: UserService, private complaintService: ComplaintService) { }
+  constructor(private branchService: BranchService,
+    private customerService: CustomerService,
+    private userService: UserService,
+    private complaintService: ComplaintService,
+    private loanService: LoanService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
 
-    //this.branchId = +localStorage.getItem("branchId");
+    this.branchId = +localStorage.getItem("branchId");
     this.branchService.getBranchById(this.branchId).subscribe(
       (data) => { this.branchModel = data; }
     )
-    this.customerService.getCustomersCount().subscribe(
+    this.customerService.getCustomersCountByBranchId(this.branchId).subscribe(
       (data) => { this.customersCount = data }
     );
-    this.userService.getUsersCount().subscribe(
+    this.userService.getUsersCountByBranchId(this.branchId).subscribe(
       (data) => { this.usersCount = +data }
     );
+
+    this.loanService.getAllLoansCountByBranchId(this.branchId).subscribe(
+      (data) => {
+        this.loansCount = data;
+      }
+    )
+
     this.complaintService.getComplaintsCountByStatusIdAndBranchId(10, this.branchId).subscribe(
-      (data) => { this.complaintData[0].value = +data; }
+      (data) => {
+        this.complaintData[0].value = +data;
+        this.complaintData = [].concat(this.complaintData);
+      }
     );
     this.complaintService.getComplaintsCountByStatusIdAndBranchId(2, this.branchId).subscribe(
-      (data) => { this.complaintData[1].value = +data; }
+      (data) => {
+        this.complaintData[1].value = +data;
+        this.complaintData = [].concat(this.complaintData);
+      }
     );
     this.complaintService.getComplaintsCountByStatusIdAndBranchId(5, this.branchId).subscribe(
-      (data) => { this.complaintData[2].value = +data; this.complaintData = [].concat(this.complaintData); }
+      (data) => {
+        this.complaintData[2].value = +data;
+        this.complaintData = [].concat(this.complaintData);
+      }
     );
   }
 
   viewCustomers() {
-
+    this.router.navigateByUrl("branch/customers");
   }
 
   viewUsers() {
-
+    this.router.navigateByUrl("branch/users");
+  }
+  viewComplaints() {
+    this.router.navigateByUrl("branch/complaints");
+  }
+  viewLoans() {
+    this.router.navigateByUrl("branch/loans");
   }
 
 }

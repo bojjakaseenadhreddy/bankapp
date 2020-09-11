@@ -9,6 +9,7 @@ import { LoansComponent } from '../admin-branch/components/loans/loans.component
 import { UpdateUserComponent } from '../admin-branch/components/update-user/update-user.component';
 import { UserRegisterComponent } from '../admin-branch/components/user-register/user-register.component';
 import { UsersComponent } from '../admin-branch/components/users/users.component';
+import { UpdateComplaintComponent } from '../core/components/update-complaint/update-complaint.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: "customers", component: CustomersComponent },
       { path: "loans", component: LoansComponent },
       { path: "update-user/:user-id", component: UpdateUserComponent },
+      { path: "update-complaint/:complaint-id", component: UpdateComplaintComponent },
       { path: "register-user", component: UserRegisterComponent },
       { path: "users", component: UsersComponent }
     ]

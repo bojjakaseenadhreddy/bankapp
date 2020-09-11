@@ -54,14 +54,14 @@ export class LoginComponent implements OnInit {
                 console.log(data);
                 if (data.role == "CUSTOMER") {
                     this.customer = data;
-                    console.log(this.customer);
                     localStorage.clear();
                     localStorage.setItem("jwttoken", this.customer.jwt);
                     localStorage.setItem("role", this.customer.role);
-                    localStorage.setItem("branchCode", "" + this.customer.branchCode);
                     localStorage.setItem("accountNo", "" + this.customer.accountNo);
                     localStorage.setItem("customerName", this.customer.customerName);
                     localStorage.setItem("customerEmail", this.customer.customerEmail);
+                    localStorage.setItem("branchId", "" + this.customer.branchCode);
+
                 } else {
                     localStorage.clear();
                     this.user = data;
@@ -70,6 +70,7 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem("email", "" + this.user.email);
                     localStorage.setItem("userId", "" + this.user.userId);
                     localStorage.setItem("userName", this.user.userName);
+                    localStorage.setItem("branchId", "" + this.user.branchCode);
                 }
                 console.log(data.role);
                 this.redirectUser(data.role);

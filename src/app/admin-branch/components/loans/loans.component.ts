@@ -2,15 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoanService } from '../../../core/services/loan.service';
 import { LoanModel } from '../../../../interfaces/LoanModel';
 import { MatTableDataSource } from '@angular/material/table';
-import { CustomerModel } from '../../../../interfaces/CustomerModel';
-import { StatusModel } from '../../../../interfaces/StatusModel';
-import { LoanTypeModel } from '../../../../interfaces/LoanTypeModel';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { count } from '@swimlane/ngx-charts';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-
 
 @Component({
   selector: 'app-loans',
@@ -34,9 +28,11 @@ export class LoansComponent implements OnInit {
   selectedValue: string;
   statusArray: Array<{ id: number, old: string, current: string }> = [];
   count = 0;
+  isAdmin = false;
   display = false;
   isReset = false;
   isUpdated = false;
+  role = "";
   statuses = [
     { id: 1, value: "APPLIED" },
     { id: 3, value: "APPROVED" },
@@ -47,28 +43,52 @@ export class LoansComponent implements OnInit {
   constructor(private loansService: LoanService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.loansService.getAllLoans().subscribe((data) => {
-      this.loansModels = data;
-      this.dataSource = new MatTableDataSource<LoanModel>(this.loansModels);
-      this.dataSource.sortingDataAccessor = (item, property) => {
-        //  console.log("custom sorting")
-        switch (property) {
-          case 'customerAccountNo': return item.customerModel.accountNo;
-          case 'status': return item.statusModel.name;
-          case 'loanType': return item.loanTypeModel.name;
-          default: return item[property];
-        }
-      }
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.filterPredicate = (data, filter: string) => {
-        return data.customerModel.accountNo === +filter || data.loanTypeModel.name.toLowerCase().includes(filter) ||
-          data.statusModel.name.toLowerCase().includes(filter);
-      }
-    }, (error) => {
-      console.log(error);
-    });
+    this.role = localStorage.getItem("role").toLowerCase();
+    if (this.role == "admin") {
+      this.loansService.getAllLoans().subscribe((data) => {
+        this.assignRemoteData(data);
+      }, (error) => {
+        console.log(error);
+      });
+    } else if (this.role == "manager") {
+      const branchId = +localStorage.getItem("branchId");
+      this.loansService.getLoanByBranchId(branchId).subscribe(
+        (data) => {
+          this.assignRemoteData(data);
+        },
+        (error) => { console.log(error); }
+      )
 
+    } else if (this.role == "customer") {
+      const accountNo = +localStorage.getItem("accountNo");
+      this.loansService.getLoansByAccountNumber(accountNo).subscribe(
+        (data) => {
+          this.assignRemoteData(data);
+        }, (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }
+
+  assignRemoteData(data) {
+    this.loansModels = data;
+    this.dataSource = new MatTableDataSource<LoanModel>(this.loansModels);
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      //  console.log("custom sorting")
+      switch (property) {
+        case 'customerAccountNo': return item.customerModel.accountNo;
+        case 'status': return item.statusModel.name;
+        case 'loanType': return item.loanTypeModel.name;
+        default: return item[property];
+      }
+    }
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.filterPredicate = (data, filter: string) => {
+      return data.customerModel.accountNo === +filter || data.loanTypeModel.name.toLowerCase().includes(filter) ||
+        data.statusModel.name.toLowerCase().includes(filter);
+    }
   }
   applyFilter(filterValue: string) {
     //const filterValue = (event.target as HTMLInputElement).value;
@@ -150,6 +170,7 @@ export class LoansComponent implements OnInit {
     this.selectedStatus(id, selected);
   }
   editLoanButton(id: number, status: string) {
+    console.log("editing");
     this.isUpdated = false;
     this.idArray.push(id);
     this.statusArray.push({

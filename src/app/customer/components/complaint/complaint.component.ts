@@ -1,3 +1,4 @@
+import { IDeactivateComponent } from './../../../../interfaces/IDeactivateComponent';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ComplaintModel } from './../../../../interfaces/ComplaintModel';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -9,7 +10,7 @@ import { ComplaintService } from 'src/app/core/services/complaint.service';
   templateUrl: './complaint.component.html',
   styleUrls: ['./complaint.component.css']
 })
-export class ComplaintComponent implements OnInit {
+export class ComplaintComponent implements OnInit, IDeactivateComponent {
 
   complaint: ComplaintModel;
   createComplaintForm: FormGroup;
@@ -20,6 +21,7 @@ export class ComplaintComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackbar: MatSnackBar
   ) { }
+
 
   ngOnInit() {
     this.accountNumber = +localStorage.getItem("accountNumber");
@@ -49,5 +51,18 @@ export class ComplaintComponent implements OnInit {
     }
     else
       this.snackbar.open("Please fill the required field", "OK", { duration: 3000 });
+  }
+  isSaved(): boolean {
+    console.log("checking dirty");
+    if (this.createComplaintForm.dirty) {
+      if (window.confirm("Your changes will not be saved, please save")) {
+        return true;
+      }
+      else
+        return false;
+    }
+    else {
+      return true;
+    }
   }
 }
